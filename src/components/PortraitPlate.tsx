@@ -47,7 +47,11 @@ export const PortraitPlate = () => {
         src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
         alt="Manga-style self portrait of Dan Burgess"
         className="relative w-full h-full object-contain p-6 transition-opacity duration-700 ease-in-out"
-        style={{ opacity: phase === "manga" ? 1 : 0 }}
+        style={{ 
+          opacity: phase === "manga" ? 1 : 0,
+          imageRendering: "-webkit-optimize-contrast",
+          transform: "translateZ(0)"
+        }}
         loading="eager"
       />
       <span

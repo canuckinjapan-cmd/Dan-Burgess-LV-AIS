@@ -72,6 +72,7 @@ export const TopBar = () => {
               src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
               alt=""
               className="relative w-9 h-9 rounded-full bg-white object-cover"
+              style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
               loading="eager"
             />
           </span>

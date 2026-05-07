@@ -457,6 +457,7 @@ const Index = () => {
               src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
               alt=""
               className="w-7 h-7 rounded-full bg-white"
+              style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
               loading="lazy"
             />
             <span>© {currentYear} Dan Burgess Design</span>
