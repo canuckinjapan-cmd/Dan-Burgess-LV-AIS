@@ -107,8 +107,8 @@ const Index = () => {
 
               <p className="mt-8 max-w-[58ch] text-lg lg:text-xl text-ink-muted leading-relaxed">
                 {t(
-                  <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer based in Fukuoka since 1992. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
-                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から福岡を拠点に活動しているカナダ人デザイナーです。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験の創出を支援してきました。</>
+                  <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer living in Japan since 1992, and based in Fukuoka. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
+                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験の創出を支援してきました。</>
                 )}
               </p>
 
@@ -155,8 +155,8 @@ const Index = () => {
 
                 {/* Polaroid Card (Top on mobile, Right on sm+, Top on lg+) */}
                 <motion.div 
-                  whileHover={{ rotate: 5 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  whileHover={{ rotate: 2 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
                   className="order-1 sm:order-2 w-full relative bg-surface-elevated border rule p-4 sm:p-6 lg:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer"
                 >
                   <div className="flex items-center justify-between font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted mb-3 lg:mb-4">
@@ -264,7 +264,7 @@ const Index = () => {
           <div className="lg:col-span-6 lg:col-start-5">
             <p className="drop-cap text-lg leading-[1.7] text-ink/85 mb-6">
               {t(
-                "Trained in Canada in print and multimedia, I crossed the Pacific in 1992 and never really came back. Three decades later, I'm still here — designing for Japanese teams who want to reach the world, and for global teams who need to land properly in Japan.",
+                "Trained in Canada in print and multimedia, I crossed the Pacific in 1992 and never really went back. Three decades later, I'm still here — designing for Japanese teams who want to reach the world, and for global teams who need to land properly in Japan.",
                 "カナダでデザインを学び、1992年に海を渡って以来、日本を拠点に活動を続けています。30年後の今も、世界を目指す日本のチームや、日本市場への展開を狙うグローバル企業のパートナーとしてデザインを提供しています。"
               )}
             </p>
