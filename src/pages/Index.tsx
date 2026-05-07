@@ -1,0 +1,478 @@
+import { motion } from "motion/react";
+import { TopBar } from "@/components/TopBar";
+import { KineticWordmark } from "@/components/KineticWordmark";
+import { CaseStudies } from "@/components/CaseStudies";
+import { ContactForm } from "@/components/ContactForm";
+import { PortraitPlate } from "@/components/PortraitPlate";
+
+import { useLanguage } from "@/context/LanguageContext";
+
+const Index = () => {
+  const { t, lang } = useLanguage();
+  const currentYear = new Date().getFullYear();
+
+  const stats = [
+    { value: "30+", label: t("Years designing", "デザイン歴") },
+    { value: "1992", label: t("Based in Japan", "来日年") },
+    { value: "EN / JP", label: t("Native bilingual", "バイリンガル対応") },
+    { value: "150+", label: t("Projects shipped", "完了プロジェクト") },
+  ];
+
+  const services = [
+    {
+      no: "S01",
+      title: t("Bilingual Web Design", "バイリンガルWebデザイン"),
+      body: t(
+        "EN/JP websites that respect both audiences — typography, hierarchy and copy tuned for each language, not auto-translated afterthoughts.",
+        "日本と海外、双方の視点を尊重したサイト制作。単なる自動翻訳ではなく、言語ごとのタイポグラフィ、情報階層、コピーライティングの最適化を徹底しています。"
+      ),
+      deliverables: t(
+        ["Strategy & sitemap", "Design system", "EN + JP build"],
+        ["戦略・サイトマップ", "デザインシステム", "日英サイト構築"]
+      ),
+    },
+    {
+      no: "S02",
+      title: t("UI / Product Design", "UI / プロダクトデザイン"),
+      body: t(
+        "30 years of UI craft applied to apps, dashboards and SaaS — clear systems, confident states, accessible by default.",
+        "30年の経験に裏打ちされたUI制作。アプリ、ダッシュボード、SaaSにおいて、明快なシステム、確固たるステート設計、アクセシビリティを標準としたプロダクトを提供します。"
+      ),
+      deliverables: t(
+        ["UX audits", "Design systems", "Figma libraries"],
+        ["UXオーディット", "デザインシステム", "Figmaライブラリ"]
+      ),
+    },
+    {
+      no: "S03",
+      title: t("No-Code Development", "ノーコード開発"),
+      body: t(
+        "Webflow, Framer and modern stacks. Beautiful sites your team can actually update without filing a ticket.",
+        "WebflowやFramerを活用した最新のスタック。エンジニアへの依頼なしで、チームが直感的に更新できる、美しく機能的なサイトを実現します。"
+      ),
+      deliverables: t(
+        ["Webflow / Framer", "CMS modeling", "Editor handover"],
+        ["Webflow / Framer実装", "CMS設計", "運用マニュアル"]
+      ),
+    },
+    {
+      no: "S04",
+      title: t("Localization & Translation", "ローカライズ・翻訳"),
+      body: t(
+        "Born in Canada, working in Japan since 1992. I write and review the words too — so nothing reads like a machine translation.",
+        "カナダ出身、1992年より日本で活動。自らコピーの執筆や監修を行うことで、機械翻訳とは一線を画す、文化に根ざした表現を追求しています。"
+      ),
+      deliverables: t(
+        ["UI copy EN/JP", "Brand voice", "Cultural review"],
+        ["日英UIコピー", "ブランドボイス設定", "文化的レビュー"]
+      ),
+    },
+  ];
+
+  const process = [
+    { step: "01", title: t("Discover", "ヒアリング・調査"), body: t("Workshop, audit, audience and competitive read. We agree on the goal before pixels exist.", "ワークショップ、現状分析、ターゲット調査、競合比較。実制作の前に目標を明確に定めます。") },
+    { step: "02", title: t("Design", "デザイン制作"), body: t("Editorial-grade visuals, design system, prototypes, and localization.", "高品質なビジュアル、デザインシステムの構築、プロトタイプ作成、そしてローカライズ対応を行います。") },
+    { step: "03", title: t("Develop", "実装・開発"), body: t("Built in Webflow / Framer or modern stacks. Performance and SEO are a deliverable, not an afterthought.", "Webflow、Framer、または最新の技術スタックによる構築。パフォーマンスとSEOは標準の成果物です。") },
+    { step: "04", title: t("Deploy & Support", "公開・運用保守"), body: t("Launch, analytics setup, training. Ongoing care plan available.", "サイト公開、分析ツールの設定、操作トレーニング、そして継続的なサポートを提供します。") },
+  ];
+
+  return (
+    <div id="top" className="bg-paper text-ink min-h-dvh font-sans-body">
+      <TopBar />
+
+      {/* HERO ============================================================ */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 lg:pt-20 pb-16 lg:pb-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+            {/* Left column — masthead */}
+            <motion.div 
+              className="lg:col-span-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+            >
+              <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted mb-8">
+                <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" aria-hidden />
+                <span>Issue №26 · {t(`Spring ${currentYear}`, `${currentYear}年 春号`)}</span>
+                <span className="h-px w-8 bg-ink/20" />
+                <span>Fukuoka, JPN · UTC+9</span>
+              </div>
+
+              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[0.95] text-balance text-[3.25rem] sm:text-[4.5rem] lg:text-[6.25rem]">
+                {t(
+                  <>Design that <em className="italic text-accent-brand font-medium">travels</em><br />between Canada<br />and Japan.</>,
+                  <>カナダと日本の<br /><em className="italic text-accent-brand font-medium">架け橋</em>となる<br />デザインを。</>
+                )}
+              </h1>
+
+              <p className="mt-8 max-w-[58ch] text-lg lg:text-xl text-ink-muted leading-relaxed">
+                {t(
+                  <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer based in Fukuoka since 1992. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
+                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から福岡を拠点に活動しているカナダ人デザイナーです。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験の創出を支援してきました。</>
+                )}
+              </p>
+
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
+                >
+                  {t("Start a Project", "プロジェクトを開始する")}
+                  <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+                </a>
+                <a
+                  href="#work"
+                  className="inline-flex items-center gap-3 px-7 py-4 font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted hover:text-accent-brand transition-all border rule hover:border-accent-brand hover:bg-white/40"
+                >
+                  {t("See Selected Work", "制作事例を見る")}
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Right column — manga portrait card & stats */}
+            <motion.aside 
+              className="lg:col-span-4 lg:mt-0"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
+            >
+              <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-col gap-6 sm:gap-12 lg:gap-0 items-center">
+                
+                {/* Stats (Hidden on lg, visible < lg) */}
+                {/* On mobile portrait: bottom row of 4. On sm/tablet: left side 2x2 grid. */}
+                <div className="order-2 sm:order-1 lg:hidden grid grid-cols-4 sm:grid-cols-2 gap-x-2 sm:gap-x-12 gap-y-7 w-full">
+                  {stats.map((s) => (
+                    <div key={s.label}>
+                      <p className="font-serif-display text-xl sm:text-4xl font-semibold tracking-tight leading-none text-ink">
+                        {s.value}
+                      </p>
+                      <p className="mt-1.5 sm:mt-3 font-mono text-[6px] sm:text-[10px] uppercase tracking-[0.14em] text-ink-muted leading-tight">
+                        {s.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Polaroid Card (Top on mobile, Right on sm+, Top on lg+) */}
+                <motion.div 
+                  whileHover={{ rotate: 5 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="order-1 sm:order-2 w-full relative bg-surface-elevated border rule p-4 sm:p-6 lg:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer"
+                >
+                  <div className="flex items-center justify-between font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted mb-3 lg:mb-4">
+                    <span>Plate 01</span>
+                    <span className="flex items-center gap-1.5 lg:gap-2">
+                      <span className="size-1 rounded-full lg:size-1.5 bg-accent-brand animate-pulse-dot" />
+                      {t("Accepting Q3", "Q3 プロジェクト受付中")}
+                    </span>
+                  </div>
+                  <PortraitPlate />
+                  <div className="mt-4 lg:mt-5 flex items-baseline justify-between gap-2 lg:gap-4 pt-3 lg:pt-4 border-t rule">
+                    <div>
+                      <p className="text-xl lg:text-2xl leading-none" style={{ fontFamily: '"Homemade Apple", cursive' }}>Dan Burgess</p>
+                      <p className="font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted mt-1">
+                        {t("Designer · デザイナー", "デザイナー · Designer")}
+                      </p>
+                    </div>
+                    <p className="font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted text-right leading-relaxed shrink-0">
+                      🍁 → 🇯🇵<br />
+                      {t("Since '92", "92年から活動")}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.aside>
+          </div>
+        </div>
+
+        {/* Stat strip - Hidden on mobile/tablet as they move up next to portrait */}
+        <motion.div 
+          className="border-y rule bg-surface-soft/40 hidden lg:block"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <div className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 rule">
+            {stats.map((s, i) => (
+              <div key={s.label} className={`px-6 py-7 lg:py-9 ${i === 0 ? "border-l-0" : ""}`}>
+                <p className="font-serif-display text-4xl lg:text-5xl font-semibold tracking-tight leading-none">
+                  {s.value}
+                </p>
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Kinetic wordmark */}
+        <KineticWordmark />
+      </section>
+
+      {/* WORK ============================================================ */}
+      <section id="work" className="py-24 lg:py-32">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
+          <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
+            <div className="lg:col-span-3">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+                §01 — {t("Selected Work", "制作事例")}
+              </p>
+            </div>
+            <div className="lg:col-span-9">
+              <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
+                {t(
+                  <>Three projects, three industries — one approach to <em className="italic text-accent-brand font-medium">bilingual</em> craft.</>,
+                  <>3つのプロジェクト、3つの業界。一貫した<em className="italic text-accent-brand font-medium">バイリンガル</em>の造形美。</>
+                )}
+              </h2>
+              <p className="mt-6 max-w-[60ch] text-ink-muted text-lg leading-relaxed">
+                {t(
+                  "Every engagement begins with the audience and ends with measurable outcomes. Here's a closer look at recent work.",
+                  "すべてのプロジェクトはオーディエンスの理解から始まり、測定可能な成果へと繋がります。最近の活動の一部をご紹介します。"
+                )}
+              </p>
+            </div>
+          </header>
+
+          <CaseStudies />
+        </div>
+      </section>
+
+      {/* ABOUT =========================================================== */}
+      <section id="about" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 overflow-hidden">
+        <motion.div 
+          className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-12"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <div className="lg:col-span-3">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+              §02 — {t("About", "プロフィール")}
+            </p>
+            <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-6">
+              {t("A 30-year route from Victoria to Fukuoka.", "ビクトリアから福岡へ。30年の軌跡。")}
+            </h2>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted">
+              {t("SINCE 1992 · JAPAN", "1992年より · 日本拠点")}
+            </p>
+          </div>
+
+          <div className="lg:col-span-6 lg:col-start-5">
+            <p className="drop-cap text-lg leading-[1.7] text-ink/85 mb-6">
+              {t(
+                "Trained in Canada in print and multimedia, I crossed the Pacific in 1992 and never really came back. Three decades later, I'm still here — designing for Japanese teams who want to reach the world, and for global teams who need to land properly in Japan.",
+                "カナダでデザインを学び、1992年に海を渡って以来、日本を拠点に活動を続けています。30年後の今も、世界を目指す日本のチームや、日本市場への展開を狙うグローバル企業のパートナーとしてデザインを提供しています。"
+              )}
+            </p>
+            <p className="text-ink-muted leading-relaxed mb-6">
+              {t(
+                "The work has changed shape over the years — magazine layouts, sign design, Windows game localization in Nagano, documentation localization and UI production in Tokyo, and now bilingual websites and product design for founders and growing companies. The throughline is the same: design that respects both cultures it lives in.",
+                "長年の間に仕事の形は進化してきました。長野での雑誌や看板のデザイン、東京でのドキュメントのローカライズやUI制作を経て、現在は日英バイリンガルのWebサイトやプロダクトデザインに注力しています。一貫しているのは、「双方が属する文化を等しく尊重するデザイン」です。"
+              )}
+            </p>
+            <p className="text-ink-muted leading-relaxed">
+              {t(
+                "I work directly with clients, not through layers. You get a senior designer with three decades of taste, technical chops, and a healthy appetite for projects with stakes.",
+                "私は代理店を介さず、クライアントと直接対話します。30年の経験が培った審美眼と技術力、そして難易度の高い課題に立ち向かう情熱を、あなたのプロジェクトに注ぎ込みます。"
+              )}
+            </p>
+
+            <ol className="mt-12 space-y-6 border-l rule pl-6">
+              {[
+                { y: "1992", t: t("Moved to Japan", "来日"), b: t("Taught English and started translation in Nagano.", "長野にて英語講師を務めつつ翻訳を開始。") },
+                { y: "1994", t: t("Localization & UI", "ローカライズ・UI制作"), b: t("Windows game and website localization.", "Windows向けゲームや初期のWebサイトのローカライズに従事。") },
+                { y: "2004", t: t("Tokyo · Fortune 500 HQ", "都内のグローバル企業拠点"), b: t("Localization and UI production for global tech.", "大手精密機器メーカーの本社にてローカライズ・UI制作を担当。") },
+                { y: "2010", t: t("Independent Studio", "スタジオ設立"), b: t("Bilingual websites, UI, no-code, for founders and teams.", "日英サイト、UI、ノーコード開発を軸に独立。") },
+              ].map((m) => (
+                <li key={m.y} className="relative group transition-transform duration-500 ease-in-out hover:scale-[1.02] origin-left cursor-default">
+                  <span className="absolute -left-[1.65rem] top-2 size-2 bg-accent-brand rounded-full transition-transform group-hover:scale-125" aria-hidden />
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink-muted">{m.y}</p>
+                  <p className="font-serif-display text-xl font-semibold mt-1 transition-colors group-hover:text-accent-brand">{m.t}</p>
+                  <p className="text-ink-muted text-sm mt-1">{m.b}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* SERVICES ======================================================== */}
+      <section id="services" className="py-24 lg:py-32 border-t rule overflow-hidden">
+        <motion.div 
+          className="max-w-[1320px] mx-auto px-6 lg:px-10"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-20">
+            <div className="lg:col-span-3">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+                §03 — {t("Services", "サービス")}
+              </p>
+            </div>
+            <div className="lg:col-span-9">
+              <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
+                {t(
+                  <>What I do, when I'm not <em className="italic text-accent-brand font-medium">drawing manga selfies</em>.</>,
+                  <>プロフェッショナルな提供サービス。<br /><em className="italic text-accent-brand font-medium">マンガ風の自画像</em>を描く以外のこと。</>
+                )}
+              </h2>
+            </div>
+          </header>
+
+          <div className="grid md:grid-cols-2 gap-px bg-ink/10 border rule">
+            {services.map((s) => (
+              <div key={s.no} className="group bg-surface p-8 lg:p-10 hover:bg-surface-elevated transition-colors">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent-brand">
+                    {s.no}
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </span>
+                </div>
+                <h3 className="font-serif-display text-2xl lg:text-3xl font-semibold tracking-tight mb-4">
+                  {s.title}
+                </h3>
+                <p className="text-ink-muted leading-relaxed mb-6 max-w-[42ch]">{s.body}</p>
+                <ul className="flex flex-wrap gap-2">
+                  {s.deliverables.map((d) => (
+                    <li
+                      key={d}
+                      className="font-mono text-[10px] uppercase tracking-widest border rule px-2.5 py-1 text-ink-muted"
+                    >
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* PROCESS ========================================================= */}
+      <section id="process" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 overflow-hidden">
+        <motion.div 
+          className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <div className="lg:col-span-3">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+              §04 — {t("Process", "プロセス")}
+            </p>
+            <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05]">
+              {t("Calm, predictable, milestone-based.", "堅実で円滑な。マイルストーン重視の進行。")}
+            </h2>
+          </div>
+          <ol className="lg:col-span-9 grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-ink/10 border rule">
+            {process.map((p) => (
+              <li key={p.step} className="bg-surface p-6 lg:p-7 hover:bg-surface-elevated transition-colors group">
+                <div className="flex justify-between items-start mb-3">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-accent-brand">
+                    {p.step}
+                  </p>
+                  <span className="font-mono text-[11px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </span>
+                </div>
+                <h3 className="font-serif-display text-xl font-semibold mb-2">{p.title}</h3>
+                <p className="text-ink-muted text-sm leading-relaxed">{p.body}</p>
+              </li>
+            ))}
+          </ol>
+        </motion.div>
+      </section>
+
+      {/* CONTACT ========================================================= */}
+      <section id="contact" className="py-24 lg:py-32 border-t rule overflow-hidden">
+        <motion.div 
+          className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <div className="lg:col-span-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-4">
+              §05 — {t("Contact", "お問い合わせ")}
+            </p>
+            <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-[-0.02em] leading-[1.02] text-balance">
+              {t(
+                <>Have a project that needs to land in <em className="italic text-accent-brand font-medium">two languages?</em></>,
+                <>2つの言語で展開するプロジェクトを<br /><em className="italic text-accent-brand font-medium">お考えですか？</em></>
+              )}
+            </h2>
+            <p className="mt-6 text-ink-muted text-lg leading-relaxed max-w-[44ch]">
+              {t(
+                "Send a short brief — goals, audience, timeline. I read every message personally and reply within 1–2 business days (JST).",
+                "プロジェクトの概要（目標、ターゲット、希望納期）をご記入ください。すべてのメッセージに目を通し、1〜2営業日以内に返信いたします。"
+              )}
+            </p>
+
+            <dl className="mt-10 space-y-5 font-mono text-[12px] uppercase tracking-[0.18em]">
+              <div className="flex items-start gap-4">
+                <dt className="text-ink-muted w-20">Contact</dt>
+                <dd className="text-ink">
+                  {t("USE CONTACT FORM", "フォームよりお問い合わせください")}
+                </dd>
+              </div>
+              <div className="flex items-start gap-4">
+                <dt className="text-ink-muted w-20">Studio</dt>
+                <dd className="text-ink">Fukuoka, JP · UTC+9</dd>
+              </div>
+              <div className="flex items-start gap-4">
+                <dt className="text-ink-muted w-20">Lang</dt>
+                <dd className="text-ink">English · 日本語</dd>
+              </div>
+              <div className="flex items-start gap-4">
+                <dt className="text-ink-muted w-20">Status</dt>
+                <dd className="text-ink flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" />
+                  {t("Accepting Q3 Projects", "Q3 プロジェクト受付中")}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="lg:col-span-7 bg-surface-elevated border rule p-7 lg:p-10 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.25)]">
+            <ContactForm />
+          </div>
+        </motion.div>
+      </section>
+
+      {/* FOOTER ========================================================== */}
+      <footer className="border-t rule">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
+              alt=""
+              className="w-7 h-7 rounded-full bg-white"
+              loading="lazy"
+            />
+            <span>© {currentYear} Dan Burgess Design</span>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 -ml-2">
+            <a href="#work" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Work", "制作事例")}</a>
+            <a href="#about" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("About", "プロフィール")}</a>
+            <a href="#services" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Services", "サービス")}</a>
+            <a href="#process" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Process", "プロセス")}</a>
+            <a href="#contact" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Contact", "お問い合わせ")}</a>
+          </div>
+          <span>{t("Fukuoka · 福岡 · UTC+9", "福岡 · Fukuoka · UTC+9")}</span>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Index;
