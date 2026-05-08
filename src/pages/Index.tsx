@@ -83,7 +83,7 @@ const Index = () => {
       {/* HERO ============================================================ */}
       <section className="relative overflow-hidden">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 lg:pt-20 pb-16 lg:pb-24">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left column — masthead */}
             <motion.div 
               className="lg:col-span-8"
@@ -98,10 +98,12 @@ const Index = () => {
                 <span>Fukuoka, JPN · UTC+9</span>
               </div>
 
-              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[0.95] text-balance text-[3.25rem] sm:text-[4.5rem] lg:text-[6.25rem]">
+              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] lg:text-[6.25rem]">
                 {t(
-                  <>Design that <em className="italic text-accent-brand font-medium">travels</em><br />between Canada<br />and Japan.</>,
-                  <>カナダと日本の<br /><em className="italic text-accent-brand font-medium">架け橋</em>となる<br />デザインを。</>
+                  <><span className="text-accent-brand font-medium">Bridging</span> Japanese<br />and Western digital<br />experiences.</>,
+                  <span className="text-[0.8em] sm:text-[0.82em] leading-[1.1] block">
+                    日本と欧米の<br className="hidden sm:inline" />デジタル体験の<br className="hidden sm:inline" /><span className="text-accent-brand font-medium">架け橋</span>となるデザインを。
+                  </span>
                 )}
               </h1>
 
@@ -115,14 +117,14 @@ const Index = () => {
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <a
                   href="#contact"
-                  className="group inline-flex items-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
+                  className="group inline-flex items-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
                 >
                   {t("Start a Project", "プロジェクトを開始する")}
                   <span className="text-[22px] transition-transform group-hover:translate-x-1" aria-hidden>→</span>
                 </a>
                 <a
                   href="#work"
-                  className="inline-flex items-center gap-3 px-7 py-4 font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted hover:text-accent-brand transition-all border rule hover:border-accent-brand hover:bg-white/40"
+                  className="inline-flex items-center gap-3 px-7 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-ink hover:text-accent-brand transition-all border-2 border-ink/40 hover:border-accent-brand hover:bg-white/40 shadow-sm"
                 >
                   {t("See Selected Work", "制作事例を見る")}
                 </a>
