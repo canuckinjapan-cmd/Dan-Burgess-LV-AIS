@@ -118,7 +118,7 @@ const Index = () => {
                   className="group inline-flex items-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
                 >
                   {t("Start a Project", "プロジェクトを開始する")}
-                  <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+                  <span className="text-[22px] transition-transform group-hover:translate-x-1" aria-hidden>→</span>
                 </a>
                 <a
                   href="#work"
@@ -329,10 +329,10 @@ const Index = () => {
             {services.map((s) => (
               <div key={s.no} className="group bg-surface p-8 lg:p-10 hover:bg-surface-elevated transition-colors">
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent-brand">
+                  <span className="font-mono text-[22px] uppercase tracking-[0.22em] text-accent-brand">
                     {s.no}
                   </span>
-                  <span className="font-mono text-[11px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="font-mono text-[22px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
                 </div>
@@ -377,10 +377,10 @@ const Index = () => {
             {process.map((p) => (
               <li key={p.step} className="bg-surface p-6 lg:p-7 hover:bg-surface-elevated transition-colors group">
                 <div className="flex justify-between items-start mb-3">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-accent-brand">
+                  <p className="font-mono text-[22px] uppercase tracking-widest text-accent-brand">
                     {p.step}
                   </p>
-                  <span className="font-mono text-[11px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="font-mono text-[22px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
                 </div>

@@ -119,7 +119,7 @@ export const ContactForm = () => {
           className="inline-flex items-center justify-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors disabled:opacity-60"
         >
           {submitting ? t("Sending…", "送信中…") : t("Send Brief", "概要を送信する")}
-          <span aria-hidden>→</span>
+          <span className="text-[22px]" aria-hidden>→</span>
         </button>
       </div>
     </form>

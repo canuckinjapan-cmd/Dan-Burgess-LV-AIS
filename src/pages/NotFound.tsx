@@ -118,7 +118,7 @@ const NotFound = () => {
             className="inline-flex items-center gap-3 bg-accent-brand text-white px-10 py-5 font-mono text-[12px] uppercase tracking-[0.25em] hover:bg-white hover:text-ink transition-all duration-300 shadow-[0_10px_40px_-10px_rgba(255,106,31,0.5)]"
           >
             {t("Return to Home", "ホームへ戻る")}
-            <span aria-hidden>→</span>
+            <span className="text-[24px]" aria-hidden>→</span>
           </Link>
         </div>
       </main>
