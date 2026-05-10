@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 
 export const PortraitPlate = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [cycle, setCycle] = useState(0);
   const [phase, setPhase] = useState<"photo" | "manga">("photo");
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -13,20 +15,27 @@ export const PortraitPlate = () => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             setPhase("photo");
+            setIsVisible(true);
             setCycle((c) => c + 1);
+          } else {
+            // Scrolled out: reset to photo instantly for next entrance
+            setPhase("photo");
+            setIsVisible(false);
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.1 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
   useEffect(() => {
-    const t = window.setTimeout(() => setPhase("manga"), 2000);
+    if (!isVisible) return;
+    // Only start the blend timer if the component is currently in view
+    const t = window.setTimeout(() => setPhase("manga"), 2500);
     return () => window.clearTimeout(t);
-  }, [cycle]);
+  }, [cycle, isVisible]);
 
   return (
     <div ref={ref} className="relative aspect-square bg-surface-soft overflow-hidden">
@@ -34,26 +43,33 @@ export const PortraitPlate = () => {
         className="absolute inset-6 border border-dashed border-ink/15 rounded-full animate-spin-slow"
         aria-hidden
       />
-      <img
-        key={`photo-${cycle}`}
+      
+      {/* Photo Portrait */}
+      <motion.img
+        initial={false}
+        animate={{ opacity: phase === "photo" ? 1 : 0 }}
+        transition={{ duration: 2, ease: "easeInOut" }}
         src="https://www.danburgess.com/2026-assets/DJB-headshot01.jpg"
         alt="Photo portrait of Dan Burgess"
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-        style={{ opacity: phase === "photo" ? 1 : 0 }}
+        className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
       />
-      <img
-        key={`manga-${cycle}`}
+
+      {/* Manga Avatar */}
+      <motion.img
+        initial={false}
+        animate={{ opacity: phase === "manga" ? 1 : 0 }}
+        transition={{ duration: 2, ease: "easeInOut" }}
         src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
         alt="Manga-style self portrait of Dan Burgess"
-        className="relative w-full h-full object-contain p-6 transition-opacity duration-700 ease-in-out"
+        className="absolute inset-0 w-full h-full object-contain p-6"
         style={{ 
-          opacity: phase === "manga" ? 1 : 0,
           imageRendering: "-webkit-optimize-contrast",
           transform: "translateZ(0)"
         }}
         loading="eager"
       />
+      
       <span
         className="absolute bottom-4 right-4 size-3 bg-accent-brand rotate-45 border-2 border-surface-elevated z-10"
         aria-hidden
@@ -61,3 +77,4 @@ export const PortraitPlate = () => {
     </div>
   );
 };
+
