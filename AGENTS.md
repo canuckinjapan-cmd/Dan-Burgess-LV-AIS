@@ -24,7 +24,7 @@ This document provides technical guidelines and implementation patterns for AI a
 - Performance: Apply `transform: "translateZ(0)"` to animated images or marquees to ensure hardware acceleration and crisp rendering.
 
 ### Asset Management
-- **Manga Avatar**: `https://www.danburgess.com/2026-assets/danface_manga-2025.png`.
+- **Manga Avatar**: `/src/assets/danface_manga-2025.png`.
 - **Optimized Rendering**: For small graphics (like favicons or small nav avatars), apply `imageRendering: "-webkit-optimize-contrast"` to avoid blurriness in Chromium.
 
 ## 🛠️ Build & Deployment

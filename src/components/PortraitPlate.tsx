@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 
+import headshot from "@/assets/DJB-headshot01.jpg";
+import manga from "@/assets/danface_manga-2025.png";
+
 export const PortraitPlate = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [cycle, setCycle] = useState(0);
@@ -49,7 +52,7 @@ export const PortraitPlate = () => {
         initial={false}
         animate={{ opacity: phase === "photo" ? 1 : 0 }}
         transition={{ duration: 2, ease: "easeInOut" }}
-        src="https://www.danburgess.com/2026-assets/DJB-headshot01.jpg"
+        src={headshot}
         alt="Photo portrait of Dan Burgess"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
@@ -60,7 +63,7 @@ export const PortraitPlate = () => {
         initial={false}
         animate={{ opacity: phase === "manga" ? 1 : 0 }}
         transition={{ duration: 2, ease: "easeInOut" }}
-        src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
+        src={manga}
         alt="Manga-style self portrait of Dan Burgess"
         className="absolute inset-0 w-full h-full object-contain p-6"
         style={{ 

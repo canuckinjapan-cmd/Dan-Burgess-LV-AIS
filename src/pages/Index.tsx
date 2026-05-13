@@ -4,6 +4,7 @@ import { KineticWordmark } from "@/components/KineticWordmark";
 import { CaseStudies } from "@/components/CaseStudies";
 import { ContactForm } from "@/components/ContactForm";
 import { PortraitPlate } from "@/components/PortraitPlate";
+import manga from "@/assets/danface_manga-2025.png";
 
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -456,7 +457,7 @@ const Index = () => {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
           <div className="flex items-center gap-3">
             <img
-              src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
+              src={manga}
               alt=""
               className="w-7 h-7 rounded-full bg-white"
               style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
+import manga from "@/assets/danface_manga-2025.png";
 
 const navItems = [
   { label: "Work", jpLabel: "制作事例", href: "#work" },
@@ -69,7 +70,7 @@ export const TopBar = () => {
           <span className="relative hidden sm:inline-block">
             <span className="absolute -inset-1 rounded-full border border-ink/20 animate-spin-slow" aria-hidden />
             <img
-              src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
+              src={manga}
               alt=""
               className="relative w-9 h-9 rounded-full bg-white object-cover"
               style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}

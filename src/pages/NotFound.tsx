@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { TopBar } from "@/components/TopBar";
 import { useLanguage } from "@/context/LanguageContext";
+import manga from "@/assets/danface_manga-2025.png";
 
 const MatrixRain = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -127,7 +128,7 @@ const NotFound = () => {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
           <div className="flex items-center gap-3">
             <img
-              src="https://www.danburgess.com/2026-assets/danface_manga-2025.png"
+              src={manga}
               alt=""
               className="w-7 h-7 rounded-full bg-white transition-transform hover:scale-110"
               style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
