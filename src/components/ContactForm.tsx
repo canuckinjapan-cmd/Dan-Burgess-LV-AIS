@@ -14,7 +14,7 @@ export const ContactForm = () => {
     message: "",
   });
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       toast({ 
@@ -23,16 +23,38 @@ export const ContactForm = () => {
       });
       return;
     }
+    
     setSubmitting(true);
-    // Hook this up to your backend / Cloud function later
-    setTimeout(() => {
+    console.log("Contact form: Starting submission...", { ...form, message: "[REDACTED]" });
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
       setSubmitting(false);
       toast({ 
         title: t("Message sent", "メッセージを送信しました"), 
         description: t("Thanks — Dan will reply within 1–2 business days (JST).", "ありがとうございます。1〜2営業日以内に返信いたします。") 
       });
       setForm({ name: "", email: "", company: "", budget: "", message: "" });
-    }, 700);
+    } catch (error) {
+      console.error("Contact form error:", error);
+      setSubmitting(false);
+      toast({
+        variant: "destructive",
+        title: t("Error", "エラー"),
+        description: t("Something went wrong. Please try again later.", "送信中にエラーが発生しました。時間をおいて再度お試しください。"),
+      });
+    }
   };
 
   const field =
