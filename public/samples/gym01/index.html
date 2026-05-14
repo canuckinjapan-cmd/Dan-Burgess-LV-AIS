@@ -10,6 +10,45 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <script>
+    (function() {
+        try {
+            const sessionKey = 'lang_redir_count';
+            let count = 0;
+            try {
+                count = parseInt(sessionStorage.getItem(sessionKey) || '0');
+                if (count > 5) return;
+            } catch(e) {}
+
+            const search = window.location.search;
+            const isForcedJa = search.indexOf('lang=ja') !== -1;
+            const isForcedEn = search.indexOf('lang=en') !== -1;
+            
+            if (isForcedJa) localStorage.setItem('lang_pref', 'ja');
+            if (isForcedEn) localStorage.setItem('lang_pref', 'en');
+
+            const pref = localStorage.getItem('lang_pref');
+            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            const isJapanese = browserLang.startsWith('ja');
+
+            let target = null;
+            if (pref === 'en' && !isForcedJa) {
+                target = 'index-e.html' + (isForcedEn ? '?lang=en' : '');
+            } else if (!pref && !isForcedJa && !isJapanese) {
+                target = 'index-e.html';
+            }
+
+            if (target) {
+                try { sessionStorage.setItem(sessionKey, (count + 1).toString()); } catch(e) {}
+                window.location.replace(target);
+            } else {
+                try { sessionStorage.removeItem(sessionKey); } catch(e) {}
+            }
+        } catch (e) {
+            console.error('Language detection failed:', e);
+        }
+    })();
+  </script>
 
   <style>
     /* =============================================
@@ -806,7 +845,7 @@
       <a href="#classes">クラス</a>
       <a href="#trainers">トレーナー</a>
       <a href="#pricing">料金プラン</a>
-      <a href="index-e.html" class="lang-switcher" onclick="localStorage.setItem('lang_pref', 'en')">
+      <a href="index-e.html?lang=en" class="lang-switcher" onclick="localStorage.setItem('lang_pref', 'en')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         ENGLISH
       </a>
@@ -826,7 +865,7 @@
       <a href="#pricing">料金プラン</a>
     </div>
     <div class="mobile-lang-wrap">
-      <a href="index-e.html" class="lang-switcher" onclick="localStorage.setItem('lang_pref', 'en')">ENGLISH</a>
+      <a href="index-e.html?lang=en" class="lang-switcher" onclick="localStorage.setItem('lang_pref', 'en')">ENGLISH</a>
     </div>
   </div>
 </nav>
@@ -1270,48 +1309,29 @@
     }
   });
 
+  // Newsletter Form Handling
+  const newsletterBtn = document.querySelector('.newsletter-btn');
+  const newsletterInput = document.querySelector('.newsletter-input');
+  if (newsletterBtn && newsletterInput) {
+    newsletterBtn.addEventListener('click', () => {
+      const email = newsletterInput.value;
+      if (email && email.includes('@')) {
+        newsletterBtn.disabled = true;
+        newsletterBtn.textContent = '...';
+        setTimeout(() => {
+          alert('登録ありがとうございます！最新情報をお届けします。');
+          newsletterInput.value = '';
+          newsletterBtn.disabled = false;
+          newsletterBtn.textContent = '登録する';
+        }, 1000);
+      } else {
+        alert('有効なメールアドレスを入力してください。');
+      }
+    });
+  }
+
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<script>
-    (function() {
-        try {
-            const sessionKey = 'lang_redir_count';
-            let count = 0;
-            try {
-                count = parseInt(sessionStorage.getItem(sessionKey) || '0');
-                if (count > 5) return;
-            } catch(e) {}
-
-            const search = window.location.search;
-            const isForcedJa = search.indexOf('lang=ja') !== -1;
-            const isForcedEn = search.indexOf('lang=en') !== -1;
-            
-            if (isForcedJa) localStorage.setItem('lang_pref', 'ja');
-            if (isForcedEn) localStorage.setItem('lang_pref', 'en');
-
-            const pref = localStorage.getItem('lang_pref');
-            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-            const isJapanese = browserLang.startsWith('ja');
-
-            let target = null;
-            if (pref === 'en' && !isForcedJa) {
-                target = 'index-e.html' + (isForcedEn ? '?lang=en' : '');
-            } else if (!pref && !isForcedJa && !isJapanese) {
-                target = 'index-e.html';
-            }
-
-            if (target) {
-                try { sessionStorage.setItem(sessionKey, (count + 1).toString()); } catch(e) {}
-                window.location.replace(target);
-            } else {
-                try { sessionStorage.removeItem(sessionKey); } catch(e) {}
-            }
-        } catch (e) {
-            console.error('Language detection failed:', e);
-        }
-    })();
 </script>
 
 </body>

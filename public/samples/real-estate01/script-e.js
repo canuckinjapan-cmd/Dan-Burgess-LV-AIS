@@ -33,3 +33,41 @@ menuToggle.addEventListener('click', toggleMenu);
 document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => { if (isOpen) toggleMenu(); }); });
 const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.remove('opacity-0', 'translate-y-10'); observer.unobserve(entry.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Contact Form Handling
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData.entries());
+        
+        try {
+            // We use the same API as the main site
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                alert('Thank you for your message. It has been sent successfully.');
+                contactForm.reset();
+            } else {
+                throw new Error('Failed to send');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Something went wrong. Please try again later.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+        }
+    });
+}
