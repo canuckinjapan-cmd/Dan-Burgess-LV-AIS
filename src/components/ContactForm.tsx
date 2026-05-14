@@ -25,11 +25,12 @@ export const ContactForm = () => {
     }
     
     setSubmitting(true);
-    console.log("Contact form: Starting submission...", { ...form, message: "[REDACTED]" });
+    const apiBase = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
+    const targetUrl = `${apiBase}/api/contact`;
+    console.log("Contact form: Starting submission to", targetUrl, { ...form, message: "[REDACTED]" });
     
     try {
-      const apiBase = import.meta.env.VITE_API_BASE_URL || "";
-      const response = await fetch(`${apiBase}/api/contact`, {
+      const response = await fetch(targetUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +39,8 @@ export const ContactForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to send message");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to send message");
       }
 
       setSubmitting(false);
@@ -48,12 +50,13 @@ export const ContactForm = () => {
       });
       setForm({ name: "", email: "", company: "", budget: "", message: "" });
     } catch (error) {
-      console.error("Contact form error:", error);
+      const err = error as Error;
+      console.error("Contact form error:", err);
       setSubmitting(false);
       toast({
         variant: "destructive",
         title: t("Error", "エラー"),
-        description: t("Something went wrong. Please try again later.", "送信中にエラーが発生しました。時間をおいて再度お試しください。"),
+        description: err.message || t("Something went wrong. Please try again later.", "送信中にエラーが発生しました。時間をおいて再度お試しください。"),
       });
     }
   };

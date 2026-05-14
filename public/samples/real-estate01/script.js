@@ -50,8 +50,9 @@ if (contactForm) {
         
         try {
             // Support absolute API base if provided (e.g. for cross-domain testing)
-            const apiBase = window.API_BASE_URL || '';
-            const response = await fetch(`${apiBase}/api/contact`, {
+            const apiBase = (window.API_BASE_URL || '').replace(/\/+$/, "");
+            const targetUrl = `${apiBase}/api/contact`;
+            const response = await fetch(targetUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -61,11 +62,12 @@ if (contactForm) {
                 alert('お問い合わせありがとうございます。送信が完了しました。');
                 contactForm.reset();
             } else {
-                throw new Error('Failed to send');
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || 'Failed to send');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('エラーが発生しました。時間をおいて再度お試しください。');
+            alert('エラーが発生しました: ' + error.message);
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = originalBtnText;

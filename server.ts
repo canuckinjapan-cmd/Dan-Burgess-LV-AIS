@@ -12,27 +12,60 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // CORS configuration
+  // Global request logging
+  app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('origin') || 'none'}`);
+    next();
+  });
+
+  // Simplified CORS - allow everything for debugging NetworkErrors
   app.use(cors({
-    origin: ["https://danburgess.com", "https://www.danburgess.com", /^https:\/\/ais-.*\.run\.app$/],
-    credentials: true
+    origin: (origin, callback) => {
+      // Echo the origin if it exists, otherwise allow
+      callback(null, origin || true);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   }));
 
   app.use(express.json());
 
   // API routes
+  app.get("/api/health", async (req, res) => {
+    let smtpStatus = "Not Configured";
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
+          port: parseInt(process.env.SMTP_PORT || "587"),
+          secure: process.env.SMTP_PORT === "465",
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        });
+        await transporter.verify();
+        smtpStatus = "Connected";
+      } catch (e: any) {
+        smtpStatus = `Error: ${e.message}`;
+      }
+    }
+
+    res.json({ 
+      status: "ok", 
+      time: new Date().toISOString(),
+      smtpStatus
+    });
+  });
+
   app.post("/api/contact", async (req, res) => {
     const { name, email, message, company, budget, phone, type } = req.body;
 
     console.log("-----------------------------------------");
-    console.log("New Contact Form Submission:");
-    console.log(`Name: ${name}`);
-    console.log(`Email: ${email}`);
-    console.log(`Phone: ${phone || "N/A"}`);
-    console.log(`Type: ${type || "N/A"}`);
-    console.log(`Company: ${company || "N/A"}`);
-    console.log(`Budget: ${budget || "N/A"}`);
-    console.log(`Message: ${message}`);
+    console.log("New Contact Form Submission:", new Date().toISOString());
+    console.log(`Origin: ${req.get('origin')}`);
+    console.log(`Data:`, JSON.stringify(req.body));
     console.log("-----------------------------------------");
 
     const contactEmail = process.env.CONTACT_EMAIL || "dan@danburgess.com";
@@ -51,6 +84,9 @@ async function startServer() {
             user: smtpUser,
             pass: smtpPass,
           },
+          // Add timeout to prevent hanging
+          connectionTimeout: 10000,
+          greetingTimeout: 10000,
         });
 
         const info = await transporter.sendMail({
@@ -71,17 +107,17 @@ ${message}
           `,
         });
 
-        console.log("Email sent: %s", info.messageId);
+        console.log("Email sent successfully: %s", info.messageId);
         
         return res.status(200).json({ 
           success: true, 
           message: "Thank you for your message. Your inquiry has been sent successfully." 
         });
       } catch (error) {
-        console.error("Error sending email:", error);
+        console.error("Error in contact form handler:", error);
         return res.status(500).json({ 
           success: false, 
-          message: "Failed to send email. Please try again later or contact us directly." 
+          message: `Server Error: ${error.message}` 
         });
       }
     } else {

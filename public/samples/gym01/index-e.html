@@ -1320,8 +1320,9 @@
         newsletterBtn.textContent = '...';
         
         try {
-          const apiBase = window.API_BASE_URL || '';
-          const response = await fetch(`${apiBase}/api/contact`, {
+          const apiBase = (window.API_BASE_URL || '').replace(/\/+$/, "");
+          const targetUrl = `${apiBase}/api/contact`;
+          const response = await fetch(targetUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1336,11 +1337,12 @@
             alert('Thank you for subscribing! We will keep you updated.');
             newsletterInput.value = '';
           } else {
-            throw new Error('Failed to subscribe');
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || 'Failed to subscribe');
           }
         } catch (error) {
           console.error('Error:', error);
-          alert('Something went wrong. Please try again later.');
+          alert('Something went wrong: ' + error.message);
         } finally {
           newsletterBtn.disabled = false;
           newsletterBtn.textContent = 'Subscribe';
