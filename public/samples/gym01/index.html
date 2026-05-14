@@ -1313,17 +1313,38 @@
   const newsletterBtn = document.querySelector('.newsletter-btn');
   const newsletterInput = document.querySelector('.newsletter-input');
   if (newsletterBtn && newsletterInput) {
-    newsletterBtn.addEventListener('click', () => {
+    newsletterBtn.addEventListener('click', async () => {
       const email = newsletterInput.value;
       if (email && email.includes('@')) {
         newsletterBtn.disabled = true;
         newsletterBtn.textContent = '...';
-        setTimeout(() => {
-          alert('登録ありがとうございます！最新情報をお届けします。');
-          newsletterInput.value = '';
+        
+        try {
+          const apiBase = window.API_BASE_URL || '';
+          const response = await fetch(`${apiBase}/api/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: 'Newsletter Subscriber',
+              email: email,
+              type: 'newsletter',
+              message: 'Signed up for newsletter from Gym 01 site'
+            })
+          });
+          
+          if (response.ok) {
+            alert('登録ありがとうございます！最新情報をお届けします。');
+            newsletterInput.value = '';
+          } else {
+            throw new Error('Failed to subscribe');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('エラーが発生しました。時間をおいて再度お試しください。');
+        } finally {
           newsletterBtn.disabled = false;
           newsletterBtn.textContent = '登録する';
-        }, 1000);
+        }
       } else {
         alert('有効なメールアドレスを入力してください。');
       }

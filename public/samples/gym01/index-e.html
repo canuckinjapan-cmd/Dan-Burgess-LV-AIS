@@ -1309,6 +1309,48 @@
     }
   });
 
+  // Newsletter Form Handling
+  const newsletterBtn = document.querySelector('.newsletter-btn');
+  const newsletterInput = document.querySelector('.newsletter-input');
+  if (newsletterBtn && newsletterInput) {
+    newsletterBtn.addEventListener('click', async () => {
+      const email = newsletterInput.value;
+      if (email && email.includes('@')) {
+        newsletterBtn.disabled = true;
+        newsletterBtn.textContent = '...';
+        
+        try {
+          const apiBase = window.API_BASE_URL || '';
+          const response = await fetch(`${apiBase}/api/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: 'Newsletter Subscriber',
+              email: email,
+              type: 'newsletter',
+              message: 'Signed up for newsletter from Gym 01 English site'
+            })
+          });
+          
+          if (response.ok) {
+            alert('Thank you for subscribing! We will keep you updated.');
+            newsletterInput.value = '';
+          } else {
+            throw new Error('Failed to subscribe');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Something went wrong. Please try again later.');
+        } finally {
+          newsletterBtn.disabled = false;
+          newsletterBtn.textContent = 'Subscribe';
+        }
+      } else {
+        alert('Please enter a valid email address.');
+      }
+    });
+  }
+
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>

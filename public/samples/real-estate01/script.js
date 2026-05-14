@@ -49,8 +49,9 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
         
         try {
-            // We use the same API as the main site
-            const response = await fetch('/api/contact', {
+            // Support absolute API base if provided (e.g. for cross-domain testing)
+            const apiBase = window.API_BASE_URL || '';
+            const response = await fetch(`${apiBase}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
