@@ -56,8 +56,8 @@ const cases: CaseStudy[] = [
     tabletImage: new URL("../assets/Taka-tablet-E.jpeg", import.meta.url).href,
     jpTabletImage: new URL("../assets/Taka-tablet-J.jpeg", import.meta.url).href,
     accent: true,
-    link: "https://danburgess.com/samples/gym01/index-e.html",
-    jpLink: "https://danburgess.com/samples/gym01/index.html",
+    link: "/samples/gym01/index-e.html",
+    jpLink: "/samples/gym01/index.html",
   },
   {
     id: "lumina",
@@ -86,8 +86,8 @@ const cases: CaseStudy[] = [
     jpMobileImage: new URL("../assets/Real01-phone-J.jpg", import.meta.url).href,
     tabletImage: new URL("../assets/Real01-tablet-E.jpeg", import.meta.url).href,
     jpTabletImage: new URL("../assets/Real01-tablet-J.jpeg", import.meta.url).href,
-    link: "https://danburgess.com/samples/real-estate01/index-e.html",
-    jpLink: "https://danburgess.com/samples/real-estate01/index.html?lang=ja",
+    link: "/samples/real-estate01/index-e.html",
+    jpLink: "/samples/real-estate01/index.html?lang=ja",
   },
   {
     id: "apex",
