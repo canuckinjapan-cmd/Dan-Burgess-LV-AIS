@@ -5,7 +5,7 @@ type Language = "EN" | "JP";
 interface LanguageContextType {
   lang: Language;
   setLang: (lang: Language) => void;
-  t: (en: any, jp: any) => any;
+  t: <T>(en: T, jp: T) => T;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -18,7 +18,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.lang = lang.toLowerCase();
   }, [lang]);
 
-  const t = (en: any, jp: any) => (lang === "EN" ? en : jp);
+  const t = <T,>(en: T, jp: T): T => (lang === "EN" ? en : jp);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>

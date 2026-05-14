@@ -1,7 +1,7 @@
 
 export const onRequestPost: PagesFunction<{ CONTACT_EMAIL: string }> = async (context) => {
   try {
-    const data: any = await context.request.json();
+    const data = (await context.request.json()) as Record<string, string>;
     const { name, email, company, budget, message } = data;
 
     // Validation
@@ -73,9 +73,10 @@ ${message}
         }
       );
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
     return new Response(
-      JSON.stringify({ error: "Internal server error", details: error.message }),
+      JSON.stringify({ error: "Internal server error", details: errorMessage }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
