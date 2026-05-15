@@ -15,14 +15,25 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // 1. CORS MUST BE FIRST
-  app.use(cors({
-    origin: true,
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
-    optionsSuccessStatus: 204
-  }));
+  // 1. Robust CORS handling for all environments
+  app.use((req, res, next) => {
+    const origin = req.get('Origin');
+    // Allow all origins for the contact form to work from static sites
+    if (origin) {
+      res.header("Access-Control-Allow-Origin", origin);
+    } else {
+      res.header("Access-Control-Allow-Origin", "*");
+    }
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, X-Requested-With");
+    
+    // Explicitly handle preflight requests
+    if (req.method === "OPTIONS") {
+      return res.status(204).end();
+    }
+    next();
+  });
 
   // 2. Global request logging
   app.use((req, res, next) => {
