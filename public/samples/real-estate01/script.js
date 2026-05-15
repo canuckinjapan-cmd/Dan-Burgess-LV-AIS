@@ -49,7 +49,8 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const apiBase = (window.API_BASE_URL || localStorage.getItem('AIS_API_URL') || "").trim().replace(/\/+$/, "");
+            const aisFallback = "https://ais-pre-r6az2fezg2siatxq2zvtqq-343348950519.asia-east1.run.app";
+            const apiBase = (window.API_BASE_URL || localStorage.getItem('AIS_API_URL') || aisFallback).trim().replace(/\/+$/, "");
             const targetUrl = apiBase ? `${apiBase}/api/contact` : "/api/contact";
             const response = await fetch(targetUrl, {
                 method: 'POST',

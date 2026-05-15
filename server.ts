@@ -23,12 +23,8 @@ async function startServer() {
     next();
   });
 
-  // Relaxed CORS for static site integrations (e.g., GitHub Pages)
   app.use(cors({
-    origin: (origin, callback) => {
-      // Allow all origins to enable static site contact forms to work
-      callback(null, true);
-    },
+    origin: true, // Allow all origins explicitly via reflected header
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
@@ -69,27 +65,32 @@ async function startServer() {
         const transporter = nodemailer.createTransport({
           host: SMTP_HOST,
           port: parseInt(SMTP_PORT || "587"),
-          secure: (SMTP_PORT === "465" || (SMTP_HOST.includes("gmail") && SMTP_PORT === "465")),
+          secure: SMTP_PORT === "465", // Only 465 is secure by default (SSL), 587 uses STARTTLS
           auth: {
             user: SMTP_USER,
             pass: SMTP_PASS,
           },
-          connectionTimeout: 10000,
-          greetingTimeout: 10000,
+          connectionTimeout: 15000,
+          greetingTimeout: 15000,
+          // TLS configuration to handle different providers
+          tls: {
+            rejectUnauthorized: false
+          }
         });
 
-        // Verify connection before sending
-        await transporter.verify().catch(err => {
-          console.error(">>> [API] SMTP Verification Failed:", err.message);
-          throw new Error(`SMTP connection verification failed: ${err.message}`);
-        });
+        console.log(">>> [API] Verifying SMTP connection...");
+        await transporter.verify();
+        console.log(">>> [API] SMTP Verified.");
 
-        console.log(">>> [API] Sending mail...");
+        // Defensive 'from' address check
+        const fromEmail = (SMTP_USER && SMTP_USER.includes("@")) ? SMTP_USER : contactEmail;
+        console.log(">>> [API] Sending mail to:", contactEmail, "from:", fromEmail);
+        
         const info = await transporter.sendMail({
-          from: `"Web Form" <${SMTP_USER}>`,
+          from: `"Dan Burgess Design" <${fromEmail}>`,
           to: contactEmail,
           replyTo: email,
-          subject: `Inquiry from Dan Burgess Design (${type || "General"})`,
+          subject: `New Inquiry: ${type || "General"} - from ${name}`,
           text: `
 Name: ${name}
 Email: ${email}
@@ -110,13 +111,11 @@ ${message}
           message: "Thank you for your message. Your inquiry has been sent successfully." 
         });
       } catch (error: any) {
-        console.error("Error in contact form handler:", error);
+        console.error(">>> [API] SMTP ERROR:", error);
         
-        // Return 200 with error details in message so it shows in the toast instead of a generic 500
-        // (Wait, 500 is better for error states, but let's make the message helpful)
         return res.status(500).json({ 
           success: false, 
-          message: `Server Error: ${error.message || "Unknown SMTP Error"}. Please check your SMTP settings in Secrets.` 
+          message: `Server Error: ${error.message || "Unknown SMTP Error"}. Please check your SMTP settings (Host, Port, User, Pass) in Secrets.` 
         });
       }
     } else {
