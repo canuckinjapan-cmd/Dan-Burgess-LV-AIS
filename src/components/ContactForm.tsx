@@ -30,10 +30,11 @@ export const ContactForm = () => {
     // Manual override > Automatic discovery via VITE_APP_URL > AI Studio Fallback > Relative path
     const envBase = import.meta.env.VITE_API_BASE_URL;
     const appUrl = import.meta.env.VITE_APP_URL;
+    const localStored = localStorage.getItem('AIS_API_URL');
     const windowBase = (window as any).API_BASE_URL;
     const aisFallback = "https://ais-pre-r6az2fezg2siatxq2zvtqq-343348950519.asia-east1.run.app";
     
-    let apiBase = (envBase || windowBase || "").trim().replace(/\/+$/, "");
+    let apiBase = (envBase || windowBase || localStored || "").trim().replace(/\/+$/, "");
     
     // If we're on a static host (like GitHub Pages) and no manual base is set,
     // use the baked-in VITE_APP_URL or the hardcoded AIS fallback.
