@@ -25,7 +25,22 @@ export const ContactForm = () => {
     }
     
     setSubmitting(true);
-    const targetUrl = "/api/contact";
+    
+    // Determine the API base URL. 
+    // Manual override > Automatic discovery via VITE_APP_URL > Relative path
+    const envBase = import.meta.env.VITE_API_BASE_URL;
+    const appUrl = import.meta.env.VITE_APP_URL;
+    const windowBase = (window as any).API_BASE_URL;
+    
+    let apiBase = (envBase || windowBase || "").trim().replace(/\/+$/, "");
+    
+    // If we're on a static host (like GitHub Pages) and no manual base is set,
+    // use the baked-in VITE_APP_URL from the AIS environment.
+    if (!apiBase && appUrl && !window.location.hostname.includes("run.app") && window.location.hostname !== "localhost") {
+      apiBase = appUrl.trim().replace(/\/+$/, "");
+    }
+    
+    const targetUrl = apiBase ? `${apiBase}/api/contact` : "/api/contact";
     console.log("Contact form: Starting submission to", targetUrl);
     
     try {

@@ -49,7 +49,8 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const targetUrl = "/api/contact";
+            const apiBase = (window.API_BASE_URL || "").trim().replace(/\/+$/, "");
+            const targetUrl = apiBase ? `${apiBase}/api/contact` : "/api/contact";
             const response = await fetch(targetUrl, {
                 method: 'POST',
                 headers: { 

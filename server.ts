@@ -23,8 +23,17 @@ async function startServer() {
     next();
   });
 
-  // Standard CORS for internal API access
-  app.use(cors());
+  // Relaxed CORS for static site integrations (e.g., GitHub Pages)
+  app.use(cors({
+    origin: (origin, callback) => {
+      // Allow all origins to enable static site contact forms to work
+      callback(null, true);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
+    optionsSuccessStatus: 204
+  }));
 
   app.use(express.json());
 

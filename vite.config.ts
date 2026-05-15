@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     'process.env.GEMINI_API_KEY': JSON.stringify(process.env.GEMINI_API_KEY),
+    'import.meta.env.VITE_APP_URL': JSON.stringify(process.env.APP_URL || process.env.URL || ""),
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
