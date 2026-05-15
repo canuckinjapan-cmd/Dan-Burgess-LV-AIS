@@ -19,14 +19,19 @@ async function startServer() {
   // Logging
   app.use((req, res, next) => {
     if (!req.url.includes("/api/health") && !req.url.includes("/@vite") && !req.url.includes("/node_modules")) {
-      console.log(`>>> [SERVER] ${req.method} ${req.url}`);
+      console.log(`>>> [SERVER] ${new Date().toISOString()} | ${req.method} ${req.url}`);
     }
     next();
   });
 
   // 2. API Routes
   app.get("/api/health", (req, res) => {
-    res.json({ status: "ok", mode: process.env.NODE_ENV });
+    res.json({ 
+      status: "ok", 
+      mode: process.env.NODE_ENV,
+      version: "1.2.0",
+      time: new Date().toISOString()
+    });
   });
 
   app.post("/api/contact", async (req, res) => {
@@ -64,7 +69,7 @@ async function startServer() {
 
   // 3. Vite / Static
   if (process.env.NODE_ENV !== "production") {
-    console.log(">>> [SERVER] Initializing Vite Middleware...");
+    console.log(">>> [SERVER] MODE: Development (Using Vite)");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -74,27 +79,42 @@ async function startServer() {
     console.log(">>> [SERVER] MODE: Production (Serving Dist)");
     const distPath = path.resolve(process.cwd(), 'dist');
     
-    // Serve static files with NO CACHE to force update
+    // Serve static files from dist
     app.use(express.static(distPath, {
       index: false,
       maxAge: 0,
       setHeaders: (res, filePath) => {
         res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         if (filePath.endsWith('.js')) {
-          res.setHeader('Content-Type', 'application/javascript');
+          res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
+          res.setHeader('X-Content-Type-Options', 'nosniff');
+        }
+        if (filePath.endsWith('.css')) {
+          res.setHeader('Content-Type', 'text/css');
         }
       }
     }));
 
     // Fallback to index.html for SPA
     app.get('*', (req, res) => {
-      if (req.url.includes('.')) {
+      // If it looks like a file request that wasn't caught by static, it's 404
+      if (req.url.includes('.') && !req.url.includes('?')) {
+        console.log(`>>> [SERVER] File Not Found: ${req.url}`);
         return res.status(404).send('Not Found');
       }
+      
+      console.log(`>>> [SERVER] Serving index.html for: ${req.url}`);
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Content-Type', 'text/html; charset=UTF-8');
       res.sendFile(path.resolve(distPath, 'index.html'));
     });
   }
+
+  // Final catch-all for errors
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(">>> [SERVER] FATAL ERROR:", err);
+    res.status(500).send("Internal Server Error");
+  });
 
   // 404 for non-SPA routes (missing assets/API)
   app.use((req, res) => {
