@@ -71,58 +71,28 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const BUILD_TIME = new Date().toISOString();
-    console.log(`>>> [SERVER] Production Mode: Serving dist/ (Build Time: ${BUILD_TIME})`);
+    console.log(">>> [SERVER] MODE: Production (Serving Dist)");
     const distPath = path.resolve(process.cwd(), 'dist');
     
-    // Global header to check if we are using the new server version
-    app.use((req, res, next) => {
-      res.setHeader('X-Server-Time', BUILD_TIME);
-      next();
-    });
-
-    // Explicitly handle JS file requests to ensure MIME type
-    app.use('/assets', (req, res, next) => {
-      console.log(`>>> [SERVER] Asset request: ${req.url}`);
-      next();
-    });
-
+    // Serve static files with NO CACHE to force update
     app.use(express.static(distPath, {
       index: false,
-      maxAge: '1y', // Assets are hashed, long cache is fine
-      immutable: true,
+      maxAge: 0,
       setHeaders: (res, filePath) => {
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         if (filePath.endsWith('.js')) {
           res.setHeader('Content-Type', 'application/javascript');
-        }
-        if (filePath.endsWith('.css')) {
-          res.setHeader('Content-Type', 'text/css');
         }
       }
     }));
 
-    app.get('*', async (req, res, next) => {
-      // Don't fallback for API or static files (anything with a dot)
-      if (req.url.startsWith('/api') || req.url.includes('.')) {
-        console.log(`>>> [SERVER] Fallback skipped (likely missing asset): ${req.url}`);
-        return next();
+    // Fallback to index.html for SPA
+    app.get('*', (req, res) => {
+      if (req.url.includes('.')) {
+        return res.status(404).send('Not Found');
       }
-      
-      console.log(`>>> [SERVER] Serving SPA index.html for: ${req.url}`);
-      try {
-        const fs = await import('fs/promises');
-        let html = await fs.readFile(path.resolve(distPath, 'index.html'), 'utf-8');
-        
-        // Inject a dynamic comment to break any possible CDN cache of the HTML itself
-        html = html.replace('</head>', `<!-- Server Build: ${BUILD_TIME} --></head>`);
-        
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        res.setHeader('Content-Type', 'text/html');
-        res.send(html);
-      } catch (err) {
-        console.error(">>> [SERVER] Error reading index.html:", err);
-        res.status(500).send("Server Error");
-      }
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.sendFile(path.resolve(distPath, 'index.html'));
     });
   }
 
