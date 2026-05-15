@@ -8,34 +8,30 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log(">>> [SERVER] Starting initialization...");
-
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // 1. Health check BEFORE any other middleware
-  app.get("/api/health", (req, res) => {
-    res.json({ status: "ok", time: new Date().toISOString() });
-  });
-
-  // 2. Logging and basic middleware
+  // 1. Basic Middlewares
   app.use(cors());
   app.use(express.json());
-  
+
+  // Logging
   app.use((req, res, next) => {
-    if (!req.url.includes("/api/health") && !req.url.includes("/@vite")) {
-      console.log(`>>> [SERVER] ${req.method} ${req.url} - Origin: ${req.get('Origin') || 'none'}`);
+    if (!req.url.includes("/api/health") && !req.url.includes("/@vite") && !req.url.includes("/node_modules")) {
+      console.log(`>>> [SERVER] ${req.method} ${req.url}`);
     }
     next();
   });
 
-  // 3. API routes
+  // 2. API Routes
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", mode: process.env.NODE_ENV });
+  });
+
   app.post("/api/contact", async (req, res) => {
     try {
       const { name, email, message, type } = req.body;
-      console.log(`>>> [API] Contact request from ${email}`);
-      
       const contactEmail = process.env.CONTACT_EMAIL || "dan@danburgess.com";
       const host = process.env.SMTP_HOST || process.env.VITE_SMTP_HOST;
       const user = process.env.SMTP_USER || process.env.VITE_SMTP_USER;
@@ -58,55 +54,48 @@ async function startServer() {
           subject: `${type || 'Inquiry'}: ${name}`,
           text: `Name: ${name}\nEmail: ${email}\n\n${message}`
         });
-        console.log(`>>> [API] Email sent successfully`);
       }
-      
-      res.status(200).json({ success: true, message: "Sent" });
+      res.status(200).json({ success: true });
     } catch (err) {
-      console.error(">>> [API] Contact Error:", err);
-      res.status(500).json({ success: false, message: "Error" });
+      console.error(">>> [API] Error:", err);
+      res.status(500).json({ success: false });
     }
   });
 
-  // 4. Vite/Static handling
-  const isProd = process.env.NODE_ENV === "production";
-  
-  if (!isProd) {
-    console.log(">>> [SERVER] MODE: Development (Using Vite)");
+  // 3. Vite / Static
+  if (process.env.NODE_ENV !== "production") {
+    console.log(">>> [SERVER] Initializing Vite Middleware...");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
-    console.log(">>> [SERVER] MODE: Production (Serving Dist)");
-    const distPath = path.join(process.cwd(), 'dist');
-    
-    app.use(express.static(distPath, { index: false }));
-
+    console.log(">>> [SERVER] Production Mode: Serving dist/");
+    const distPath = path.resolve(process.cwd(), 'dist');
+    app.use(express.static(distPath));
     app.get('*', (req, res, next) => {
-      // Don't fallback for missing assets or api
-      if (req.url.startsWith('/api/') || req.url.includes('.') || req.url.startsWith('/assets/')) {
+      // Don't fallback for API or static files (anything with a dot)
+      if (req.url.startsWith('/api') || req.url.includes('.')) {
         return next();
       }
-      
-      // Serve index.html with no-cache to ensure latest bundle is loaded
       res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
-
-    app.use((req, res) => {
-      res.status(404).send('Not Found');
+      res.sendFile(path.resolve(distPath, 'index.html'));
     });
   }
 
+  // 404 for non-SPA routes (missing assets/API)
+  app.use((req, res) => {
+    if (req.url.startsWith('/api')) {
+      res.status(404).json({ error: "API Route Not Found" });
+    } else {
+      res.status(404).send("Not Found");
+    }
+  });
+
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`>>> [SERVER] SUCCESS: Server running on http://0.0.0.0:${PORT}`);
-    console.log(`>>> [SERVER] Mode: ${process.env.NODE_ENV || "development"}`);
+    console.log(`>>> [SERVER] Running on http://0.0.0.0:${PORT} (${process.env.NODE_ENV || 'development'})`);
   });
 }
 
-console.log(">>> [SERVER] Calling startServer()...");
-startServer().catch((err) => {
-  console.error(">>> [SERVER] CRITICAL FAILURE during startServer():", err);
-});
+startServer();
