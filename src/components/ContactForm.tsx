@@ -27,17 +27,18 @@ export const ContactForm = () => {
     setSubmitting(true);
     
     // Determine the API base URL. 
-    // Manual override > Automatic discovery via VITE_APP_URL > Relative path
+    // Manual override > Automatic discovery via VITE_APP_URL > AI Studio Fallback > Relative path
     const envBase = import.meta.env.VITE_API_BASE_URL;
     const appUrl = import.meta.env.VITE_APP_URL;
     const windowBase = (window as any).API_BASE_URL;
+    const aisFallback = "https://ais-pre-r6az2fezg2siatxq2zvtqq-343348950519.asia-east1.run.app";
     
     let apiBase = (envBase || windowBase || "").trim().replace(/\/+$/, "");
     
     // If we're on a static host (like GitHub Pages) and no manual base is set,
-    // use the baked-in VITE_APP_URL from the AIS environment.
-    if (!apiBase && appUrl && !window.location.hostname.includes("run.app") && window.location.hostname !== "localhost") {
-      apiBase = appUrl.trim().replace(/\/+$/, "");
+    // use the baked-in VITE_APP_URL or the hardcoded AIS fallback.
+    if (!apiBase && !window.location.hostname.includes("run.app") && window.location.hostname !== "localhost") {
+      apiBase = (appUrl || aisFallback).trim().replace(/\/+$/, "");
     }
     
     const targetUrl = apiBase ? `${apiBase}/api/contact` : "/api/contact";

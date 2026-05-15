@@ -24,7 +24,7 @@ async function startServer() {
   });
 
   app.use(cors({
-    origin: true, // Allow all origins explicitly via reflected header
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
@@ -60,19 +60,19 @@ async function startServer() {
     const SMTP_PORT = process.env.SMTP_PORT || process.env.VITE_SMTP_PORT;
 
     if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
-      console.log(">>> [API] Attempting to send email via SMTP:", SMTP_HOST);
+      console.log(">>> [API] SMTP Configured. Host:", SMTP_HOST, "Port:", SMTP_PORT);
       try {
+        const secure = SMTP_PORT === "465";
         const transporter = nodemailer.createTransport({
           host: SMTP_HOST,
           port: parseInt(SMTP_PORT || "587"),
-          secure: SMTP_PORT === "465", // Only 465 is secure by default (SSL), 587 uses STARTTLS
+          secure,
           auth: {
             user: SMTP_USER,
             pass: SMTP_PASS,
           },
           connectionTimeout: 15000,
           greetingTimeout: 15000,
-          // TLS configuration to handle different providers
           tls: {
             rejectUnauthorized: false
           }
@@ -82,7 +82,6 @@ async function startServer() {
         await transporter.verify();
         console.log(">>> [API] SMTP Verified.");
 
-        // Defensive 'from' address check
         const fromEmail = (SMTP_USER && SMTP_USER.includes("@")) ? SMTP_USER : contactEmail;
         console.log(">>> [API] Sending mail to:", contactEmail, "from:", fromEmail);
         
@@ -112,10 +111,9 @@ ${message}
         });
       } catch (error: any) {
         console.error(">>> [API] SMTP ERROR:", error);
-        
         return res.status(500).json({ 
           success: false, 
-          message: `Server Error: ${error.message || "Unknown SMTP Error"}. Please check your SMTP settings (Host, Port, User, Pass) in Secrets.` 
+          message: `Server Error: ${error.message || "Unknown SMTP Error"}. Please check your SMTP settings in Secrets.` 
         });
       }
     } else {
