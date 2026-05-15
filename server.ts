@@ -15,25 +15,19 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // Global request logging
+  // 1. CORS MUST BE FIRST
+  app.use(cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
+    optionsSuccessStatus: 204
+  }));
+
+  // 2. Global request logging
   app.use((req, res, next) => {
     if (req.url !== "/api/health") {
       console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('origin') || 'none'}`);
-    }
-    next();
-  });
-
-  // Manual CORS handling to be absolutely sure in container/shared env
-  app.use((req, res, next) => {
-    const origin = req.get('origin') || '*';
-    res.header("Access-Control-Allow-Origin", origin);
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, X-Requested-With");
-    
-    if (req.method === "OPTIONS") {
-      console.log(`[CORS] Preflight for ${req.url} from ${origin}`);
-      return res.sendStatus(204);
     }
     next();
   });
@@ -68,11 +62,11 @@ async function startServer() {
     const SMTP_PORT = process.env.SMTP_PORT || process.env.VITE_SMTP_PORT;
 
     if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
-      console.log(">>> [API] SMTP Configured. Host:", SMTP_HOST, "Port:", SMTP_PORT);
+      const port = parseInt(SMTP_PORT || "587");
+      const secure = port === 465;
+      
+      console.log(`>>> [API] SMTP Initializing: ${SMTP_HOST}:${port} (Secure: ${secure})`);
       try {
-        const port = parseInt(SMTP_PORT || "587");
-        const secure = port === 465;
-        
         const transporter = nodemailer.createTransport({
           host: SMTP_HOST,
           port,
@@ -84,7 +78,6 @@ async function startServer() {
           connectionTimeout: 15000,
           greetingTimeout: 15000,
           tls: {
-            // Handle cases where SMTP server has self-signed certs or legacy configs
             rejectUnauthorized: false
           }
         });
@@ -100,7 +93,7 @@ async function startServer() {
           from: `"Dan Burgess Design" <${fromEmail}>`,
           to: contactEmail,
           replyTo: email,
-          subject: `New Inquiry: ${type || "General"} - from ${name}`,
+          subject: `${type || "Inquiry"}: ${name}`,
           text: `
 Name: ${name}
 Email: ${email}
