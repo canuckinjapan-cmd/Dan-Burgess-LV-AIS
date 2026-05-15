@@ -58,7 +58,10 @@ async function startServer() {
     console.log(">>> [API] Origin:", req.get('origin') || 'none');
 
     const contactEmail = process.env.CONTACT_EMAIL || "dan@danburgess.com";
-    const { SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_PORT } = process.env;
+    const SMTP_HOST = process.env.SMTP_HOST || process.env.VITE_SMTP_HOST;
+    const SMTP_USER = process.env.SMTP_USER || process.env.VITE_SMTP_USER;
+    const SMTP_PASS = process.env.SMTP_PASS || process.env.VITE_SMTP_PASS;
+    const SMTP_PORT = process.env.SMTP_PORT || process.env.VITE_SMTP_PORT;
 
     if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
       console.log(">>> [API] Attempting to send email via SMTP:", SMTP_HOST);
@@ -66,13 +69,19 @@ async function startServer() {
         const transporter = nodemailer.createTransport({
           host: SMTP_HOST,
           port: parseInt(SMTP_PORT || "587"),
-          secure: SMTP_PORT === "465",
+          secure: (SMTP_PORT === "465" || (SMTP_HOST.includes("gmail") && SMTP_PORT === "465")),
           auth: {
             user: SMTP_USER,
             pass: SMTP_PASS,
           },
           connectionTimeout: 10000,
           greetingTimeout: 10000,
+        });
+
+        // Verify connection before sending
+        await transporter.verify().catch(err => {
+          console.error(">>> [API] SMTP Verification Failed:", err.message);
+          throw new Error(`SMTP connection verification failed: ${err.message}`);
         });
 
         console.log(">>> [API] Sending mail...");
@@ -100,11 +109,14 @@ ${message}
           success: true, 
           message: "Thank you for your message. Your inquiry has been sent successfully." 
         });
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error in contact form handler:", error);
+        
+        // Return 200 with error details in message so it shows in the toast instead of a generic 500
+        // (Wait, 500 is better for error states, but let's make the message helpful)
         return res.status(500).json({ 
           success: false, 
-          message: `Server Error: ${error.message}` 
+          message: `Server Error: ${error.message || "Unknown SMTP Error"}. Please check your SMTP settings in Secrets.` 
         });
       }
     } else {

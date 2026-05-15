@@ -49,7 +49,7 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const apiBase = (window.API_BASE_URL || "").trim().replace(/\/+$/, "");
+            const apiBase = (window.API_BASE_URL || localStorage.getItem('AIS_API_URL') || "").trim().replace(/\/+$/, "");
             const targetUrl = apiBase ? `${apiBase}/api/contact` : "/api/contact";
             const response = await fetch(targetUrl, {
                 method: 'POST',
