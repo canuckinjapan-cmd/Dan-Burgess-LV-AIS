@@ -15,30 +15,25 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // 1. Robust CORS handling for all environments
-  app.use((req, res, next) => {
-    const origin = req.get('Origin');
-    // Allow all origins for the contact form to work from static sites
-    if (origin) {
-      res.header("Access-Control-Allow-Origin", origin);
-    } else {
-      res.header("Access-Control-Allow-Origin", "*");
-    }
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, X-Requested-With");
-    
-    // Explicitly handle preflight requests
-    if (req.method === "OPTIONS") {
-      return res.status(204).end();
-    }
-    next();
-  });
+  // 1. Consistent CORS handling
+  app.use(cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "X-Requested-With"],
+    optionsSuccessStatus: 204
+  }));
 
-  // 2. Global request logging
+  // Log exactly what's happening during startup
+  console.log(">>> [SERVER] Middlewares configured. Setting up health endpoint...");
+
+  // Explicitly handle ALL options requests globally as a fallback
+  app.options("*", cors());
+
+  // 2. Global request logging (excluding health checks to keep logs cleaner)
   app.use((req, res, next) => {
-    if (req.url !== "/api/health") {
-      console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('origin') || 'none'}`);
+    if (!req.url.includes("/api/health")) {
+      console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - From: ${req.get('Origin') || 'none'} - Referer: ${req.get('Referer') || 'none'}`);
     }
     next();
   });
@@ -124,13 +119,14 @@ ${message}
           success: true, 
           message: "Thank you for your message. Your inquiry has been sent successfully." 
         });
-      } catch (error: any) {
-        console.error(">>> [API] SMTP ERROR:", error);
-        return res.status(500).json({ 
-          success: false, 
-          message: `Server Error: ${error.message || "Unknown SMTP Error"}. Please check your SMTP settings in Secrets.` 
-        });
-      }
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown SMTP Error";
+      console.error(">>> [API] SMTP ERROR:", error);
+      return res.status(500).json({ 
+        success: false, 
+        message: `Server Error: ${errorMessage}. Please check your SMTP settings in Secrets.` 
+      });
+    }
     } else {
       console.warn("SMTP credentials not configured. Email NOT sent.");
       // Return a 200 with a warning message in development, or just mock success
@@ -156,8 +152,9 @@ ${message}
     }
   } else {
     const distPath = path.join(process.cwd(), 'dist');
+    console.log(`>>> [SERVER] Production mode: Serving static files from ${distPath}`);
     app.use(express.static(distPath));
-    app.get('*', (req, res) => {
+    app.get('*all', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }

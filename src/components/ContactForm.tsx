@@ -31,19 +31,24 @@ export const ContactForm = () => {
     const envBase = import.meta.env.VITE_API_BASE_URL;
     const appUrl = import.meta.env.VITE_APP_URL;
     const localStored = localStorage.getItem('AIS_API_URL');
-    const windowBase = (window as any).API_BASE_URL;
+    const windowBase = (window as Window & { API_BASE_URL?: string }).API_BASE_URL;
+    const currentOrigin = window.location.origin;
     const aisFallback = "https://ais-pre-r6az2fezg2siatxq2zvtqq-343348950519.asia-east1.run.app";
     
     let apiBase = (envBase || windowBase || localStored || "").trim().replace(/\/+$/, "");
     
-    // If we're on a static host (like GitHub Pages) and no manual base is set,
-    // use the baked-in VITE_APP_URL or the hardcoded AIS fallback.
-    if (!apiBase && !window.location.hostname.includes("run.app") && window.location.hostname !== "localhost") {
-      apiBase = (appUrl || aisFallback).trim().replace(/\/+$/, "");
+    // If no manual base set, check if we're on a static host vs run.app
+    if (!apiBase) {
+      if (window.location.hostname.includes("run.app") || window.location.hostname === "localhost") {
+        apiBase = currentOrigin;
+      } else {
+        // We are on an external static site (like danburgess.com)
+        apiBase = (appUrl || aisFallback).trim().replace(/\/+$/, "");
+      }
     }
     
-    const targetUrl = apiBase ? `${apiBase}/api/contact` : "/api/contact";
-    console.log("Contact form: Starting submission to", targetUrl);
+    const targetUrl = apiBase + "/api/contact";
+    console.log(`Contact form: Submitting to ${targetUrl} (Base: ${apiBase})`);
     
     try {
       const response = await fetch(targetUrl, {
