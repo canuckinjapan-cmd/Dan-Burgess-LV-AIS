@@ -25,22 +25,22 @@ export const ContactForm = () => {
     }
     
     setSubmitting(true);
-    const apiBase = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
-    const targetUrl = `${apiBase}/api/contact`;
-    console.log("Contact form: Starting submission to", targetUrl, { ...form, message: "[REDACTED]" });
+    const targetUrl = "/api/contact";
+    console.log("Contact form: Starting submission to", targetUrl);
     
     try {
       const response = await fetch(targetUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
         },
         body: JSON.stringify(form),
       });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to send message");
+        throw new Error(errorData.message || "Server error: " + response.status);
       }
 
       setSubmitting(false);
@@ -53,6 +53,7 @@ export const ContactForm = () => {
       const err = error as Error;
       console.error("Contact form error:", err);
       setSubmitting(false);
+      
       toast({
         variant: "destructive",
         title: t("Error", "エラー"),

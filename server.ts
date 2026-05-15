@@ -8,89 +8,67 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+console.log(">>> [SERVER] Starting initialization...");
+
 async function startServer() {
+  console.log(">>> [SERVER] Initializing Express app...");
   const app = express();
   const PORT = 3000;
 
   // Global request logging
   app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('origin') || 'none'}`);
+    if (req.url !== "/api/health") {
+      console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.get('origin') || 'none'}`);
+    }
     next();
   });
 
-  // Simplified CORS - allow everything for debugging NetworkErrors
-  app.use(cors({
-    origin: (origin, callback) => {
-      // Echo the origin if it exists, otherwise allow
-      callback(null, origin || true);
-    },
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-  }));
+  // Standard CORS for internal API access
+  app.use(cors());
 
   app.use(express.json());
 
-  // API routes
+  // API health check
   app.get("/api/health", async (req, res) => {
-    let smtpStatus = "Not Configured";
-    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST,
-          port: parseInt(process.env.SMTP_PORT || "587"),
-          secure: process.env.SMTP_PORT === "465",
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-          },
-        });
-        await transporter.verify();
-        smtpStatus = "Connected";
-      } catch (e: any) {
-        smtpStatus = `Error: ${e.message}`;
-      }
-    }
-
+    const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+    const smtpStatus = (SMTP_HOST && SMTP_USER && SMTP_PASS) ? "Connected" : "Not Configured";
+    
     res.json({ 
       status: "ok", 
       time: new Date().toISOString(),
-      smtpStatus
+      smtpStatus: smtpStatus,
+      env: process.env.NODE_ENV || "development"
     });
   });
 
   app.post("/api/contact", async (req, res) => {
+    console.log(">>> [API] Received /api/contact POST request");
     const { name, email, message, company, budget, phone, type } = req.body;
 
-    console.log("-----------------------------------------");
-    console.log("New Contact Form Submission:", new Date().toISOString());
-    console.log(`Origin: ${req.get('origin')}`);
-    console.log(`Data:`, JSON.stringify(req.body));
-    console.log("-----------------------------------------");
+    console.log(">>> [API] Payload:", JSON.stringify({ name, email, type, company }));
+    console.log(">>> [API] Origin:", req.get('origin') || 'none');
 
     const contactEmail = process.env.CONTACT_EMAIL || "dan@danburgess.com";
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = process.env.SMTP_PORT;
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
+    const { SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_PORT } = process.env;
 
-    if (smtpHost && smtpUser && smtpPass) {
+    if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
+      console.log(">>> [API] Attempting to send email via SMTP:", SMTP_HOST);
       try {
         const transporter = nodemailer.createTransport({
-          host: smtpHost,
-          port: parseInt(smtpPort || "587"),
-          secure: smtpPort === "465",
+          host: SMTP_HOST,
+          port: parseInt(SMTP_PORT || "587"),
+          secure: SMTP_PORT === "465",
           auth: {
-            user: smtpUser,
-            pass: smtpPass,
+            user: SMTP_USER,
+            pass: SMTP_PASS,
           },
-          // Add timeout to prevent hanging
           connectionTimeout: 10000,
           greetingTimeout: 10000,
         });
 
+        console.log(">>> [API] Sending mail...");
         const info = await transporter.sendMail({
-          from: `"Web Form" <${smtpUser}>`,
+          from: `"Web Form" <${SMTP_USER}>`,
           to: contactEmail,
           replyTo: email,
           subject: `Inquiry from Dan Burgess Design (${type || "General"})`,
@@ -132,11 +110,17 @@ ${message}
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
+    console.log(">>> [SERVER] Initializing Vite middleware (Development)...");
+    try {
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+      console.log(">>> [SERVER] Vite middleware attached.");
+    } catch (err) {
+      console.error(">>> [SERVER] Failed to initialize Vite server:", err);
+    }
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
@@ -146,8 +130,12 @@ ${message}
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`>>> [SERVER] SUCCESS: Server running on http://0.0.0.0:${PORT}`);
+    console.log(`>>> [SERVER] Mode: ${process.env.NODE_ENV || "development"}`);
   });
 }
 
-startServer();
+console.log(">>> [SERVER] Calling startServer()...");
+startServer().catch((err) => {
+  console.error(">>> [SERVER] CRITICAL FAILURE during startServer():", err);
+});

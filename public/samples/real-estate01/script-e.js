@@ -49,12 +49,13 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
         
         try {
-            // Support absolute API base if provided (e.g. for cross-domain testing)
-            const apiBase = (window.API_BASE_URL || '').replace(/\/+$/, "");
-            const targetUrl = `${apiBase}/api/contact`;
+            const targetUrl = "/api/contact";
             const response = await fetch(targetUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
                 body: JSON.stringify(data)
             });
             
