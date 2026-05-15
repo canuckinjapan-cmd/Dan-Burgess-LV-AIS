@@ -3,10 +3,6 @@ import path from "path";
 import cors from "cors";
 import nodemailer from "nodemailer";
 import { createServer as createViteServer } from "vite";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
@@ -18,20 +14,15 @@ async function startServer() {
 
   // Logging
   app.use((req, res, next) => {
-    if (!req.url.includes("/api/health") && !req.url.includes("/@vite") && !req.url.includes("/node_modules")) {
-      console.log(`>>> [SERVER] ${new Date().toISOString()} | ${req.method} ${req.url}`);
+    if (!req.url.includes("/api/health") && !req.url.includes("/@vite")) {
+      console.log(`>>> [SERVER] ${req.method} ${req.url}`);
     }
     next();
   });
 
   // 2. API Routes
   app.get("/api/health", (req, res) => {
-    res.json({ 
-      status: "ok", 
-      mode: process.env.NODE_ENV,
-      version: "1.2.0",
-      time: new Date().toISOString()
-    });
+    res.json({ status: "ok", version: "1.4.0", mode: process.env.NODE_ENV });
   });
 
   app.post("/api/contact", async (req, res) => {
@@ -69,65 +60,58 @@ async function startServer() {
 
   // 3. Vite / Static
   if (process.env.NODE_ENV !== "production") {
-    console.log(">>> [SERVER] MODE: Development (Using Vite)");
+    console.log(">>> [SERVER] MODE: Development");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
-    console.log(">>> [SERVER] MODE: Production (Serving Dist)");
-    const distPath = path.resolve(process.cwd(), 'dist');
+    console.log(">>> [SERVER] MODE: Production");
+    const distPath = path.join(process.cwd(), 'dist');
     
     // Serve static files from dist
+    // We don't set index: false here to allow default behavior if needed, 
+    // but the fallback below handles SPA.
     app.use(express.static(distPath, {
-      index: false,
-      maxAge: 0,
+      maxAge: 0, // Disable cache temporarily for hard debugging
       setHeaders: (res, filePath) => {
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         if (filePath.endsWith('.js')) {
-          res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
-          res.setHeader('X-Content-Type-Options', 'nosniff');
-        }
-        if (filePath.endsWith('.css')) {
-          res.setHeader('Content-Type', 'text/css');
+          res.setHeader('Content-Type', 'application/javascript');
         }
       }
     }));
 
     // Fallback to index.html for SPA
-    app.get('*', (req, res) => {
-      // If it looks like a file request that wasn't caught by static, it's 404
-      if (req.url.includes('.') && !req.url.includes('?')) {
-        console.log(`>>> [SERVER] File Not Found: ${req.url}`);
+    app.get('*', async (req, res) => {
+      // Exclude files with dots (assets) from fallback
+      if (req.url.includes('.')) {
         return res.status(404).send('Not Found');
       }
-      
-      console.log(`>>> [SERVER] Serving index.html for: ${req.url}`);
-      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-      res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-      res.sendFile(path.resolve(distPath, 'index.html'));
+
+      try {
+        const fs = await import('fs/promises');
+        let html = await fs.readFile(path.join(distPath, 'index.html'), 'utf-8');
+        
+        // Inject dynamic time to bypass any HTML-level CDN caching
+        const now = new Date().toISOString();
+        html = html.replace('</head>', `<!-- SVR-TIME: ${now} --></head>`);
+        
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+        res.send(html);
+      } catch (err) {
+        console.error(">>> [SERVER] Error serving index.html:", err);
+        res.status(500).send("Server Error");
+      }
     });
   }
 
-  // Final catch-all for errors
-  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.error(">>> [SERVER] FATAL ERROR:", err);
-    res.status(500).send("Internal Server Error");
-  });
-
-  // 404 for non-SPA routes (missing assets/API)
-  app.use((req, res) => {
-    if (req.url.startsWith('/api')) {
-      res.status(404).json({ error: "API Route Not Found" });
-    } else {
-      res.status(404).send("Not Found");
-    }
-  });
-
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`>>> [SERVER] Running on http://0.0.0.0:${PORT} (${process.env.NODE_ENV || 'development'})`);
+    console.log(`>>> [SERVER] Running on http://0.0.0.0:${PORT}`);
   });
 }
 
-startServer();
+startServer().catch(err => {
+  console.error(">>> [SERVER] Startup Error:", err);
+});
