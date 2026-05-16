@@ -9,13 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.25.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.454.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "lucide-react": "^0.344.0",
+    "react-router-dom": "^6.22.3",
     "smtp-client": "^0.2.1",
-    "framer-motion": "^11.0.8",
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^2.2.1"
+    "sonner": "^1.4.3",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
