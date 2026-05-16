@@ -47,7 +47,7 @@ export const ContactForm = () => {
       }
     }
     
-    const targetUrl = apiBase + "/api/contact";
+    const targetUrl = '/api/contact';
     console.log(`Contact form: Submitting to ${targetUrl} (Base: ${apiBase})`);
     
     try {
