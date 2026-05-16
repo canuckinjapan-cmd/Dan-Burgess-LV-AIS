@@ -11,11 +11,10 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
     hmr: process.env.DISABLE_HMR !== 'true',
   },
-  define: {
-    // Add fallbacks to prevent the app from crashing if these are undefined
-    'process.env.GEMINI_API_KEY': JSON.stringify(process.env.GEMINI_API_KEY || ""),
-    'import.meta.env.VITE_APP_URL': JSON.stringify(process.env.APP_URL || process.env.URL || ""),
-  },
+define: {
+  'process.env.GEMINI_API_KEY': JSON.stringify(process.env.GEMINI_API_KEY || ""),
+  'import.meta.env.VITE_APP_URL': JSON.stringify(process.env.APP_URL || ""),
+},
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {

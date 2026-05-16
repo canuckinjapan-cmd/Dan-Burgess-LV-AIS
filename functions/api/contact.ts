@@ -12,7 +12,7 @@ export const onRequestPost: PagesFunction<{ CONTACT_EMAIL: string }> = async (co
       });
     }
 
-    const contactEmail = context.env.CONTACT_EMAIL || "dan@danburgess.com";
+    const contactEmail = context.env.CONTACT_EMAIL || "canuck.in.japan@gmail.com";
 
     // Format the email content
     const emailBody = `
