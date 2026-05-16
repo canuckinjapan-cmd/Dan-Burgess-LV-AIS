@@ -1,3 +1,6 @@
+// @ts-ignore - Required for nodejs_compat
+import nodemailer from 'nodemailer';
+
 export const onRequestPost: PagesFunction<{ 
   CONTACT_EMAIL: string, 
   SMTP_HOST: string, 
@@ -8,39 +11,40 @@ export const onRequestPost: PagesFunction<{
     const data = (await context.request.json()) as Record<string, string>;
     const { name, email, company, budget, message } = data;
 
-    // 1. Validation
     if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
     }
 
-    // 2. Format the Email
-    const emailContent = `
-      Name: ${name}
-      Email: ${email}
-      Company: ${company || "N/A"}
-      Budget: ${budget || "N/A"}
-      Message: ${message}
-    `;
-
-    // 3. Send via SMTPServer (Using Cloudflare's standard fetch to an SMTP relay)
-    // Note: We use Gmail's SMTP settings from your Cloudflare Secrets
-    const sendEmail = await fetch("https://api.mailgun.net/v3/YOUR_DOMAIN/messages", { // Using SMTP relay logic
-        // This is a placeholder for the logic that utilizes your SMTP Secrets
+    // Create the transporter using your Cloudflare Secrets
+    const transporter = nodemailer.createTransport({
+      host: context.env.SMTP_HOST, // smtp.gmail.com
+      port: 465,
+      secure: true, // Use SSL
+      auth: {
+        user: context.env.SMTP_USER, // Your Gmail address
+        pass: context.env.SMTP_PASS, // Your 16-digit App Password
+      },
     });
 
-    // PEER NOTE: Since standard Node 'nodemailer' doesn't work in Cloudflare Workers, 
-    // we use the 'fetch' pattern to talk to your SMTP credentials.
-    
-    // For a 100% "No-Code" feel, the easiest relay for Gmail in Workers is 'Brevo' or 'Resend'.
-    // If you want to stick strictly to your Gmail App Password, tell AIS: 
-    // "Switch this to use a simple SMTPServer fetch pattern with my SMTP_PASS secret."
+    const mailOptions = {
+      from: `"Web Form" <${context.env.SMTP_USER}>`, 
+      to: context.env.CONTACT_EMAIL,
+      replyTo: email,
+      subject: `Inquiry from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company || "N/A"}\nBudget: ${budget || "N/A"}\n\nMessage:\n${message}`,
+    };
 
-    return new Response(JSON.stringify({ message: "Success" }), { status: 200 });
+    await transporter.sendMail(mailOptions);
+
+    return new Response(JSON.stringify({ message: "Inquiry sent successfully" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
 
   } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "SMTP Error", details: error.message }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 };
