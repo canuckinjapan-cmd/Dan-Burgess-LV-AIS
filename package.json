@@ -28,22 +28,16 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
-    "events": "^3.3.0",
     "framer-motion": "^11.0.8",
     "lucide-react": "^0.454.0",
     "motion": "^11.11.13",
-    "net": "^1.0.2",
     "next-themes": "^0.3.0",
-    "os": "^0.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.22.3",
-    "smtp-client": "^0.2.1",
     "sonner": "^1.4.3",
-    "stream": "^0.0.3",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7",
-    "tls": "^0.0.1"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240903.0",
