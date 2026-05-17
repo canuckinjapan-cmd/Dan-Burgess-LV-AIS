@@ -145,19 +145,18 @@ const Index = () => {
               <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-col gap-6 sm:gap-12 lg:gap-0 items-center">
                 
                 {/* Stats (Hidden on lg, visible < lg) */}
-                {/* On mobile portrait: bottom row of 4. On sm/tablet: left side 2x2 grid. */}
-                <div className="order-2 sm:order-1 lg:hidden grid grid-cols-4 sm:grid-cols-2 gap-x-2 sm:gap-x-12 gap-y-7 w-full">
+                <dl className="order-2 sm:order-1 lg:hidden grid grid-cols-4 sm:grid-cols-2 gap-x-2 sm:gap-x-12 gap-y-7 w-full">
                   {stats.map((s) => (
                     <div key={s.label}>
-                      <p className="font-serif-display text-xl sm:text-4xl font-semibold tracking-tight leading-none text-ink">
+                      <dt className="font-serif-display text-xl sm:text-4xl font-semibold tracking-tight leading-none text-ink">
                         {s.value}
-                      </p>
-                      <p className="mt-1.5 sm:mt-3 font-mono text-[6px] sm:text-[10px] uppercase tracking-[0.14em] text-ink-muted leading-tight">
+                      </dt>
+                      <dd className="mt-1.5 sm:mt-3 font-mono text-[6px] sm:text-[10px] uppercase tracking-[0.14em] text-ink-muted leading-tight">
                         {s.label}
-                      </p>
+                      </dd>
                     </div>
                   ))}
-                </div>
+                </dl>
 
                 {/* Polaroid Card (Top on mobile, Right on sm+, Top on lg+) */}
                 <motion.div 
@@ -199,18 +198,18 @@ const Index = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <div className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 rule">
+          <dl className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 rule">
             {stats.map((s, i) => (
               <div key={s.label} className={`px-6 py-7 lg:py-9 ${i === 0 ? "border-l-0" : ""}`}>
-                <p className="font-serif-display text-4xl lg:text-5xl font-semibold tracking-tight leading-none">
+                <dt className="font-serif-display text-4xl lg:text-5xl font-semibold tracking-tight leading-none">
                   {s.value}
-                </p>
-                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+                </dt>
+                <dd className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
                   {s.label}
-                </p>
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
         </motion.div>
 
         {/* Kinetic wordmark */}
@@ -331,14 +330,14 @@ const Index = () => {
             </div>
           </header>
 
-          <div className="grid md:grid-cols-2 gap-px bg-ink/10 border rule">
+          <div className="grid md:grid-cols-2 gap-px bg-ink/10 border rule" role="list">
             {services.map((s) => (
-              <div key={s.no} className="group bg-surface p-8 lg:p-10 hover:bg-surface-elevated transition-colors">
+              <article key={s.no} className="group bg-surface p-8 lg:p-10 hover:bg-surface-elevated transition-colors" role="listitem">
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-mono text-[22px] uppercase tracking-[0.22em] text-accent-brand">
+                  <header className="font-mono text-[22px] uppercase tracking-[0.22em] text-accent-brand">
                     {s.no}
-                  </span>
-                  <span className="font-mono text-[22px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
+                  </header>
+                  <span className="font-mono text-[22px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">
                     →
                   </span>
                 </div>
@@ -346,7 +345,7 @@ const Index = () => {
                   {s.title}
                 </h3>
                 <p className="text-ink-muted leading-relaxed mb-6 max-w-[42ch]">{s.body}</p>
-                <ul className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2" aria-label={t("Deliverables", "成果物")}>
                   {s.deliverables.map((d) => (
                     <li
                       key={d}
@@ -356,7 +355,7 @@ const Index = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
           </div>
         </motion.div>

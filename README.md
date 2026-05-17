@@ -1,10 +1,16 @@
 # Dan Burgess Design | Ver. 2
 
-A premium, editorial-inspired portfolio website for Dan Burgess, a Canadian designer based in Fukuoka, Japan. This redesign focuses on high-conversion presentation, bridging Western minimalism with Japanese trust-based design across three decades of expertise.
+[![Live Demo](https://img.shields.io/badge/Live-Demo-orange?style=for-the-badge)](https://canuckinjapan-cmd.github.io/Dan-Burgess-LV-AIS/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## 🚀 Overview
+A premium, editorial-inspired portfolio website bridging Western minimalism with Japanese trust-based design.  
+福岡を拠点に活動するカナダ人デザイナー、ダン・バージェスのポートフォリオ。西洋のミニマリズムと日本の信頼重視のデザインを融合。
 
-This project is a React-based single-page application (SPA) that emphasizes typography, whitespace, and subtle kinetic energy. It showcases 30 years of cross-cultural design experience, ranging from classic game localization to modern No-Code product development.
+## 🚀 Overview / 概要
+
+This project is a React-based single-page application (SPA) showcasing 30 years of cross-cultural design experience—from classic game localization to modern UI/UX design and No-Code development.
+
+30年にわたる異文化デザイン経験（ゲームのローカライゼーションから最新のUI/UX、ノーコード開発まで）を凝縮した、Reactベースのシングルページアプリケーション（SPA）です。
 
 ## 🛠️ Tech Stack
 
