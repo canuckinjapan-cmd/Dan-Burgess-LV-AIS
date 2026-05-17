@@ -1,3 +1,5 @@
+import { EventEmitter } from 'node:events';
+import { Readable, Writable, Transform, PassThrough } from 'node:stream';
 import { SMTPClient } from 'smtp-client';
 
 export const onRequestPost: PagesFunction<{ 
