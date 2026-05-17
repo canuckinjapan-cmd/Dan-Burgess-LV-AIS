@@ -2,25 +2,32 @@ import { EventEmitter } from 'node:events';
 import { Readable, Writable, Transform, PassThrough } from 'node:stream';
 import { SMTPClient } from 'smtp-client';
 
-export const onRequestPost: PagesFunction<{ 
-  CONTACT_EMAIL: string, 
-  SMTP_HOST: string, 
-  SMTP_USER: string, 
-  SMTP_PASS: string 
-}> = async (context) => {
+export const onRequestPost = async (context) => {
+  // 1. Log entry for Cloudflare Real-time Logs
+  console.log("Contact API: Request received");
+
   try {
-    const data = (await context.request.json()) as Record<string, string>;
+    const data = await context.request.json();
     const { name, email, message } = data;
 
-    // Setup SMTP Client for Gmail SSL (Port 465)
+    // 2. Validate environment variables are present
+    if (!context.env.SMTP_PASS || !context.env.SMTP_USER) {
+      throw new Error("Missing SMTP credentials in Cloudflare environment.");
+    }
+
+    // 3. Setup SMTP Client for Port 465 (SSL)
     const client = new SMTPClient({
       host: context.env.SMTP_HOST || 'smtp.gmail.com',
       port: 465,
+      secure: true, // Explicitly enable SSL for port 465
     });
 
+    console.log("Contact API: Connecting to SMTP...");
     await client.connect();
     await client.greet();
-    await client.authPlain({
+    
+    // 4. Authenticate using Login (often more compatible with App Passwords)
+    await client.authLogin({
       user: context.env.SMTP_USER,
       pass: context.env.SMTP_PASS,
     });
@@ -29,20 +36,35 @@ export const onRequestPost: PagesFunction<{
     await client.to(context.env.CONTACT_EMAIL);
     
     const emailData = [
-      `Subject: Inquiry: ${name}`,
+      `Subject: New Inquiry from ${name}`,
       `Reply-To: ${email}`,
       `From: ${context.env.SMTP_USER}`,
       `To: ${context.env.CONTACT_EMAIL}`,
+      'Content-Type: text/plain; charset=utf-8',
       '',
-      `Message from ${name}:`,
+      `Name: ${name}`,
+      `Email: ${email}`,
+      '',
+      `Message:`,
       `${message}`
     ].join('\r\n');
 
     await client.data(emailData);
     await client.quit();
 
-    return new Response(JSON.stringify({ message: "Success" }), { status: 200 });
-  } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    console.log("Contact API: Email sent successfully");
+    return new Response(JSON.stringify({ message: "Success" }), { 
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    });
+
+  } catch (error) {
+    // 5. Log the actual error to the Cloudflare Functions log stream
+    console.error("Contact API Error:", error.message);
+    
+    return new Response(JSON.stringify({ error: error.message }), { 
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 };
