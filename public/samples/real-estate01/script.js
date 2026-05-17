@@ -49,10 +49,7 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
         
         try {
-            const currentOrigin = window.location.origin;
-            const localStored = localStorage.getItem('AIS_API_URL');
-            const apiBase = (window.API_BASE_URL || localStored || currentOrigin).trim().replace(/\/+$/, "");
-            const targetUrl = apiBase + "/api/contact";
+            const targetUrl = "/api/contact";
             
             console.log(`Contact: Sending to ${targetUrl}`);
             

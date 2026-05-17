@@ -1320,12 +1320,7 @@
         newsletterBtn.textContent = '...';
         
         try {
-          const currentOrigin = window.location.origin;
-          const localStored = localStorage.getItem('AIS_API_URL');
-          // Prioritize explicitly set env (not available in static), then localStorage, then current origin
-          const apiBase = (window.API_BASE_URL || localStored || currentOrigin).trim().replace(/\/+$/, "");
-          // Construct target URL
-          const targetUrl = apiBase + "/api/contact";
+          const targetUrl = "/api/contact";
           
           console.log(`Newsletter: Sending to ${targetUrl}`);
           
