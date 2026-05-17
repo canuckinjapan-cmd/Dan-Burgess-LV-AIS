@@ -5,7 +5,7 @@ export const onRequestPost = async (context) => {
 
   try {
     const data = await context.request.json();
-    const { name, email, message } = data;
+    const { name, email, message, ...otherFields } = data;
 
     // Validate environment variables from Cloudflare dashboard
     if (!context.env.SMTP_PASS || !context.env.SMTP_USER) {
@@ -39,6 +39,10 @@ export const onRequestPost = async (context) => {
                const result = responseBuffer;
                responseBuffer = lines.slice(i + 1).join('\r\n'); // keep remaining buffer
                return result;
+            }
+            // Check for SMTP error codes (4xx or 5xx)
+            if (/^[45]\d\d/.test(line)) {
+               throw new Error(`SMTP Server Error: ${line}`);
             }
           }
         }
@@ -75,19 +79,29 @@ export const onRequestPost = async (context) => {
     await write('DATA');
     await readUntil(['354']);
 
+    // Safely encode Subject with MIME Encoded-Word for Japanese/UTF-8 support
+    const subjectText = `New Inquiry from ${name || 'User'}`;
+    const utf8Bytes = encoder.encode(subjectText);
+    const binaryString = Array.from(utf8Bytes).map(b => String.fromCharCode(b)).join('');
+    const encodedSubject = `=?UTF-8?B?${btoa(binaryString)}?=`;
+
+    const otherFieldsLines = Object.entries(otherFields)
+      .map(([k, v]) => `${k.charAt(0).toUpperCase() + k.slice(1)}: ${v}`);
+
     // Construct Email content
     const emailData = [
-      `Subject: New Inquiry from ${name}`,
-      `Reply-To: ${email}`,
+      `Subject: ${encodedSubject}`,
+      `Reply-To: ${email || 'no-reply@example.com'}`,
       `From: ${context.env.SMTP_USER}`,
       `To: ${contactEmail}`,
       'Content-Type: text/plain; charset=utf-8',
       '',
-      `Name: ${name}`,
-      `Email: ${email}`,
+      `Name: ${name || 'N/A'}`,
+      `Email: ${email || 'N/A'}`,
+      ...otherFieldsLines,
       '',
       `Message:`,
-      `${message}`,
+      `${message || 'N/A'}`,
       '.',
     ].join('\r\n');
 
@@ -105,7 +119,7 @@ export const onRequestPost = async (context) => {
 
   } catch (error) {
     console.error("Contact API Error:", error.message);
-    return new Response(JSON.stringify({ error: error.message }), { 
+    return new Response(JSON.stringify({ error: error.message, message: error.message }), { 
       status: 500,
       headers: { "Content-Type": "application/json" }
     });
