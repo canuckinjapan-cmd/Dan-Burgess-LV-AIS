@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
 import manga from "@/assets/danface_manga-2025.png";
+import instagramLogo from "@/assets/Instagram-Logo.png";
+import bloggerLogo from "@/assets/Blogger-Logo.png";
 
 const navItems = [
   { label: "Work", jpLabel: "制作事例", href: "#work" },
@@ -168,7 +170,34 @@ export const TopBar = () => {
               </motion.div>
             </nav>
             <div className="absolute bottom-10 left-8 right-8 flex justify-between items-center font-mono text-[10px] uppercase tracking-widest text-ink-muted">
-              <span>Fukuoka · UTC+9</span>
+              <div className="flex items-center gap-4">
+                <a 
+                  href="https://www.instagram.com/canuckinjapan/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center size-8 transition-transform hover:scale-110"
+                >
+                  <img 
+                    src={instagramLogo} 
+                    alt="Instagram" 
+                    className="w-full h-full object-contain" 
+                    style={{ imageRendering: "-webkit-optimize-contrast" }}
+                  />
+                </a>
+                <a 
+                  href="https://djb-archviz.blogspot.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center size-8 transition-transform hover:scale-110"
+                >
+                  <img 
+                    src={bloggerLogo} 
+                    alt="Blogger" 
+                    className="w-full h-full object-contain" 
+                    style={{ imageRendering: "-webkit-optimize-contrast" }}
+                  />
+                </a>
+              </div>
               <span>© {new Date().getFullYear()} Burgess</span>
             </div>
           </motion.div>

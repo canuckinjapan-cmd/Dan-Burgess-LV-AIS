@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Instagram, Rss } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 import { KineticWordmark } from "@/components/KineticWordmark";
 import { CaseStudies } from "@/components/CaseStudies";
@@ -6,6 +7,8 @@ import { ContactForm } from "@/components/ContactForm";
 import { PortraitPlate } from "@/components/PortraitPlate";
 import manga from "@/assets/danface_manga-2025.png";
 
+import instagramLogo from "@/assets/Instagram-Logo.png";
+import bloggerLogo from "@/assets/Blogger-Logo.png";
 import { useLanguage } from "@/context/LanguageContext";
 
 const Index = () => {
@@ -472,7 +475,59 @@ const Index = () => {
             <a href="#process" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Process", "プロセス")}</a>
             <a href="#contact" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Contact", "お問い合わせ")}</a>
           </div>
-          <span>{t("Fukuoka · 福岡 · UTC+9", "福岡 · Fukuoka · UTC+9")}</span>
+          <div className="flex items-center gap-4">
+            <span className="text-ink-muted">{t("MY SOCIALS →", "自分のSNS→")}</span>
+            
+            {/* Instagram */}
+            <div className="relative group">
+              <a 
+                href="https://www.instagram.com/canuckinjapan/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-center size-8 transition-transform hover:scale-110"
+              >
+                <img 
+                  src={instagramLogo} 
+                  alt="Instagram" 
+                  className="w-full h-full object-contain" 
+                  style={{ imageRendering: "-webkit-optimize-contrast" }}
+                />
+              </a>
+              
+              {/* Tooltip Balloon */}
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-y-1 group-hover:translate-y-0">
+                <div className="relative bg-ink text-surface text-[9px] font-mono uppercase tracking-[0.1em] px-2.5 py-1.5 rounded-sm whitespace-nowrap shadow-2xl">
+                  {t("SOME NATURE PHOTOS", "自作自然の写真")}
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45" />
+                </div>
+              </div>
+            </div>
+
+            {/* Blogspot */}
+            <div className="relative group">
+              <a 
+                href="https://djb-archviz.blogspot.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-center size-8 transition-transform hover:scale-110"
+              >
+                <img 
+                  src={bloggerLogo} 
+                  alt="Blogger" 
+                  className="w-full h-full object-contain" 
+                  style={{ imageRendering: "-webkit-optimize-contrast" }}
+                />
+              </a>
+              
+              {/* Tooltip Balloon */}
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-y-1 group-hover:translate-y-0">
+                <div className="relative bg-ink text-surface text-[9px] font-mono uppercase tracking-[0.1em] px-2.5 py-1.5 rounded-sm whitespace-nowrap shadow-2xl">
+                  {t("3D CG MADE BY ME", "自作の3DCG作例")}
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
