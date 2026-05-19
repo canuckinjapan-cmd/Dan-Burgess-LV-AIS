@@ -221,7 +221,7 @@ const Index = () => {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
             <div className="lg:col-span-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+              <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
                 §01 — {t("Selected Work", "制作事例")}
               </p>
             </div>
@@ -255,7 +255,7 @@ const Index = () => {
           transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
           <div className="lg:col-span-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+            <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
               §02 — {t("About", "プロフィール")}
             </p>
             <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-6">
@@ -316,7 +316,7 @@ const Index = () => {
         >
           <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-20">
             <div className="lg:col-span-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+              <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
                 §03 — {t("Services", "サービス")}
               </p>
             </div>
@@ -371,7 +371,7 @@ const Index = () => {
           transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
           <div className="lg:col-span-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+            <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
               §04 — {t("Process", "プロセス")}
             </p>
             <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05]">
@@ -407,7 +407,7 @@ const Index = () => {
           transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
           <div className="lg:col-span-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-brand mb-4">
+            <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-4">
               §05 — {t("Contact", "お問い合わせ")}
             </p>
             <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-[-0.02em] leading-[1.02] text-balance">
