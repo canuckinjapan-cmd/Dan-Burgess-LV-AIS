@@ -113,7 +113,7 @@ const cases: CaseStudy[] = [
     image: new URL("../assets/MacBook-Pro-indexbig.jpg", import.meta.url).href,
     mobileImage: new URL("../assets/iPhone-16-index.jpg", import.meta.url).href,
     tabletImage: new URL("../assets/iPad-index.jpg", import.meta.url).href,
-    link: "https://canuckinjapan-cmd.github.io/jdm-design-guru/",
+    link: "https://canuckinjapan-cmd.github.io/JDM-final-version/",
   },
 ];
 
