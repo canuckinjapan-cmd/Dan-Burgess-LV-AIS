@@ -90,7 +90,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-12 md:landscape:grid-cols-12 lg:landscape:grid-cols-12 gap-10 lg:gap-12 lg:landscape:gap-12 md:landscape:gap-8 items-center">
             {/* Left column — masthead */}
             <motion.div 
-              className="lg:col-span-8 md:landscape:col-span-7 lg:landscape:col-span-8"
+              className="lg:col-span-8 md:landscape:col-span-8 lg:landscape:col-span-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -102,7 +102,7 @@ const Index = () => {
                 <span>Fukuoka, JPN · UTC+9</span>
               </div>
 
-              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] md:landscape:text-[3.75rem] lg:text-[6.25rem] lg:landscape:text-[6.25rem]">
+              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] md:landscape:text-[3.25rem] lg:landscape:text-[3.75rem] xl:text-[6.25rem] xl:landscape:text-[6.25rem] lg:text-[6.25rem]">
                 {t(
                   <><span className="text-accent-brand font-medium">Bridging</span> Japanese<br />and Western digital<br />experiences.</>,
                   <span className="text-[0.8em] sm:text-[0.82em] leading-[1.1] block">
@@ -111,7 +111,7 @@ const Index = () => {
                 )}
               </h1>
 
-              <p className="mt-8 md:landscape:mt-4 lg:mt-8 lg:landscape:mt-8 max-w-[58ch] text-lg md:landscape:text-base lg:text-xl lg:landscape:text-xl text-ink-muted leading-relaxed">
+              <p className="mt-8 md:landscape:mt-4 lg:mt-8 lg:landscape:mt-6 max-w-[58ch] text-lg md:landscape:text-base lg:landscape:text-lg xl:landscape:text-xl xl:text-xl lg:text-xl text-ink-muted leading-relaxed">
                 {t(
                   <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer living in Japan since 1992, and based in Fukuoka. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
                   <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験 of 創出を支援してきました。</>
@@ -137,7 +137,7 @@ const Index = () => {
 
             {/* Right column — manga portrait card & stats */}
             <motion.aside 
-              className="lg:col-span-4 md:landscape:col-span-5 lg:landscape:col-span-4 lg:mt-0"
+              className="lg:col-span-4 md:landscape:col-span-4 lg:landscape:col-span-4 lg:mt-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -162,9 +162,9 @@ const Index = () => {
                 <motion.div 
                   whileHover={{ rotate: 2 }}
                   transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="order-1 sm:order-2 w-full md:landscape:max-w-[280px] lg:max-w-none lg:landscape:max-w-none relative bg-surface-elevated border rule p-4 sm:p-6 md:landscape:p-4 lg:p-6 lg:landscape:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer animate-fade-in"
+                  className="order-1 sm:order-2 w-full md:landscape:max-w-[240px] lg:max-w-none lg:landscape:max-w-[280px] xl:landscape:max-w-none relative bg-surface-elevated border rule p-4 sm:p-6 md:landscape:p-4 lg:p-6 lg:landscape:p-4 xl:landscape:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer animate-fade-in"
                 >
-                  <div className="flex items-center justify-between font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[10px] uppercase tracking-widest text-ink-muted mb-3 lg:mb-4">
+                  <div className="flex items-center justify-between font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[8px] xl:landscape:text-[10px] uppercase tracking-widest text-ink-muted mb-3 md:landscape:mb-2 lg:landscape:mb-3 xl:mb-4">
                     <span>Plate 01</span>
                     <span className="flex items-center gap-1.5 lg:gap-2">
                        <span className="size-1 rounded-full lg:size-1.5 bg-accent-brand animate-pulse-dot" />
@@ -172,14 +172,14 @@ const Index = () => {
                     </span>
                   </div>
                   <PortraitPlate />
-                  <div className="mt-4 lg:mt-5 flex items-baseline justify-between gap-2 lg:gap-4 pt-3 lg:pt-4 border-t rule">
+                  <div className="mt-3 md:landscape:mt-2 lg:landscape:mt-3 xl:mt-5 flex items-baseline justify-between gap-2 pt-3 md:landscape:pt-2 lg:landscape:pt-3 xl:pt-4 border-t rule">
                     <div>
-                      <p className="text-xl md:landscape:text-lg lg:text-2xl lg:landscape:text-2xl leading-none" style={{ fontFamily: '"Homemade Apple", cursive' }}>Dan Burgess</p>
-                      <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[10px] uppercase tracking-widest text-ink-muted mt-1">
+                      <p className="text-xl md:landscape:text-base lg:landscape:text-lg xl:text-2xl leading-none" style={{ fontFamily: '"Homemade Apple", cursive' }}>Dan Burgess</p>
+                      <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[8px] xl:landscape:text-[10px] uppercase tracking-widest text-ink-muted mt-1">
                         {t("Designer · デザイナー", "デザイナー · Designer")}
                       </p>
                     </div>
-                    <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[10px] uppercase tracking-widest text-ink-muted text-right leading-relaxed shrink-0">
+                    <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[8px] xl:landscape:text-[10px] uppercase tracking-widest text-ink-muted text-right leading-relaxed shrink-0">
                       🍁 → 🇯🇵<br />
                       {t("Since '92", "92年から活動")}
                     </p>
