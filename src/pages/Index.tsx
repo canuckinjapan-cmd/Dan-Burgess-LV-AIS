@@ -86,11 +86,11 @@ const Index = () => {
 
       {/* HERO ============================================================ */}
       <section className="relative overflow-hidden">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 lg:pt-20 pb-16 lg:pb-24">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 md:landscape:pt-14 lg:pt-20 lg:landscape:pt-20 pb-16 md:landscape:pb-16 lg:pb-24 lg:landscape:pb-24">
+          <div className="grid lg:grid-cols-12 md:landscape:grid-cols-12 lg:landscape:grid-cols-12 gap-10 lg:gap-12 lg:landscape:gap-12 md:landscape:gap-8 items-center">
             {/* Left column — masthead */}
             <motion.div 
-              className="lg:col-span-8"
+              className="lg:col-span-8 md:landscape:col-span-7 lg:landscape:col-span-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -102,7 +102,7 @@ const Index = () => {
                 <span>Fukuoka, JPN · UTC+9</span>
               </div>
 
-              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] lg:text-[6.25rem]">
+              <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] md:landscape:text-[3.75rem] lg:text-[6.25rem] lg:landscape:text-[6.25rem]">
                 {t(
                   <><span className="text-accent-brand font-medium">Bridging</span> Japanese<br />and Western digital<br />experiences.</>,
                   <span className="text-[0.8em] sm:text-[0.82em] leading-[1.1] block">
@@ -111,14 +111,14 @@ const Index = () => {
                 )}
               </h1>
 
-              <p className="mt-8 max-w-[58ch] text-lg lg:text-xl text-ink-muted leading-relaxed">
+              <p className="mt-8 md:landscape:mt-4 lg:mt-8 lg:landscape:mt-8 max-w-[58ch] text-lg md:landscape:text-base lg:text-xl lg:landscape:text-xl text-ink-muted leading-relaxed">
                 {t(
                   <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer living in Japan since 1992, and based in Fukuoka. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
-                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験の創出を支援してきました。</>
+                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験 of 創出を支援してきました。</>
                 )}
               </p>
 
-              <div className="mt-10 flex flex-wrap items-center gap-4">
+              <div className="mt-10 md:landscape:mt-6 lg:mt-10 lg:landscape:mt-10 flex flex-wrap items-center gap-4">
                 <a
                   href="#contact"
                   className="group inline-flex items-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
@@ -137,15 +137,15 @@ const Index = () => {
 
             {/* Right column — manga portrait card & stats */}
             <motion.aside 
-              className="lg:col-span-4 lg:mt-0"
+              className="lg:col-span-4 md:landscape:col-span-5 lg:landscape:col-span-4 lg:mt-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
             >
-              <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-col gap-6 sm:gap-12 lg:gap-0 items-center">
+              <div className="flex flex-col sm:grid sm:grid-cols-2 md:landscape:flex md:landscape:flex-col lg:flex lg:flex-col gap-6 sm:gap-12 md:landscape:gap-0 lg:gap-0 items-center">
                 
-                {/* Stats (Hidden on lg, visible < lg) */}
-                <dl className="order-2 sm:order-1 lg:hidden grid grid-cols-4 sm:grid-cols-2 gap-x-2 sm:gap-x-12 gap-y-7 w-full">
+                {/* Stats (Hidden on lg and md:landscape, visible < lg) */}
+                <dl className="order-2 sm:order-1 lg:hidden md:landscape:hidden grid grid-cols-4 sm:grid-cols-2 gap-x-2 sm:gap-x-12 gap-y-7 w-full">
                   {stats.map((s) => (
                     <div key={s.label}>
                       <dt className="font-serif-display text-xl sm:text-4xl font-semibold tracking-tight leading-none text-ink">
@@ -162,24 +162,24 @@ const Index = () => {
                 <motion.div 
                   whileHover={{ rotate: 2 }}
                   transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="order-1 sm:order-2 w-full relative bg-surface-elevated border rule p-4 sm:p-6 lg:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer"
+                  className="order-1 sm:order-2 w-full md:landscape:max-w-[280px] lg:max-w-none lg:landscape:max-w-none relative bg-surface-elevated border rule p-4 sm:p-6 md:landscape:p-4 lg:p-6 lg:landscape:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer animate-fade-in"
                 >
-                  <div className="flex items-center justify-between font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted mb-3 lg:mb-4">
+                  <div className="flex items-center justify-between font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[10px] uppercase tracking-widest text-ink-muted mb-3 lg:mb-4">
                     <span>Plate 01</span>
                     <span className="flex items-center gap-1.5 lg:gap-2">
-                      <span className="size-1 rounded-full lg:size-1.5 bg-accent-brand animate-pulse-dot" />
+                       <span className="size-1 rounded-full lg:size-1.5 bg-accent-brand animate-pulse-dot" />
                       {t("Accepting Q3", "Q3 プロジェクト受付中")}
                     </span>
                   </div>
                   <PortraitPlate />
                   <div className="mt-4 lg:mt-5 flex items-baseline justify-between gap-2 lg:gap-4 pt-3 lg:pt-4 border-t rule">
                     <div>
-                      <p className="text-xl lg:text-2xl leading-none" style={{ fontFamily: '"Homemade Apple", cursive' }}>Dan Burgess</p>
-                      <p className="font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted mt-1">
+                      <p className="text-xl md:landscape:text-lg lg:text-2xl lg:landscape:text-2xl leading-none" style={{ fontFamily: '"Homemade Apple", cursive' }}>Dan Burgess</p>
+                      <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[10px] uppercase tracking-widest text-ink-muted mt-1">
                         {t("Designer · デザイナー", "デザイナー · Designer")}
                       </p>
                     </div>
-                    <p className="font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted text-right leading-relaxed shrink-0">
+                    <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[10px] uppercase tracking-widest text-ink-muted text-right leading-relaxed shrink-0">
                       🍁 → 🇯🇵<br />
                       {t("Since '92", "92年から活動")}
                     </p>
@@ -192,19 +192,19 @@ const Index = () => {
 
         {/* Stat strip - Hidden on mobile/tablet as they move up next to portrait */}
         <motion.div 
-          className="border-y rule bg-surface-soft/40 hidden lg:block"
+          className="border-y rule bg-surface-soft/40 hidden lg:block md:landscape:block"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <dl className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 rule">
+          <dl className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 md:landscape:grid-cols-4 lg:landscape:grid-cols-4 divide-x divide-y lg:divide-y-0 md:landscape:divide-y-0 lg:landscape:divide-y-0 rule">
             {stats.map((s, i) => (
-              <div key={s.label} className={`px-6 py-7 lg:py-9 ${i === 0 ? "border-l-0" : ""}`}>
-                <dt className="font-serif-display text-4xl lg:text-5xl font-semibold tracking-tight leading-none">
+              <div key={s.label} className={`px-6 py-7 md:landscape:py-5 lg:py-9 lg:landscape:py-9 ${i === 0 ? "border-l-0" : ""}`}>
+                <dt className="font-serif-display text-4xl md:landscape:text-3xl lg:text-5xl lg:landscape:text-5xl font-semibold tracking-tight leading-none">
                   {s.value}
                 </dt>
-                <dd className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+                <dd className="mt-3 md:landscape:mt-2 lg:landscape:mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
                   {s.label}
                 </dd>
               </div>

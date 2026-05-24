@@ -55,11 +55,19 @@
 
 @layer base {
   * { @apply border-border; }
-  html { scroll-behavior: smooth; }
-  body {
+  html { 
+    scroll-behavior: smooth; 
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  body, #dan-app {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
     font-feature-settings: 'ss01', 'cv11';
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   ::selection {
     background-color: hsl(var(--accent-brand));
