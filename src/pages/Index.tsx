@@ -83,11 +83,11 @@ const Index = () => {
   ];
 
   return (
-    <div id="top" className="bg-paper text-ink min-h-dvh font-sans-body">
+    <div id="top" className="bg-paper text-ink min-h-dvh font-sans-body w-full overflow-x-hidden relative">
       <TopBar />
 
       {/* HERO ============================================================ */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden w-full">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 md:landscape:pt-14 lg:pt-20 lg:landscape:pt-20 pb-16 md:landscape:pb-16 lg:pb-24 lg:landscape:pb-24">
           <div className="grid lg:grid-cols-12 md:landscape:grid-cols-12 lg:landscape:grid-cols-12 gap-10 lg:gap-12 lg:landscape:gap-12 md:landscape:gap-8 items-center">
             {/* Left column — masthead */}
@@ -219,7 +219,7 @@ const Index = () => {
       </section>
 
       {/* WORK ============================================================ */}
-      <section id="work" className="py-24 lg:py-32">
+      <section id="work" className="py-24 lg:py-32 w-full overflow-x-hidden relative">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10">
           <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
             <div className="lg:col-span-3">
@@ -248,7 +248,7 @@ const Index = () => {
       </section>
 
       {/* ABOUT =========================================================== */}
-      <section id="about" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 overflow-hidden">
+      <section id="about" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 w-full overflow-x-hidden relative">
         <motion.div 
           className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-12"
           initial={{ opacity: 0, y: 40 }}
@@ -308,7 +308,7 @@ const Index = () => {
       </section>
 
       {/* SERVICES ======================================================== */}
-      <section id="services" className="py-24 lg:py-32 border-t rule overflow-hidden">
+      <section id="services" className="py-24 lg:py-32 border-t rule w-full overflow-x-hidden relative">
         <motion.div 
           className="max-w-[1320px] mx-auto px-6 lg:px-10"
           initial={{ opacity: 0, y: 40 }}
@@ -364,7 +364,7 @@ const Index = () => {
       </section>
 
       {/* PROCESS ========================================================= */}
-      <section id="process" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 overflow-hidden">
+      <section id="process" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 w-full overflow-x-hidden relative">
         <motion.div 
           className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10"
           initial={{ opacity: 0, y: 40 }}
@@ -400,7 +400,7 @@ const Index = () => {
       </section>
 
       {/* CONTACT ========================================================= */}
-      <section id="contact" className="py-24 lg:py-32 border-t rule overflow-hidden">
+      <section id="contact" className="py-24 lg:py-32 border-t rule w-full overflow-x-hidden relative">
         <motion.div 
           className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16"
           initial={{ opacity: 0, y: 40 }}

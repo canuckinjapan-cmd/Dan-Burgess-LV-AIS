@@ -96,7 +96,7 @@ const NotFound = () => {
   }, [navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-paper text-ink font-sans-body relative">
+    <div className="flex flex-col min-h-screen bg-paper text-ink font-sans-body relative w-full overflow-x-hidden">
       <div className="relative z-[101] bg-paper">
         <TopBar />
       </div>
