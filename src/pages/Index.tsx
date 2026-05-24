@@ -11,6 +11,8 @@ import instagramLogo from "@/assets/Instagram-Logo.png";
 import bloggerLogo from "@/assets/Blogger-Logo.png";
 import { useLanguage } from "@/context/LanguageContext";
 
+// Version 2.0.2 - Fixed responsive typography scaling and Polaroid layout proportions for landscape tablets
+
 const Index = () => {
   const { t, lang } = useLanguage();
   const currentYear = new Date().getFullYear();
