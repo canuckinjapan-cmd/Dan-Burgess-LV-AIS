@@ -57,16 +57,17 @@ export const TopBar = () => {
   );
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isMenuOpen
-          ? "bg-surface border-b rule"
-          : scrolled
-          ? "bg-surface/95 backdrop-blur-md border-b rule"
-          : "bg-transparent border-b border-transparent"
-      }`}
-    >
-      <div className="max-w-[1320px] mx-auto pl-6 pr-8 lg:px-10 h-16 flex items-center justify-between gap-6">
+    <div className="h-16 w-full relative">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isMenuOpen
+            ? "bg-surface border-b rule"
+            : scrolled
+            ? "bg-surface/95 backdrop-blur-md border-b rule"
+            : "bg-transparent border-b border-transparent"
+        }`}
+      >
+        <div className="max-w-[1320px] mx-auto pl-6 pr-8 lg:px-10 h-16 flex items-center justify-between gap-6">
         {/* Logo Left: Face only on sm+, Text always */}
         <a href="#top" className="flex items-center gap-3 group shrink-0 relative" aria-label="Dan Burgess Design home">
           <span className="relative hidden sm:inline-block">
@@ -204,5 +205,6 @@ export const TopBar = () => {
         )}
       </AnimatePresence>
     </header>
+  </div>
   );
 };
