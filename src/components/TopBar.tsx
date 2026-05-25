@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
-import manga from "@/assets/danface_manga-2025-108.png";
+import manga from "@/assets/danface_manga-2025-84.png";
 import instagramLogo from "@/assets/Instagram-Logo.png";
 import bloggerLogo from "@/assets/Blogger-Logo.png";
 
