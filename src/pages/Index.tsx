@@ -5,7 +5,7 @@ import { KineticWordmark } from "@/components/KineticWordmark";
 import { CaseStudies } from "@/components/CaseStudies";
 import { ContactForm } from "@/components/ContactForm";
 import { PortraitPlate } from "@/components/PortraitPlate";
-import manga from "@/assets/danface_manga-2025-84.png";
+import manga from "@/assets/danface_manga.svg";
 
 import instagramLogo from "@/assets/Instagram-Logo.png";
 import bloggerLogo from "@/assets/Blogger-Logo.png";

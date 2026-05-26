@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { TopBar } from "@/components/TopBar";
 import { useLanguage } from "@/context/LanguageContext";
-import manga from "@/assets/danface_manga-2025-84.png";
+import manga from "@/assets/danface_manga.svg";
 import instagramLogo from "@/assets/Instagram-Logo.png";
 import bloggerLogo from "@/assets/Blogger-Logo.png";
 

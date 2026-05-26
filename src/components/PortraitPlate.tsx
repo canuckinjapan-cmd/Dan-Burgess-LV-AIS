@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 
 import headshot from "@/assets/DJB-headshot01.jpg";
-import manga from "@/assets/danface_manga-2025.png";
+import manga from "@/assets/danface_manga.svg";
 
 export const PortraitPlate = () => {
   const ref = useRef<HTMLDivElement>(null);
