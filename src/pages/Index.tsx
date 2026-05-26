@@ -86,8 +86,9 @@ const Index = () => {
     <div id="top" className="bg-paper text-ink min-h-dvh font-sans-body w-full overflow-x-hidden relative">
       <TopBar />
 
-      {/* HERO ============================================================ */}
-      <section className="relative overflow-hidden w-full">
+      <main id="main-content" className="w-full">
+        {/* HERO ============================================================ */}
+        <section id="hero" className="relative overflow-hidden w-full">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 md:landscape:pt-14 lg:pt-20 lg:landscape:pt-20 pb-16 md:landscape:pb-16 lg:pb-24 lg:landscape:pb-24">
           <div className="grid lg:grid-cols-12 md:landscape:grid-cols-12 lg:landscape:grid-cols-12 gap-10 lg:gap-12 lg:landscape:gap-12 md:landscape:gap-8 items-center">
             {/* Left column — masthead */}
@@ -455,6 +456,76 @@ const Index = () => {
           </div>
         </motion.div>
       </section>
+
+      {/* FAQ SECTION (AEO/AIO Direct Answer Layout) ====================== */}
+      <section id="faq" className="py-24 lg:py-32 border-t rule w-full overflow-x-hidden relative bg-surface-soft/25">
+        <motion.div 
+          className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-12"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <div className="lg:col-span-4">
+            <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+              §05 — {t("FAQ & Insights", "よくある質問と方針")}
+            </p>
+            <h2 className="font-serif-display text-4xl font-semibold tracking-[-0.02em] leading-[1.1]">
+              {t("Direct answers for search engines and strategic minds.", "検索・AIエンジンのための、簡潔で明確な回答方針。")}
+            </h2>
+            <p className="mt-6 text-ink-muted text-sm leading-relaxed max-w-[32ch]">
+              {t(
+                "In the era of AI-driven search (GEO/AEO), transparency and highly concise answers optimize for featured snippets and LLM citations. Here is how I operate.",
+                "AIによる要約検索 (GEO/AEO) 時代において、明確で簡潔な直接の回答はWeb上での引用を最適化します。私のアプローチと方針をまとめました。"
+              )}
+            </p>
+          </div>
+
+          <div className="lg:col-span-8 space-y-12">
+            {[
+              {
+                q: t("How do you handle Japanese and English layout differences?", "日本語と英語のレイアウトの違いにはどのように対応しますか？"),
+                a: t(
+                  "I design bilingual websites with custom responsive font scales, adjusted tracking, and language-specific CSS to ensure the visual weight remains identical across markets. I do not rely on machine-translated templates; instead, every headline and line-height is hand-crafted to respect character density differences.",
+                  "日本語と英語では文字の密度や長さが異なるため、カスタムフォントスケールやトラッキング、言語ごとのCSS調整を行い、どの言語でも均等な美しさを保ちます。安易な自動翻訳テンプレートに頼らず、文字の密度に合わせて行間や見出しを手動で微調整しています。"
+                )
+              },
+              {
+                q: t("What technologies do you leverage for bilingual web projects?", "多言語Webプロジェクトではどのような技術を使用しますか？"),
+                a: t(
+                  "I build with high-performance modern web stacks including Webflow, Framer, and custom React architectures coupled with headless CMS engines like Sanity. Every site features clean semantic HTML, lazy-loaded vector files, and strict Core Web Vitals optimizations for maximum performance.",
+                  "WebflowやFramer、およびヘッドレスCMS（Sanityなど）を組み合わせた高性能なReact構成から、ご要望に応じたスタックを選定します。クリーンなセマンティックHTML、軽量化されたベクター(SVG)アセット、および厳格なCore Web Vitals対策を標準装備しています。"
+                )
+              },
+              {
+                q: t("How long does a typical bilingual web design project take?", "一般的なバイリンガルWebデザインプロジェクトの制作期間はどのくらいですか？"),
+                a: t(
+                  "A comprehensive bilingual design and development project typically takes 4 to 8 weeks to complete from the discovery workshop to deployment. This timeline depends on the content model complexity, bilingual copy-editing requirements, and search engine optimization configurations.",
+                  "共通理解を深めるワークショップから最終公開まで、一般的なプロジェクトでは4〜8週間をいただいております。この期間はコンテンツの複雑さ、日欧の翻訳・コピー監修の範囲、およびSEO/AEOの構成レベルによって決定されます。"
+                )
+              },
+              {
+                q: t("Are your localized websites optimized for local and global search engines?", "ローカライズされたWebサイトは国内外の検索エンジンに最適化されていますか？"),
+                a: t(
+                  "Yes, every bilingual site is deployed with strict multi-lingual SEO parameters, canonical styling, high-accuracy JSON-LD schemas, and crawlable site structure. This ensures high search rankings on Google, Bing, and maximum accessibility for emerging generative AI agents like Perplexity and ChatGPT.",
+                  "はい。多言語SEOの設定、カノニカルタグ、高精度なJSON-LD構造化データ、クローラブルな階層構造を徹底して構築します。GoogleやBingなどの一般検索に加え、PerplexityやChatGPTといった最新の対話型AIエンジンからの参照・引用も容易にします。"
+                )
+              }
+            ].map((faq, idx) => (
+              <article key={idx} className="border-b rule pb-8 last:border-b-0 last:pb-0">
+                <h3 className="font-serif-display text-xl sm:text-2xl font-semibold tracking-tight text-ink mb-3">
+                  {faq.q}
+                </h3>
+                <p className="text-ink-muted leading-relaxed text-base max-w-[65ch]">
+                  {faq.a}
+                </p>
+              </article>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      </main>
 
       {/* FOOTER ========================================================== */}
       <footer className="border-t rule">

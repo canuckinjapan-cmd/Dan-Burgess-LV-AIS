@@ -28,9 +28,7 @@ This document provides technical guidelines and implementation patterns for AI a
 - **Optimized Rendering**: For small graphics (like favicons or small nav avatars), apply `imageRendering: "-webkit-optimize-contrast"` to avoid blurriness in Chromium.
 
 ## 🛠️ Build & Deployment
-- **Deployment**: Deploys to GitHub Pages under the `/Dan-Burgess-LV-AIS/` path.
 - **Base URL**: Access the base path via `import.meta.env.BASE_URL` in `BrowserRouter` or resource links.
-- **GitHub Workflow**: The `.github/workflows/deploy.yml` handles CI/CD. When updating, ensure it copies `index.html` to `404.html` for SPA routing support.
 
 ## ⚠️ Anti-Patterns
 - **No Hardcoded Strings**: Never add raw strings; always use the `t()` helper.

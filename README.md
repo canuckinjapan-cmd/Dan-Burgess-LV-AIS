@@ -1,6 +1,6 @@
 # Dan Burgess Design | Ver. 2
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-orange?style=for-the-badge)](https://canuckinjapan-cmd.github.io/Dan-Burgess-LV-AIS/)
+[![Live Website](https://img.shields.io/badge/Live-Website-blue?style=for-the-badge)](https://www.danburgess.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 A premium, editorial-inspired portfolio website bridging Western minimalism with Japanese trust-based design.  
@@ -19,7 +19,7 @@ This project is a React-based single-page application (SPA) showcasing 30 years 
 - **Motion**: [Framer Motion](https://www.framer.com/motion/) (via `motion/react`)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Typography**: [Fraunces](https://fonts.google.com/specimen/Fraunces), [Inter](https://fonts.google.com/specimen/Inter), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono)
-- **Deployment**: [GitHub Pages](https://pages.github.com/)
+- **Deployment**: [www.danburgess.com](https://www.danburgess.com/)
 
 ## ✨ Key Features
 
@@ -30,22 +30,6 @@ This project is a React-based single-page application (SPA) showcasing 30 years 
 - **Dynamic Portrait**: A dual-phase portrait card that shifts between a professional photo and a manga-style illustration.
 - **Optimized Favicon**: High-resolution manga avatar integrated as a favicon/shortcut icon.
 
-## 📦 Getting Started
-
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Run development server**:
-   ```bash
-   npm run dev
-   ```
-
-3. **Build for production**:
-   ```bash
-   npm run build
-   ```
 
 ## 📄 Documentation
 
