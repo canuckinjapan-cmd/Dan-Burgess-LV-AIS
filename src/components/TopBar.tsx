@@ -82,7 +82,7 @@ export const TopBar = () => {
             : "bg-transparent border-b border-transparent"
         }`}
       >
-        <div className="max-w-[1320px] mx-auto pl-6 pr-8 lg:px-10 h-16 flex items-center justify-between gap-6">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-6 lg:px-10 h-16 flex items-center justify-between gap-3 md:gap-6">
         {/* Logo Left: Face only on sm+, Text always */}
         <a 
           href="#top" 
@@ -90,7 +90,7 @@ export const TopBar = () => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="flex items-center gap-3 group shrink-0 relative" 
+          className="flex items-center gap-3 group shrink-0 relative h-10" 
           aria-label="Dan Burgess Design home"
         >
           <span className="relative hidden sm:inline-block">
@@ -134,7 +134,7 @@ export const TopBar = () => {
         </nav>
 
         {/* Right Side Tools */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 md:gap-1.5">
           {/* Lang Switcher - Visible right for mobile/tablet, and within desktop tools */}
           <LangSwitcher className="flex" />
           
@@ -149,7 +149,7 @@ export const TopBar = () => {
           </div>
 
           {/* Mobile Right: Hamburger (Visible on lg:hidden) */}
-          <div className="relative lg:hidden">
+          <div className="relative lg:hidden mr-1 sm:mr-0 h-10 flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
@@ -168,11 +168,11 @@ export const TopBar = () => {
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.2 }}
                   onClick={() => setIsMenuOpen(true)}
-                  className="absolute right-0 top-[calc(100%+8px)] bg-background text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
+                  className="absolute right-0 top-[calc(100%+8px)] bg-surface text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
                 >
                   {t("Navigation Menu", "ナビメニュー")}
                   {/* Hollow/Open border-matching triangle at the top pointing up */}
-                  <div className="absolute -top-1 right-5 w-2 h-2 bg-background border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
+                  <div className="absolute -top-1 right-4 w-2 h-2 bg-surface border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
                 </motion.div>
               )}
             </AnimatePresence>
