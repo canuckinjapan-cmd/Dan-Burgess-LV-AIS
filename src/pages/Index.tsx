@@ -468,7 +468,7 @@ const Index = () => {
         >
           <div className="lg:col-span-4">
             <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-              §05 — {t("FAQ & Insights", "よくある質問と方針")}
+              §06 — {t("FAQ & Insights", "よくある質問と方針")}
             </p>
             <h2 className="font-serif-display text-4xl font-semibold tracking-[-0.02em] leading-[1.1]">
               {t("Direct answers for search engines and strategic minds.", "検索・AIエンジンのための、簡潔で明確な回答方針。")}

@@ -18,12 +18,27 @@ export const TopBar = () => {
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Determine if scrolled all the way to the bottom with a 15px margin
+      setIsAtBottom(windowHeight + scrollY >= documentHeight - 15);
+    };
+    
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -69,7 +84,15 @@ export const TopBar = () => {
       >
         <div className="max-w-[1320px] mx-auto pl-6 pr-8 lg:px-10 h-16 flex items-center justify-between gap-6">
         {/* Logo Left: Face only on sm+, Text always */}
-        <a href="#top" className="flex items-center gap-3 group shrink-0 relative" aria-label="Dan Burgess Design home">
+        <a 
+          href="#top" 
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="flex items-center gap-3 group shrink-0 relative" 
+          aria-label="Dan Burgess Design home"
+        >
           <span className="relative hidden sm:inline-block">
             <span className="absolute -inset-1 rounded-full border border-ink/20 animate-spin-slow" aria-hidden />
             <img
@@ -86,8 +109,14 @@ export const TopBar = () => {
             <span className="text-black">DESIGN</span>
           </span>
 
-          {/* Tooltip Balloon */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-y-1 group-hover:translate-y-0">
+          {/* Tooltip Balloon - persistent when at bottom, interactive on hover otherwise */}
+          <div 
+            className={`absolute left-1/2 -translate-x-1/2 top-[calc(100%+8px)] transition-all duration-200 pointer-events-none z-30 ${
+              isAtBottom 
+                ? "opacity-100 translate-y-0" 
+                : "opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
+            }`}
+          >
             <div className="relative bg-ink text-surface text-[9px] font-mono uppercase tracking-[0.1em] px-2.5 py-1.5 rounded-sm whitespace-nowrap shadow-2xl">
               {t("Return to top", "トップへ戻る")}
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45" />
@@ -120,13 +149,34 @@ export const TopBar = () => {
           </div>
 
           {/* Mobile Right: Hamburger (Visible on lg:hidden) */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-ink hover:text-accent-brand transition-colors"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="relative lg:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* Bottom-reached Navigation Menu Overlay */}
+            <AnimatePresence>
+              {isAtBottom && !isMenuOpen && (
+                <motion.div
+                  key="nav-menu-overlay"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => setIsMenuOpen(true)}
+                  className="absolute right-0 top-[calc(100%+8px)] bg-background text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
+                >
+                  {t("Navigation Menu", "ナビメニュー")}
+                  {/* Hollow/Open border-matching triangle at the top pointing up */}
+                  <div className="absolute -top-1 right-5 w-2 h-2 bg-background border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 
