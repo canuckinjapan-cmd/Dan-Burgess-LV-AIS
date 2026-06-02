@@ -17,6 +17,54 @@ const Index = () => {
   const { t, lang } = useLanguage();
   const currentYear = new Date().getFullYear();
 
+  const getSeasonDetails = () => {
+    const today = new Date();
+    const month = today.getMonth(); // 0-11 (Jan is 0, Dec is 11)
+    const year = today.getFullYear();
+
+    let seasonEn = "Spring";
+    let seasonJp = "春号";
+    let seasonIndex = 0; // 0 = Spring, 1 = Summer, 2 = Autumn, 3 = Winter
+    let seasonYear = year;
+
+    if (month >= 2 && month <= 4) {
+      // Mar, Apr, May
+      seasonEn = "Spring";
+      seasonJp = "春号";
+      seasonIndex = 0;
+      seasonYear = year;
+    } else if (month >= 5 && month <= 7) {
+      // Jun, Jul, Aug
+      seasonEn = "Summer";
+      seasonJp = "夏号";
+      seasonIndex = 1;
+      seasonYear = year;
+    } else if (month >= 8 && month <= 10) {
+      // Sep, Oct, Nov
+      seasonEn = "Autumn";
+      seasonJp = "秋号";
+      seasonIndex = 2;
+      seasonYear = year;
+    } else {
+      // Dec, Jan, Feb
+      seasonEn = "Winter";
+      seasonJp = "冬号";
+      seasonIndex = 3;
+      seasonYear = month === 11 ? year : year - 1;
+    }
+
+    const issueNo = 26 + (seasonYear - 2026) * 4 + seasonIndex;
+
+    return {
+      issueNo,
+      seasonEn,
+      seasonJp,
+      seasonYear,
+    };
+  };
+
+  const seasonDetails = getSeasonDetails();
+
   const stats = [
     { value: "30+", label: t("Years designing", "デザイン歴") },
     { value: "1992", label: t("Based in Japan", "来日年") },
@@ -100,7 +148,7 @@ const Index = () => {
             >
               <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted mb-8">
                 <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" aria-hidden />
-                <span>Issue №26 · {t(`Spring ${currentYear}`, `${currentYear}年 春号`)}</span>
+                <span>Issue №{seasonDetails.issueNo} · {t(`${seasonDetails.seasonEn} ${seasonDetails.seasonYear}`, `${seasonDetails.seasonYear}年 ${seasonDetails.seasonJp}`)}</span>
                 <span className="h-px w-8 bg-ink/20" />
                 <span>Fukuoka, JPN · UTC+9</span>
               </div>
