@@ -117,7 +117,7 @@ const Index = () => {
               <p className="mt-8 md:landscape:mt-4 lg:mt-8 lg:landscape:mt-6 max-w-[58ch] text-lg md:landscape:text-base lg:landscape:text-lg xl:landscape:text-xl xl:text-xl lg:text-xl text-ink-muted leading-relaxed">
                 {t(
                   <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer living in Japan since 1992, and based in Fukuoka. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
-                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。30年にわたり、日本と海外の双方で美しく機能し、市場に響くWebサイトやUI、プロダクト体験 of 創出を支援してきました。</>
+                  <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。過去30年にわたり、私は起業家やチームが、英語と日本語の両方で美しく読みやすく、どちらの市場でもコンバージョンにつながるウェブサイト、UI、およびプロダクト体験をリリースできるよう支援してきました。</>
                 )}
               </p>
 
@@ -262,7 +262,7 @@ const Index = () => {
               §02 — {t("About", "プロフィール")}
             </p>
             <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-6">
-              {t("A 30-year route from Victoria to Fukuoka.", "ビクトリアから福岡へ。30年の軌跡。")}
+              {t("A 30-year route from Victoria to Fukuoka.", "ビクトリアから福岡への30年の道のり。")}
             </h2>
             <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted">
               {t("SINCE 1992 · JAPAN", "1992年より · 日本拠点")}
@@ -273,13 +273,13 @@ const Index = () => {
             <p className="drop-cap text-lg leading-[1.7] text-ink/85 mb-6">
               {t(
                 "Trained in Canada in print and multimedia, I crossed the Pacific in 1992 and never really went back. Three decades later, I'm still here — designing for Japanese teams who want to reach the world, and for global teams who need to land properly in Japan.",
-                "カナダでデザインを学び、1992年に海を渡って以来、日本を拠点に活動を続けています。30年後の今も、世界を目指す日本のチームや、日本市場への展開を狙うグローバル企業のパートナーとしてデザインを提供しています。"
+                "カナダでデザインを学び、1992年に来日し、日本を拠点に活動を続けています。30年後の今も、世界を目指す日本のチームや、日本市場への展開を狙うグローバル企業のパートナーとしてデザインを提供しています。"
               )}
             </p>
             <p className="text-ink-muted leading-relaxed mb-6">
               {t(
-                "The work has changed shape over the years — magazine layouts, sign design, Windows game localization in Nagano, documentation localization and UI production in Tokyo, and now bilingual websites and product design for founders and growing companies. The throughline is the same: design that respects both cultures it lives in.",
-                "長年の間に仕事の形は進化してきました。長野での雑誌や看板のデザイン、東京でのドキュメントのローカライズやUI制作を経て、現在は日英バイリンガルのWebサイトやプロダクトデザインに注力しています。一貫しているのは、「双方が属する文化を等しく尊重するデザイン」です。"
+                "The work has changed shape over the years — magazine layouts, sign design in Canada, Windows game localization in Nagano, documentation localization and UI production in Tokyo, and now bilingual websites and product design for founders and growing companies. The throughline is the same: design that respects both cultures it lives in.",
+                "長年の間に仕事の形は進化してきました。カナダでの雑誌や看板のデザイン、長野でのWindowsゲームのローカライズ、東京でのドキュメントのローカライズやUI制作を経て、現在は起業家や成長企業向けのバイリンガルWebサイトやプロダクトデザインを手がけています。一貫しているのは、両方の文化を尊重するデザインです。"
               )}
             </p>
             <p className="text-ink-muted leading-relaxed">
@@ -294,7 +294,7 @@ const Index = () => {
                 { y: "1992", t: t("Moved to Japan", "来日"), b: t("Taught English and started translation in Nagano.", "長野にて英語講師を務めつつ翻訳を開始。") },
                 { y: "1994", t: t("Localization & UI", "ローカライズ・UI制作"), b: t("Windows game and website localization.", "Windows向けゲームや初期のWebサイトのローカライズに従事。") },
                 { y: "2004", t: t("Tokyo · Fortune 500 HQ", "都内のグローバル企業拠点"), b: t("Localization and UI production for global tech.", "大手精密機器メーカーの本社にてローカライズ・UI制作を担当。") },
-                { y: "2010", t: t("Independent Studio", "スタジオ設立"), b: t("Bilingual websites, UI, no-code, for founders and teams.", "日英サイト、UI、ノーコード開発を軸に独立。") },
+                { y: "2010", t: t("Independent Studio", "スタジオ設立"), b: t("Bilingual websites, UI, no-code, for founders and teams.", "翻訳、日英サイト、UI、ノーコード開発を軸に独立。") },
               ].map((m) => (
                 <li key={m.y} className="relative group transition-transform duration-500 ease-in-out hover:scale-[1.02] origin-left cursor-default">
                   <span className="absolute -left-[1.65rem] top-2 size-2 bg-accent-brand rounded-full transition-transform group-hover:scale-125" aria-hidden />
