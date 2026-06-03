@@ -111,7 +111,7 @@
   .rule { border-color: hsl(var(--rule) / 0.12); }
 
   /* Marquee for kinetic wordmark */
-  .animate-marquee-h { animation: marquee-h 76s linear infinite; }
+  .animate-marquee-h { animation: marquee-h 60s linear infinite; }
   @keyframes marquee-h {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }

@@ -5,9 +5,9 @@ export const KineticWordmark = () => {
       <span className="text-accent-brand/30">BURGESS</span>
       <span className="text-ink/[0.07]">DESIGN</span>
       <span className="text-accent-brand/30 font-bold tracking-[-0.05em]">・</span>
-      <span className="text-ink/[0.07] font-bold tracking-[-0.08em]">ダン</span>
-      <span className="text-accent-brand/30 font-bold tracking-[-0.08em]">バージェス</span>
-      <span className="text-ink/[0.07] font-bold tracking-[-0.08em]">デザイン</span>
+      <span className="text-ink/[0.07] font-bold tracking-[-0.12em]">ダン</span>
+      <span className="text-accent-brand/30 font-bold tracking-[-0.12em]">バージェス</span>
+      <span className="text-ink/[0.07] font-bold tracking-[-0.12em]">デザイン</span>
       <span className="text-accent-brand/30 font-bold tracking-[-0.05em]">・</span>
     </span>
   );
