@@ -78,7 +78,7 @@ const Index = () => {
       title: t("Bilingual Web Design", "バイリンガルWebデザイン"),
       body: t(
         "EN/JP websites that respect both audiences — typography, hierarchy and copy tuned for each language, not auto-translated afterthoughts.",
-        "日本と海外、双方の視点を尊重したサイト制作。単なる自動翻訳ではなく、言語ごとのタイポグラフィ、情報階層、コピーライティングの最適化を徹底しています。"
+        "日本と海外、両方の視点を尊重したサイト制作。単なる自動翻訳ではなく、言語ごとのタイポグラフィ、情報階層、コピーライティングの最適化を徹底しています。"
       ),
       deliverables: t(
         ["Strategy & sitemap", "Design system", "EN + JP build"],
@@ -102,7 +102,7 @@ const Index = () => {
       title: t("No-Code Development", "ノーコード開発"),
       body: t(
         "Webflow, Framer and modern stacks. Beautiful sites your team can actually update without filing a ticket.",
-        "WebflowやFramerを活用した最新のスタック。エンジニアへの依頼なしで、チームが直感的に更新できる、美しく機能的なサイトを実現します。"
+        "WebflowやFramerを活用した最新のスタック。オプションとして、エンジニアへの依頼なしで、直接的に更新できる、美しく機能的なサイトを実現します。"
       ),
       deliverables: t(
         ["Webflow / Framer", "CMS modeling", "Editor handover"],
@@ -333,7 +333,7 @@ const Index = () => {
             <p className="text-ink-muted leading-relaxed">
               {t(
                 "I work directly with clients, not through layers. You get a senior designer with three decades of taste, technical chops, and a healthy appetite for projects with stakes.",
-                "私は代理店を介さず、クライアントと直接対話します。30年の経験が培った審美眼と技術力、そして難易度の高い課題に立ち向かう情熱を、あなたのプロジェクトに注ぎ込みます。"
+                "私は代理店を介さず、クライアントと直接対話します。30年の経験が培った確かなセンスと技術力、そして情熱を、あなたのプロジェクトに注ぎ込み、集客率の向上を目指します。"
               )}
             </p>
 
@@ -375,7 +375,7 @@ const Index = () => {
               <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
                 {t(
                   <>What I do, when I'm not <em className="italic text-accent-brand font-medium">drawing manga selfies</em>.</>,
-                  <>プロフェッショナルな提供サービス。<br /><em className="italic text-accent-brand font-medium">マンガ風の自画像</em>を描く以外のこと。</>
+                  <>プロフェッショナルな<span className="text-accent-brand font-medium">きめ細かなサービス</span>を提供します。</>
                 )}
               </h2>
             </div>
