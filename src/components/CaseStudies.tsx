@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface CaseStudy {
@@ -119,6 +120,41 @@ const cases: CaseStudy[] = [
 
 export const CaseStudies = () => {
   const { t, lang } = useLanguage();
+  const [showInstaOverlay, setShowInstaOverlay] = useState(false);
+  const takaRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const element = takaRef.current;
+    if (!element) return;
+
+    let timeoutId: any;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShowInstaOverlay(true);
+            if (timeoutId) clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+              setShowInstaOverlay(false);
+            }, 1500);
+          } else {
+            setShowInstaOverlay(false);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
     <div className="space-y-24 lg:space-y-32">
@@ -132,6 +168,7 @@ export const CaseStudies = () => {
         return (
           <article
             key={c.id}
+            ref={c.id === 'taka' ? takaRef : undefined}
             className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start"
           >
             {/* Image */}
@@ -172,8 +209,18 @@ export const CaseStudies = () => {
                       </picture>
                       {c.id === 'taka' && (
                         <>
-                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[5]" />
-                          <div className="absolute inset-0 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                          <div 
+                            className={`absolute inset-0 bg-black/50 transition-opacity duration-500 pointer-events-none z-[5] ${
+                              showInstaOverlay ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                            }`} 
+                          />
+                          <div 
+                            className={`absolute inset-0 z-10 pointer-events-none transition-all duration-500 ease-in-out ${
+                              showInstaOverlay 
+                                ? "opacity-100 scale-100" 
+                                : "opacity-0 scale-[0.98] group-hover:opacity-100 group-hover:scale-100"
+                            }`}
+                          >
                             <img 
                               src={`${import.meta.env.BASE_URL}samples/gym01/Profile-half.png`.replace(/\/+/g, '/')}
                               alt="Takasaki Fitness Profile Overlay"
@@ -216,8 +263,18 @@ export const CaseStudies = () => {
                       </picture>
                       {c.id === 'taka' && (
                         <>
-                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[5]" />
-                          <div className="absolute inset-0 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                          <div 
+                            className={`absolute inset-0 bg-black/50 transition-opacity duration-500 pointer-events-none z-[5] ${
+                              showInstaOverlay ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                            }`} 
+                          />
+                          <div 
+                            className={`absolute inset-0 z-10 pointer-events-none transition-all duration-500 ease-in-out ${
+                              showInstaOverlay 
+                                ? "opacity-100 scale-100" 
+                                : "opacity-0 scale-[0.98] group-hover:opacity-100 group-hover:scale-100"
+                            }`}
+                          >
                             <img 
                               src={`${import.meta.env.BASE_URL}samples/gym01/Profile-half.png`.replace(/\/+/g, '/')}
                               alt="Takasaki Fitness Profile Overlay"
