@@ -285,8 +285,8 @@ const Index = () => {
               </h2>
               <p className="mt-6 max-w-[60ch] text-ink-muted text-lg leading-relaxed">
                 {t(
-                  "Every engagement begins with the audience and ends with measurable outcomes. Here's a closer look at recent work.",
-                  "すべてのプロジェクトはオーディエンスの理解から始まり、測定可能な成果へと繋がります。最近の活動の一部をご紹介します。"
+                  "Every engagement begins with the audience and ends with measurable outcomes. Here's a closer look at recent work. Click the sample homepages below to view in a separate browser tab.",
+                  "すべてのプロジェクトはオーディエンスの理解から始まり、測定可能な成果へと繋がります。最近の活動の一部をご紹介します。以下のサンプルホームページをクリックすると、別のブラウザタブで表示されます。"
                 )}
               </p>
             </div>
