@@ -149,7 +149,7 @@ export const CaseStudies = () => {
                       <span>{c.index} / {t(c.client, c.clientJp)}</span>
                       <span>{c.year}</span>
                     </div>
-                    <div className={`${(c.id === 'taka' || c.id === 'lumina' || c.id === 'apex') ? 'aspect-auto' : 'aspect-[16/10]'} overflow-hidden bg-surface-soft`}>
+                    <div className={`${(c.id === 'taka' || c.id === 'lumina' || c.id === 'apex') ? 'aspect-auto' : 'aspect-[16/10]'} relative overflow-hidden bg-surface-soft`}>
                       <picture>
                         {currentMobileImage && (
                           <source
@@ -170,6 +170,18 @@ export const CaseStudies = () => {
                           className={`w-full ${(c.id === 'taka' || c.id === 'lumina' || c.id === 'apex') ? 'h-auto' : 'h-full'} object-cover object-top transition-transform duration-[20000ms] ease-in-out group-hover:scale-[1.03]`}
                         />
                       </picture>
+                      {c.id === 'taka' && (
+                        <>
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[5]" />
+                          <div className="absolute inset-0 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                            <img 
+                              src={`${import.meta.env.BASE_URL}samples/gym01/Profile-half.png`.replace(/\/+/g, '/')}
+                              alt="Takasaki Fitness Profile Overlay"
+                              className="h-full mx-auto object-contain block"
+                            />
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </a>
@@ -181,7 +193,7 @@ export const CaseStudies = () => {
                       <span>{c.index} / {t(c.client, c.clientJp)}</span>
                       <span>{c.year}</span>
                     </div>
-                    <div className={`${(c.id === 'taka' || c.id === 'lumina' || c.id === 'apex') ? 'aspect-auto' : 'aspect-[16/10]'} overflow-hidden bg-surface-soft`}>
+                    <div className={`${(c.id === 'taka' || c.id === 'lumina' || c.id === 'apex') ? 'aspect-auto' : 'aspect-[16/10]'} relative overflow-hidden bg-surface-soft`}>
                       <picture>
                         {currentMobileImage && (
                           <source
@@ -202,6 +214,18 @@ export const CaseStudies = () => {
                           className={`w-full ${(c.id === 'taka' || c.id === 'lumina' || c.id === 'apex') ? 'h-auto' : 'h-full'} object-cover object-top transition-transform duration-[20000ms] ease-in-out group-hover:scale-[1.03]`}
                         />
                       </picture>
+                      {c.id === 'taka' && (
+                        <>
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[5]" />
+                          <div className="absolute inset-0 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
+                            <img 
+                              src={`${import.meta.env.BASE_URL}samples/gym01/Profile-half.png`.replace(/\/+/g, '/')}
+                              alt="Takasaki Fitness Profile Overlay"
+                              className="h-full mx-auto object-contain block"
+                            />
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
