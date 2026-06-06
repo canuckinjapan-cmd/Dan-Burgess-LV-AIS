@@ -125,7 +125,7 @@ export const TopBar = () => {
         </a>
 
         {/* Desktop Center: Nav */}
-        <nav className="hidden lg:flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden lg:flex portrait:lg:hidden items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] absolute left-1/2 -translate-x-1/2">
           {navItems.map((n) => (
             <a key={n.label} href={n.href} className="px-2 py-1 text-ink-muted hover:text-white hover:bg-accent-brand rounded-sm transition-all">
               {t(n.label, n.jpLabel)}
@@ -136,10 +136,10 @@ export const TopBar = () => {
         {/* Right Side Tools */}
         <div className="flex items-center gap-1 md:gap-1.5">
           {/* Lang Switcher - Visible right for mobile/tablet, and within desktop tools */}
-          <LangSwitcher className="flex" />
+          <LangSwitcher className="flex ml-4 sm:ml-6 md:ml-8 lg:ml-10" />
           
           {/* Desktop Only Tools */}
-          <div className="hidden lg:flex items-center ml-3">
+          <div className="hidden lg:flex portrait:lg:hidden items-center ml-3">
             <a
               href="#contact"
               className="inline-flex items-center gap-2 bg-ink text-surface px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-accent-brand transition-colors"
@@ -149,7 +149,7 @@ export const TopBar = () => {
           </div>
 
           {/* Mobile Right: Hamburger (Visible on lg:hidden) */}
-          <div className="relative lg:hidden mr-1 sm:mr-0 h-10 flex items-center">
+          <div className="relative lg:hidden portrait:lg:flex mr-3 sm:mr-5 h-10 flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
@@ -188,7 +188,7 @@ export const TopBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-0 top-16 z-40 bg-surface lg:hidden border-t rule shadow-2xl"
+            className="fixed inset-0 top-16 z-40 bg-surface lg:hidden portrait:lg:block border-t rule shadow-2xl"
           >
             <div className="bg-paper absolute inset-0 -z-10" /> {/* Solid texture background */}
             <nav className="flex flex-col p-8 gap-8">
