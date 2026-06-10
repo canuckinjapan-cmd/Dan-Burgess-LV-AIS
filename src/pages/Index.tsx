@@ -246,23 +246,17 @@ const Index = () => {
               </div>
             </motion.div>
 
-            {/* Custom Contact Call-to-Action */}
+            {/* Custom Contact Form Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center gap-4"
+              className="w-full text-left bg-surface-elevated border rule p-6 sm:p-10 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.15)] rounded-lg mb-6"
             >
-              <a
-                href="mailto:canuck.in.japan@gmail.com"
-                className="group inline-flex items-center gap-3 bg-ink text-surface px-6 py-3.5 font-mono text-[11px] font-bold uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
-              >
-                {t("Send Email Inquiries", "メールでお問い合わせ")}
-                <span className="text-md transition-transform group-hover:translate-y-[-1px] group-hover:translate-x-0.5" aria-hidden>✉</span>
-              </a>
-              <span className="text-[10px] uppercase font-mono tracking-widest text-ink-muted">
-                {t("or reach out on social links below", "または下記SNSよりご連絡ください")}
-              </span>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent-brand mb-6 text-center">
+                📬 {t("GET IN TOUCH WITH DAN", "お問い合わせ")}
+              </p>
+              <ContactForm />
             </motion.div>
           </div>
         </main>
