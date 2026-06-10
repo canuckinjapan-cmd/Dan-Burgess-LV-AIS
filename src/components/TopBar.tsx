@@ -14,7 +14,7 @@ const navItems = [
   { label: "Contact", jpLabel: "お問い合わせ", href: "#contact" },
 ];
 
-export const TopBar = () => {
+export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => {
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -124,13 +124,15 @@ export const TopBar = () => {
         </a>
 
         {/* Desktop Center: Nav */}
-        <nav className="hidden lg:flex lg:portrait:hidden items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] absolute left-1/2 -translate-x-1/2">
-          {navItems.map((n) => (
-            <a key={n.label} href={n.href} className="px-2 py-1 text-ink-muted hover:text-white hover:bg-accent-brand rounded-sm transition-all">
-              {t(n.label, n.jpLabel)}
-            </a>
-          ))}
-        </nav>
+        {!isComingSoon && (
+          <nav className="hidden lg:flex lg:portrait:hidden items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] absolute left-1/2 -translate-x-1/2">
+            {navItems.map((n) => (
+              <a key={n.label} href={n.href} className="px-2 py-1 text-ink-muted hover:text-white hover:bg-accent-brand rounded-sm transition-all">
+                {t(n.label, n.jpLabel)}
+              </a>
+            ))}
+          </nav>
+        )}
 
         {/* Right Side Tools */}
         <div className="flex items-center gap-1 md:gap-1.5">
@@ -138,44 +140,48 @@ export const TopBar = () => {
           <LangSwitcher className="flex ml-1.5 sm:ml-6 md:ml-8 lg:ml-10" />
           
           {/* Desktop Only Tools */}
-          <div className="hidden lg:flex lg:portrait:hidden items-center ml-3">
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 bg-ink text-surface px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-accent-brand transition-colors"
-            >
-              {t("Start a Project", "プロジェクトを開始する")} <span aria-hidden>→</span>
-            </a>
-          </div>
+          {!isComingSoon && (
+            <div className="hidden lg:flex lg:portrait:hidden items-center ml-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 bg-ink text-surface px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-accent-brand transition-colors"
+              >
+                {t("Start a Project", "プロジェクトを開始する")} <span aria-hidden>→</span>
+              </a>
+            </div>
+          )}
 
           {/* Mobile Right: Hamburger (Visible on lg:hidden) */}
-          <div className="relative lg:hidden lg:portrait:flex mr-1 sm:mr-3 h-10 flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+          {!isComingSoon && (
+            <div className="relative lg:hidden lg:portrait:flex mr-1 sm:mr-3 h-10 flex items-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
 
-            {/* Bottom-reached Navigation Menu Overlay */}
-            <AnimatePresence>
-              {isAtBottom && !isMenuOpen && (
-                <motion.div
-                  key="nav-menu-overlay"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={() => setIsMenuOpen(true)}
-                  className="absolute right-0 top-[calc(100%+8px)] bg-surface text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
-                >
-                  {t("Navigation Menu", "ナビメニュー")}
-                  {/* Hollow/Open border-matching triangle at the top pointing up */}
-                  <div className="absolute -top-1 right-4 w-2 h-2 bg-surface border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+              {/* Bottom-reached Navigation Menu Overlay */}
+              <AnimatePresence>
+                {isAtBottom && !isMenuOpen && (
+                  <motion.div
+                    key="nav-menu-overlay"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={() => setIsMenuOpen(true)}
+                    className="absolute right-0 top-[calc(100%+8px)] bg-surface text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
+                  >
+                    {t("Navigation Menu", "ナビメニュー")}
+                    {/* Hollow/Open border-matching triangle at the top pointing up */}
+                    <div className="absolute -top-1 right-4 w-2 h-2 bg-surface border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       </div>
 

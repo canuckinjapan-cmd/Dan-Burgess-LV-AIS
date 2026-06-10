@@ -13,6 +13,8 @@ import { useLanguage } from "@/context/LanguageContext";
 
 // Version 2.0.2 - Fixed responsive typography scaling and Polaroid layout proportions for landscape tablets
 
+const COMING_SOON_MODE = true; // Set to false to restore original fully-featured site
+
 const Index = () => {
   const { t, lang } = useLanguage();
   const currentYear = new Date().getFullYear();
@@ -129,6 +131,198 @@ const Index = () => {
     { step: "03", title: t("Develop", "実装・開発"), body: t("Built in Webflow / Framer or modern stacks. Performance and SEO are a deliverable, not an afterthought.", "Webflow、Framer、または最新の技術スタックによる構築。パフォーマンスとSEOは標準の成果物です。") },
     { step: "04", title: t("Deploy & Support", "公開・運用保守"), body: t("Launch, analytics setup, training. Ongoing care plan available.", "サイト公開、分析ツールの設定、操作トレーニング、そして継続的なサポートを提供します。") },
   ];
+
+  if (COMING_SOON_MODE) {
+    return (
+      <div id="top" className="bg-paper text-ink min-h-dvh font-sans-body w-full overflow-x-hidden relative flex flex-col justify-between">
+        <TopBar isComingSoon={true} />
+
+        <main id="main-content" className="w-full flex-grow flex items-center justify-center py-12 md:py-20 px-6 lg:px-10">
+          <div className="max-w-[720px] w-full text-center flex flex-col items-center">
+            {/* Spinning/pulsing graphic container resembling the logo portrait */}
+            <motion.div 
+              className="relative mb-10"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: [0.21, 0.47, 0.32, 0.98] }}
+            >
+              <div className="absolute -inset-2.5 rounded-full border border-ink/10 animate-spin-slow" aria-hidden />
+              <div className="absolute -inset-5 rounded-full border border-dashed border-accent-brand/20 animate-[spin_50s_linear_infinite]" aria-hidden />
+              <img
+                src={manga}
+                alt="Dan Burgess Avatar"
+                className="relative w-28 h-28 rounded-full bg-white object-cover border-4 border-paper shadow-lg"
+                style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
+              />
+            </motion.div>
+
+            {/* Bilingual Status Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.25em] text-accent-brand border border-accent-brand/30 rounded-full bg-accent-brand/5 mb-8"
+            >
+              <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" />
+              <span>
+                {t("RESTRUCTURING / COMMITTED TO GITHUB", "リニューアル中 / GITHUB更新中")}
+              </span>
+            </motion.div>
+
+            {/* Main Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="font-serif-display font-semibold tracking-tight text-[2.5rem] sm:text-[4rem] leading-[1.1] text-ink mb-6 text-balance font-serif-display"
+            >
+              {t(
+                <>A Fresh Design is<br />Coming Soon.</>,
+                <>新しいデザインを<br />準備中です。</>
+              )}
+            </motion.h1>
+
+            {/* Body */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-ink-muted text-lg leading-relaxed max-w-[62ch] text-center mb-10 text-balance sm:px-4"
+            >
+              {t(
+                <>I am currently restructuring, rewrite-testing, and polishing the next version of Dan Burgess Design. The live landing content is temporarily behind the curtain while I push edits to GitHub and prepare the final build for Cloudflare.</>,
+                <>現在、Dan Burgess Designの新しいバージョンの編集・テスト・推敲を行っています。GitHubへデータを同期し、Cloudflareに本番展開する。それまでの間、当サービス情報は一時的に裏へと下げております。</>
+              )}
+            </motion.p>
+
+            {/* Direct Work Demos Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="w-full bg-paper/60 backdrop-blur-sm border border-ink/5 rounded-lg p-6 sm:p-8 mb-10 text-left"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent-brand mb-4 text-center">
+                {t("⚡ EXAMINE LIVE SAMPLES IN SEPARATE TABS", "⚡ 別のタブでサンプルサイトを検証できます")}
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {/* Gym Demo */}
+                <a 
+                  href={`${import.meta.env.BASE_URL || "/"}samples/gym01/index.html?lang=${lang.toLowerCase()}`.replace(/\/+/g, '/')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col justify-between p-4 bg-surface hover:bg-ink hover:text-surface border border-ink/10 rounded-sm transition-all shadow-sm"
+                >
+                  <div>
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-[#a8a29e] group-hover:text-[#d6d3d1] mb-1">SAMPLE 01</p>
+                    <h2 className="font-serif-display text-lg font-bold tracking-tight mb-2">Takasaki Fitness</h2>
+                    <p className="text-xs text-ink-muted group-hover:text-surface/80 leading-relaxed">
+                      {t("Neighborhood gym website engineered for high trial-bookings and interactive funnels.", "集客・予約獲得を強化した地域密着型フィットネスジムのWebサイトデザイン。")}
+                    </p>
+                  </div>
+                  <div className="mt-4 font-mono text-[9px] uppercase tracking-widest text-accent-brand group-hover:text-white flex items-center gap-1">
+                    {t("View Live Demo", "デモサイトを体験する")} <span aria-hidden>→</span>
+                  </div>
+                </a>
+
+                {/* Real estate Demo */}
+                <a 
+                  href={`${import.meta.env.BASE_URL || "/"}samples/real-estate01/index.html?lang=${lang.toLowerCase()}`.replace(/\/+/g, '/')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col justify-between p-4 bg-surface hover:bg-ink hover:text-surface border border-ink/10 rounded-sm transition-all shadow-sm"
+                >
+                  <div>
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-[#a8a29e] group-hover:text-[#d6d3d1] mb-1">SAMPLE 02</p>
+                    <h2 className="font-serif-display text-lg font-bold tracking-tight mb-2">Rural Japan Living</h2>
+                    <p className="text-xs text-ink-muted group-hover:text-surface/80 leading-relaxed">
+                      {t("Bilingual real estate listing database platform structured with content clarity.", "国内外の買い手をターゲットにした、高級不動産マッチングサイトのUI/UXモデル。")}
+                    </p>
+                  </div>
+                  <div className="mt-4 font-mono text-[9px] uppercase tracking-widest text-accent-brand group-hover:text-white flex items-center gap-1">
+                    {t("View Live Demo", "デモサイトを体験する")} <span aria-hidden>→</span>
+                  </div>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Custom Contact Call-to-Action */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row items-center gap-4"
+            >
+              <a
+                href="mailto:canuck.in.japan@gmail.com"
+                className="group inline-flex items-center gap-3 bg-ink text-surface px-6 py-3.5 font-mono text-[11px] font-bold uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
+              >
+                {t("Send Email Inquiries", "メールでお問い合わせ")}
+                <span className="text-md transition-transform group-hover:translate-y-[-1px] group-hover:translate-x-0.5" aria-hidden>✉</span>
+              </a>
+              <span className="text-[10px] uppercase font-mono tracking-widest text-ink-muted">
+                {t("or reach out on social links below", "または下記SNSよりご連絡ください")}
+              </span>
+            </motion.div>
+          </div>
+        </main>
+
+        {/* Simplified Footer */}
+        <footer className="border-t rule py-8 bg-paper">
+          <div className="max-w-[1320px] mx-auto px-6 lg:px-10 flex flex-col md:flex-row md:items-center justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+            <div className="flex items-center gap-3">
+              <img
+                src={manga}
+                alt=""
+                className="w-7 h-7 rounded-full bg-white"
+                style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
+                loading="lazy"
+              />
+              <span>© {currentYear} Dan Burgess Design</span>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <span className="text-ink-muted">{t("FIND ME →", "SNS窓口→")}</span>
+              
+              {/* Instagram */}
+              <div className="relative group">
+                <a 
+                  href="https://www.instagram.com/canuckinjapan/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center size-8 transition-transform hover:scale-110"
+                >
+                  <img 
+                    src={instagramLogo} 
+                    alt="Instagram" 
+                    className="w-full h-full object-contain" 
+                    style={{ imageRendering: "-webkit-optimize-contrast" }}
+                  />
+                </a>
+              </div>
+
+              {/* Blogspot */}
+              <div className="relative group">
+                <a 
+                  href="https://djb-archviz.blogspot.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center size-8 transition-transform hover:scale-110"
+                >
+                  <img 
+                    src={bloggerLogo} 
+                    alt="Blogger" 
+                    className="w-full h-full object-contain" 
+                    style={{ imageRendering: "-webkit-optimize-contrast" }}
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 
   return (
     <div id="top" className="bg-paper text-ink min-h-dvh font-sans-body w-full overflow-x-hidden relative">
