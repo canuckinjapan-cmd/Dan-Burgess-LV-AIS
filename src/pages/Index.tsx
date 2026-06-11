@@ -77,8 +77,8 @@ const Index = () => {
       no: "S01",
       title: t("Bilingual Web Design", "バイリンガルWebデザイン"),
       body: t(
-        "EN/JP websites that respect both audiences — typography, hierarchy and copy tuned for each language, not auto-translated afterthoughts.",
-        "日本と海外、両方の視点を尊重したサイト制作。単なる自動翻訳ではなく、言語ごとのタイポグラフィ、情報階層、コピーライティングの最適化を徹底しています。"
+        "English and Japanese websites created for both readers. I design the layout, spacing, and text carefully for each language, so it never feels like a cheap machine translation.",
+        "日本語と英語の読者それぞれに向けて丁寧に作られたWebサイト。レイアウトや文字、テキストを各言語に合わせて最適化し、機械翻訳のような不自然さを排除します。"
       ),
       deliverables: t(
         ["Strategy & sitemap", "Design system", "EN + JP build"],
@@ -89,8 +89,8 @@ const Index = () => {
       no: "S02",
       title: t("UI / Product Design", "UI / プロダクトデザイン"),
       body: t(
-        "30 years of UI craft applied to apps, dashboards and SaaS — clear systems, confident states, accessible by default.",
-        "30年の経験に裏打ちされたUI制作。アプリ、ダッシュボード、SaaSにおいて、明快なシステム、確固たるステート設計、アクセシビリティを標準としたプロダクトを提供します。"
+        "Thirty years of experience designing clear, user-friendly screens for apps, portals, and software. Built to be clean, easy to navigate, and usable for everyone.",
+        "アプリやソフトウェア向けの分かりやすく使いやすい画面設計における30年の実績。誰もが快適に、直感的に操作できるクリーンなデザインを提供します。"
       ),
       deliverables: t(
         ["UX audits", "Design systems", "Figma libraries"],
@@ -99,10 +99,10 @@ const Index = () => {
     },
     {
       no: "S03",
-      title: t("No-Code Development", "ノーコード開発"),
+      title: t("Visual Web Design", "ビジュアルWebデザイン"),
       body: t(
-        "Webflow, Framer and modern stacks. Beautiful sites your team can actually update without filing a ticket.",
-        "WebflowやFramerを活用した最新のスタック。オプションとして、エンジニアへの依頼なしで、直接的に更新できる、美しく機能的なサイトを実現します。"
+        "Built using Webflow, Framer and AI assisted tools. I design beautiful, responsive websites that your team can easily update yourself without needing a web developer.",
+        "Webflow、FramerおよびAIを活用したツール。制作会社や開発者に頼むことなく、自社メンバーで簡単にテキストや画像を更新できる美しいサイトを実現します。"
       ),
       deliverables: t(
         ["Webflow / Framer", "CMS modeling", "Editor handover"],
@@ -124,10 +124,10 @@ const Index = () => {
   ];
 
   const process = [
-    { step: "01", title: t("Discover", "ヒアリング・調査"), body: t("Workshop, audit, audience and competitive read. We agree on the goal before pixels exist.", "ワークショップ、現状分析、ターゲット調査、競合比較。実制作の前に目標を明確に定めます。") },
-    { step: "02", title: t("Design", "デザイン制作"), body: t("Editorial-grade visuals, design system, prototypes, and localization.", "高品質なビジュアル、デザインシステムの構築、プロトタイプ作成、そしてローカライズ対応を行います。") },
-    { step: "03", title: t("Develop", "実装・開発"), body: t("Built in Webflow / Framer or modern stacks. Performance and SEO are a deliverable, not an afterthought.", "Webflow、Framer、または最新の技術スタックによる構築。パフォーマンスとSEOは標準の成果物です。") },
-    { step: "04", title: t("Deploy & Support", "公開・運用保守"), body: t("Launch, analytics setup, training. Ongoing care plan available.", "サイト公開、分析ツールの設定、操作トレーニング、そして継続的なサポートを提供します。") },
+    { step: "01", title: t("Discover", "ヒアリング・計画"), body: t("We start by talking — about your business, your customers, and what success looks like for you. No jargon, just an honest conversation to make sure we're building the right thing.", "まずはじっくり話を聞かせてください。ビジネスのこと、お客さまのこと、そして目指す成果について。難しい言葉は使いません。正直な対話から始めます。") },
+    { step: "02", title: t("Design", "デザイン制作"), body: t("I create the look and feel of your website — layouts, colours, and all the words. You can review and give feedback at every step, so there are no surprises at the end.", "サイトの見た目や雰囲気を作り上げていきます。レイアウト、カラー、テキストのすべて。各ステップでフィードバックをいただきながら、完成形に驚かないよう丁寧に進めます。") },
+    { step: "03", title: t("Develop", "サイト構築"), body: t("I build your site to be fast, clear, and easy to find on Google. It works well on phones and computers alike — and loads quickly, which keeps visitors from leaving.", "Googleで見つけやすく、表示が速く、スマートフォンでも見やすいサイトを構築します。ページの読み込みが遅いと離脱につながるため、スピードにもこだわります。") },
+    { step: "04", title: t("Deploy & Support", "公開・継続サポート"), body: t("Once your site is live, I walk you through how to use it yourself. Ongoing support is available so you always have someone to call when you need a hand.", "サイト公開後は、ご自身で更新できるよう丁寧にご説明します。その後も継続的なサポートをご用意しているので、困ったときにすぐ相談できます。") },
   ];
 
   return (
@@ -279,14 +279,14 @@ const Index = () => {
               <div className="lg:col-span-9">
                 <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
                   {t(
-                    <>Three projects, three industries — one approach to <em className="italic text-accent-brand font-medium">bilingual</em> craft.</>,
-                    <>3つのプロジェクト、3つの業界。一貫した<em className="italic text-accent-brand font-medium">バイリンガル</em>の造形美。</>
+                    <>Three projects, three industries — one approach to <em className="italic text-accent-brand font-medium">bilingual</em> design.</>,
+                    <>3つのプロジェクト、3つの業界。バイリンガルデザインという1つのアプローチ。</>
                   )}
                 </h2>
                 <p className="mt-6 max-w-[60ch] text-ink-muted text-lg leading-relaxed">
                   {t(
-                    "Every engagement begins with the audience and ends with measurable outcomes. Here's a closer look at recent work. Click the sample homepages below to view in a separate browser tab.",
-                    "すべてのプロジェクトはオーディエンスの理解から始まり、測定可能な成果へと繋がります。最近の活動の一部をご紹介します。以下のサンプルホームページをクリックすると、別のブラウザタブで表示されます。"
+                    "Every project starts by understanding your audience to achieve real business goals. Below are concept case studies showcasing potential designs and results. Click any homepage to open a live demo in a new tab.",
+                    "すべてのプロジェクトは、顧客のニーズを深く理解し、ビジネスの成果を達成することから始まります。以下は、デザイン案と想定される成果を示すコンセプト事例です。クリックすると、別タブでデモ用ホームページが表示されます。"
                   )}
                 </p>
               </div>
@@ -326,32 +326,16 @@ const Index = () => {
               </p>
               <p className="text-ink-muted leading-relaxed mb-6">
                 {t(
-                  "The work has changed shape over the years — magazine layouts, sign design in Canada, Windows game localization in Nagano, documentation localization and UI production in Tokyo, and now bilingual websites and product design for founders and growing companies. The throughline is the same: design that respects both cultures it lives in.",
-                  "長年の間に仕事の形は進化してきました。カナダでの雑誌や看板のデザイン、長野でのWindowsゲームのローカライズ、東京でのドキュメントのローカライズやUI制作を経て、現在は起業家や成長企業向けのバイリンガルWebサイトやプロダクトデザインを手がけています。一貫しているのは、両方の文化を尊重するデザインです。"
+                  "Over the years, my design work has taken many forms — from magazine layouts and shop signs in Canada, to translating games in Nagano, managing documentation and app screens in Tokyo, and now crafting bilingual websites and web design for business founders and growing companies. Throughout it all, my focus remains the same: creating designs that respect and connect both cultures.",
+                  "長年の間に、手がけるデザインの仕事も進化してきました。カナダでの雑誌や看板のデザインから、長野でのゲーム翻訳、東京でのドキュメント作成や画面デザイン、そして現在の起業家や成長企業向けのバイリンガルWebサイト構築まで、多岐にわたります。そのすべての中心にあるのは、双方の文化を尊重し、繋ぐデザインを作るという想いです。"
                 )}
               </p>
               <p className="text-ink-muted leading-relaxed">
                 {t(
-                  "I work directly with clients, not through layers. You get a senior designer with three decades of taste, technical chops, and a healthy appetite for projects with stakes.",
-                  "私は代理店を介さず、クライアントと直接対話します。30年の経験が培った確かなセンスと技術力、そして情熱を、あなたのプロジェクトに注ぎ込み、集客率の向上を目指します。"
+                  "I work directly with you, rather than through middle managers or agencies. You get an experienced designer with thirty years of practice, solid technical skills, and a genuine commitment to helping your project succeed.",
+                  "私は代理店や中間会社を通さず、あなたと直接やり取りをします。30年の経験から得た確かなデザインセンス、確かな技術力、そしてプロジェクトを成功へと導く真摯な姿勢で、真剣に向き合います。"
                 )}
               </p>
-
-              <ol className="mt-12 space-y-6 border-l rule pl-6">
-                {[
-                  { y: "1992", t: t("Moved to Japan", "来日"), b: t("Taught English and started translation in Nagano.", "長野にて英語講師を務めつつ翻訳を開始。") },
-                  { y: "1994", t: t("Localization & UI", "ローカライズ・UI制作"), b: t("Windows game and website localization.", "Windows向けゲームや初期のWebサイトのローカライズに従事。") },
-                  { y: "2004", t: t("Tokyo · Fortune 500 HQ", "都内のグローバル企業拠点"), b: t("Localization and UI production for global tech.", "大手精密機器メーカーの本社にてローカライズ・UI制作を担当。") },
-                  { y: "2010", t: t("Independent Studio", "スタジオ設立"), b: t("Bilingual websites, UI, no-code, for founders and teams.", "翻訳、日英サイト、UI、ノーコード開発を軸に独立。") },
-                ].map((m) => (
-                  <li key={m.y} className="relative group transition-transform duration-500 ease-in-out hover:scale-[1.02] origin-left cursor-default">
-                    <span className="absolute -left-[1.65rem] top-2 size-2 bg-accent-brand rounded-full transition-transform group-hover:scale-125" aria-hidden />
-                    <p className="font-mono text-[11px] uppercase tracking-widest text-ink-muted">{m.y}</p>
-                    <p className="font-serif-display text-xl font-semibold mt-1 transition-colors group-hover:text-accent-brand">{m.t}</p>
-                    <p className="text-ink-muted text-sm mt-1">{m.b}</p>
-                  </li>
-                ))}
-              </ol>
             </div>
           </motion.div>
         </section>
@@ -426,7 +410,7 @@ const Index = () => {
                 §04 — {t("Process", "プロセス")}
               </p>
               <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05]">
-                {t("Calm, predictable, milestone-based.", "堅実で円滑な。マイルストーン重視の進行。")}
+                {t("Clear steps, no surprises.", "明確なステップで、安心の進行。")}
               </h2>
             </div>
             <ol className="lg:col-span-9 grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-ink/10 border rule">
@@ -534,29 +518,29 @@ const Index = () => {
                 {
                   q: t("How do you handle Japanese and English layout differences?", "日本語と英語のレイアウトの違いにはどのように対応しますか？"),
                   a: t(
-                    "I design bilingual websites with custom responsive font scales, adjusted tracking, and language-specific CSS to ensure the visual weight remains identical across markets. I do not rely on machine-translated templates; instead, every headline and line-height is hand-crafted to respect character density differences.",
-                    "日本語と英語では文字の密度や長さが異なるため、カスタムフォントスケールやトラッキング、言語ごとのCSS調整を行い、どの言語でも均等な美しさを保ちます。安易な自動翻訳テンプレートに頼らず、文字の密度に合わせて行間や見出しを手動で微調整しています。"
+                    "English and Japanese have completely different text densities and visual weights. I hand-craft the typography, spacing, and layout rules for each language separately so the site looks equally premium and balanced in both markets. I never rely on automated templates that break when language switches; every headline is adjusted by hand to fit the screen perfectly.",
+                    "日本語と英語では文字の長さやバランスが全く異なります。そのため、言語ごとにフォントの大きさや文字の間隔、レイアウトのルールを個別に調整し、どちらの言語でも同様の美しさと高級感を保ちます。自動翻訳のテンプレートに頼るだけの粗雑な設計はせず、見出しの一行にいたるまで、手動で美しいバランスに微調整しています。"
                   )
                 },
                 {
                   q: t("What technologies do you leverage for bilingual web projects?", "多言語Webプロジェクトではどのような技術を使用しますか？"),
                   a: t(
-                    "I build with high-performance modern web stacks including Webflow, Framer, and custom React architectures coupled with headless CMS engines like Sanity. Every site features clean semantic HTML, lazy-loaded vector files, and strict Core Web Vitals optimizations for maximum performance.",
-                    "WebflowやFramer、およびヘッドレスCMS（Sanityなど）を組み合わせた高性能なReact構成から、ご要望に応じたスタックを選定します。クリーンなセマンティックHTML、軽量化されたベクター(SVG)アセット、および厳格なCore Web Vitals対策を標準装備しています。"
+                    "I use modern, high-performance platforms like Webflow, Framer, and custom React setups, paired with flexible content management systems like Sanity. Behind the scenes, the code is kept exceptionally clean, images and graphics are optimized to load instantly, and the site is built to meet Google’s strictest speed and performance standards.",
+                    "WebflowやFramer、および柔軟な管理画面を持つシステム（Sanityなど）を組み合わせ、最新の高パフォーマンスな設計から最適な技術を選定します。裏側のコードを徹底的にクリーンに保ち、画像やグラフィックが瞬時に読み込まれるよう最適化することで、Googleの厳格な表示速度・性能基準をクリアするサイトを構築します。"
                   )
                 },
                 {
                   q: t("How long does a typical bilingual web design project take?", "一般的なバイリンガルWebデザインプロジェクトの制作期間はどのくらいですか？"),
                   a: t(
-                    "A comprehensive bilingual design and development project typically takes 4 to 8 weeks to complete from the discovery workshop to deployment. This timeline depends on the content model complexity, bilingual copy-editing requirements, and search engine optimization configurations.",
-                    "共通理解を深めるワークショップから最終公開まで、一般的なプロジェクトでは4〜8週間をいただいております。この期間はコンテンツの複雑さ、日欧の翻訳・コピー監修の範囲、およびSEO/AEOの構成レベルによって決定されます。"
+                    "A full-scale bilingual project generally takes 4 to 8 weeks from our initial strategy sessions to final launch. The exact timeline depends on the volume of content, the depth of bilingual copy editing required, and the level of search engine setup needed.",
+                    "最初の戦略ミーティングから最終公開まで、一般的なプロジェクトでは4〜8週間をいただいております。この期間は、掲載するコンテンツの量や複雑さ、日英の翻訳・コピーの監修範囲、および検索エンジン向けの最適化設定の深さによって変動します。"
                   )
                 },
                 {
                   q: t("Are your localized websites optimized for local and global search engines?", "ローカライズされたWebサイトは国内外の検索エンジンに最適化されていますか？"),
                   a: t(
-                    "Yes, every bilingual site is deployed with strict multi-lingual SEO parameters, canonical styling, high-accuracy JSON-LD schemas, and crawlable site structure. This ensures high search rankings on Google, Bing, and maximum accessibility for emerging generative AI agents like Perplexity and ChatGPT.",
-                    "はい。多言語SEOの設定、カノニカルタグ、高精度なJSON-LD構造化データ、クローラブルな階層構造を徹底して構築します。GoogleやBingなどの一般検索に加え、PerplexityやChatGPTといった最新の対話型AIエンジンからの参照・引用も容易にします。"
+                    "Yes. Every site is built with a clean, easy-to-scan structure and the hidden technical formatting that search engines require. This ensures your brand ranks high on Google and Bing, and is easily found and cited by modern AI search tools like Perplexity and ChatGPT.",
+                    "はい。すべてのサイトは、検索エンジンが情報を読み取りやすいクリーンな階層構造と、見えない部分の正しい技術設定（構造化データなど）を徹底して構築します。これにより、GoogleやBingでの上位表示はもちろん、PerplexityやChatGPTといった最新の対話型AIからも正確に引用・参照されやすくなります。"
                   )
                 }
               ].map((faq, idx) => (

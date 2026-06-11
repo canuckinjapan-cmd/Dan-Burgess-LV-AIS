@@ -17,15 +17,15 @@ export const ContactForm = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
-      toast({ 
-        title: t("Missing details", "入力漏れがあります"), 
-        description: t("Please add your name, email, and a short brief.", "お名前、メールアドレス、プロジェクトの概要をご入力ください。") 
+      toast({
+        title: t("Missing details", "入力漏れがあります"),
+        description: t("Please add your name, email, and a short brief.", "お名前、メールアドレス、プロジェクトの概要をご入力ください。")
       });
       return;
     }
-    
+
     setSubmitting(true);
-    
+
     // Determine the API base URL. 
     // Manual override > Automatic discovery via VITE_APP_URL > AI Studio Fallback > Relative path
     const envBase = import.meta.env.VITE_API_BASE_URL;
@@ -34,9 +34,9 @@ export const ContactForm = () => {
     const windowBase = (window as Window & { API_BASE_URL?: string }).API_BASE_URL;
     const currentOrigin = window.location.origin;
     const aisFallback = "https://ais-pre-r6az2fezg2siatxq2zvtqq-343348950519.asia-east1.run.app";
-    
+
     let apiBase = (envBase || windowBase || localStored || "").trim().replace(/\/+$/, "");
-    
+
     // If no manual base set, check if we're on a static host vs run.app
     if (!apiBase) {
       if (window.location.hostname.includes("run.app") || window.location.hostname === "localhost") {
@@ -46,10 +46,10 @@ export const ContactForm = () => {
         apiBase = (appUrl || aisFallback).trim().replace(/\/+$/, "");
       }
     }
-    
+
     const targetUrl = '/api/contact';
     console.log(`Contact form: Submitting to ${targetUrl} (Base: ${apiBase})`);
-    
+
     try {
       const response = await fetch(targetUrl, {
         method: "POST",
@@ -66,16 +66,16 @@ export const ContactForm = () => {
       }
 
       setSubmitting(false);
-      toast({ 
-        title: t("Message sent", "メッセージを送信しました"), 
-        description: t("Thanks — Dan will reply within 1–2 business days (JST).", "ありがとうございます。1〜2営業日以内に返信いたします。") 
+      toast({
+        title: t("Message sent", "メッセージを送信しました"),
+        description: t("Thanks — Dan will reply within 1–2 business days (JST).", "ありがとうございます。1〜2営業日以内に返信いたします。")
       });
       setForm({ name: "", email: "", company: "", budget: "", message: "" });
     } catch (error) {
       const err = error as Error;
       console.error("Contact form error:", err);
       setSubmitting(false);
-      
+
       toast({
         variant: "destructive",
         title: t("Error", "エラー"),
@@ -134,10 +134,10 @@ export const ContactForm = () => {
               onChange={(e) => setForm({ ...form, budget: e.target.value })}
             >
               <option value="">{t("Select a range", "選択してください")}</option>
-              <option>{t("Under ¥500k", "50万円未満")}</option>
-              <option>¥500k – ¥1.5M</option>
-              <option>¥1.5M – ¥4M</option>
-              <option>¥4M+</option>
+              <option>{t("Under ¥100k", "10万円未満")}</option>
+              <option>¥100k – ¥250k</option>
+              <option>¥250k – ¥500k</option>
+              <option>¥500k – ¥1M</option>
               <option>{t("Not sure yet", "未定")}</option>
             </select>
             <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none" size={16} />

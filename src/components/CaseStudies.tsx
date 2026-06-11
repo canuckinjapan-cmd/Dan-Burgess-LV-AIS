@@ -35,20 +35,20 @@ const cases: CaseStudy[] = [
     year: "2025",
     client: "Takasaki Fitness",
     clientJp: "高崎フィットネス",
-    title: "A neighborhood gym, engineered for sign-ups.",
-    titleJp: "集客を最大化する、地域密着型ジムのWebサイト設計。",
+    title: "A neighborhood gym website designed to increase membership sign-ups.",
+    titleJp: "集客と入会率を向上させる、地域密着型ジムのWebサイト設計。",
     sector: "Fitness · Local Booking - Sample HP",
     sectorJp: "フィットネス・予約システム - サンプルHP",
     summary:
-      "Repositioned a private Takasaki gym from an Instagram-only presence into a high-conversion landing site with bilingual booking, asymmetric editorial type, and a structured trial-class funnel tuned to local demographics.",
-    summaryJp: "高崎市のプライベートジムを、Instagramのみの展開から、バイリンガルの予約機能、非対称なレイアウトのコンテンツ、そして地域の人口統計に合わせた体系的な体験レッスン誘導フローを備えた、コンバージョン率の高いランディングページへと再構築しました。",
+      "Helping a local gym in Takasaki move beyond social media with a clear, welcoming website. It features an easy bilingual booking system for trial classes, designed to attract local residents and guide them to sign up.",
+    summaryJp: "高崎市のプライベートジムの、SNS発信のみの体制から次のステップへ。地域住民を惹きつけ体験レッスン予約に繋げるための、親しみやすく分かりやすいバイリンガルWebサイトと予約システムを設計しました。",
     role: ["Strategy", "UX/UI", "Front-end", "Bilingual Copy"],
     roleJp: ["戦略策定", "UX/UIデザイン", "フロントエンド実装", "コピーライティング"],
     stack: ["Webflow", "GSAP", "Calendar API", "i18n"],
     outcomes: [
-      { value: "+184%", label: "Trial bookings", jpLabel: "体験予約数" },
-      { value: "2.3s", label: "LCP, mobile", jpLabel: "モバイル読込速度" },
-      { value: "EN/JP", label: "Full parity", jpLabel: "完全多言語対応" },
+      { value: "+184%*", label: "Est. booking increase", jpLabel: "体験予約数（想定）" },
+      { value: "2.3s*", label: "Est. mobile load time", jpLabel: "モバイル読込速度（想定）" },
+      { value: "EN/JP", label: "Bilingual translation", jpLabel: "多言語翻訳対応" },
     ],
     image: new URL("../assets/Taka-PCbig-E.jpg", import.meta.url).href,
     jpImage: new URL("../assets/Taka-PCbig-J.jpg", import.meta.url).href,
@@ -66,20 +66,20 @@ const cases: CaseStudy[] = [
     year: "2024",
     client: "Rural Japan Living",
     clientJp: "不動産",
-    title: "Premium property listings, built for bilingual buyers.",
-    titleJp: "国内外の買い手を繋ぐ、高級不動産プラットフォーム。",
+    title: "Premium property listings, designed for international buyers.",
+    titleJp: "国内外の買い手に向けた、高級不動産プラットフォーム。",
     sector: "Real Estate · Property DB - Sample HP",
     sectorJp: "不動産・物件データベース - サンプルHP",
     summary:
-      "Translated dense MLS-style data into an editorial property platform — generous typography, faceted search, and a content model that respects how Japanese and English buyers actually scan for homes.",
-    summaryJp: "膨大な物件データを編集性の高い物件情報プラットフォームへと変換しました。ゆったりとした余白、検索、そして日本語と英語を扱う購入者が、実際に物件を探す大きな手助けとなります。",
+      "Converting complex real estate data into a clean, editorial property website. It features an easy-to-use search and a clear layout that helps both Japanese and overseas buyers find homes with ease.",
+    summaryJp: "複雑な物件データを整理し、洗練された不動産情報サイトへと変換。直感的な検索とクリアなレイアウトにより、国内および海外の買い手がスムーズに理想の物件を探せる体験を提供します。",
     role: ["IA", "UX/UI", "Search UX", "Localization"],
     roleJp: ["情報設計", "UX/UIデザイン", "検索体験設計", "ローカライズ"],
     stack: ["Next.js", "Algolia", "Sanity", "Tailwind"],
     outcomes: [
-      { value: "+62%", label: "Inquiry rate", jpLabel: "問い合わせ率" },
-      { value: "8k+", label: "Listings indexed", jpLabel: "掲載物件数" },
-      { value: "0", label: "JP/EN bugs at launch", jpLabel: "ローンチ時不具合" },
+      { value: "+62%*", label: "Est. inquiry increase", jpLabel: "問い合わせ率（想定）" },
+      { value: "8k+", label: "Sample listings", jpLabel: "サンプル掲載物件数" },
+      { value: "0*", label: "Est. error rate", jpLabel: "エラー発生率（想定）" },
     ],
     image: new URL("../assets/Real01-PCbig-E.jpg", import.meta.url).href,
     jpImage: new URL("../assets/Real01-PCbig-J.jpg", import.meta.url).href,
@@ -101,15 +101,15 @@ const cases: CaseStudy[] = [
     sector: "Automotive · E-commerce - Sample HP",
     sectorJp: "自動車・ECサイト - サンプルHP",
     summary:
-      "An online storefront connecting overseas enthusiasts to Japan's domestic auction market. Complex logistics, customs and bidding flows compressed into a calm, confidence-building purchase experience.",
-    summaryJp: "海外のJDMファンと日本の国内オークション市場を繋ぐECサイト。複雑な物流、通関、入札フローを整理し、ユーザーが安心して購入できるシンプルかつ信頼感のある購入体験を構築しました。",
+      "An easy-to-use online shop that connects car lovers worldwide directly to Japanese car auctions. It simplifies shipping, paperwork, and bidding, making the buying process feel simple and secure.",
+    summaryJp: "世界の車愛好家と日本のオークション市場を直接繋ぐ、使いやすいオンラインショップ。配送、手続き、入札などの複雑なフローをシンプルにし、安心・安全な購入体験を実現します。",
     role: ["Product Strategy", "UI System", "Checkout UX"],
     roleJp: ["プロダクト戦略", "UIシステム設計", "チェックアウト体験"],
     stack: ["Framer", "Custom Liquid", "i18n"],
     outcomes: [
-      { value: "4 mkts", label: "Shipping live", jpLabel: "配送対応市場" },
-      { value: "+38%", label: "Repeat buyers", jpLabel: "リピート率" },
-      { value: "🇬🇧 🇦🇺 🇺🇸", label: "Currency", jpLabel: "多通貨対応" },
+      { value: "4 mkts", label: "Sample markets", jpLabel: "サンプル対象市場" },
+      { value: "+38%*", label: "Est. repeat buyers", jpLabel: "リピート率（想定）" },
+      { value: "🇬🇧 🇦🇺 🇺🇸", label: "Supported currencies", jpLabel: "対応通貨" },
     ],
     image: new URL("../assets/MacBook-Pro-indexbig.jpg", import.meta.url).href,
     mobileImage: new URL("../assets/iPhone-16-index.jpg", import.meta.url).href,
@@ -325,7 +325,7 @@ export const CaseStudies = () => {
                 </>
               )}
 
-              <dl className="grid grid-cols-3 gap-4 mb-8 border-y rule py-5">
+              <dl className="grid grid-cols-3 gap-4 border-t rule pt-5">
                 {c.outcomes.map((o) => (
                   <div key={o.label}>
                     <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-muted mb-1">
@@ -337,24 +337,20 @@ export const CaseStudies = () => {
                   </div>
                 ))}
               </dl>
+              
+              <p className="text-[10px] font-mono text-ink-muted/70 italic mt-2 mb-6 border-b rule pb-5">
+                * {t("Potential results based on website optimization and redesign.", "ウェブサイト最適化およびリニューアルによる想定の成果")}
+              </p>
 
-              <div className="grid grid-cols-2 gap-6 text-[13px]">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted mb-2">{t("Role", "役割")}</p>
-                  <ul className="space-y-1">
-                    {t(c.role, c.roleJp).map((r) => (
-                      <li key={r}>{r}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted mb-2">{t("Stack", "技術スタック")}</p>
-                  <ul className="space-y-1">
-                    {c.stack.map((s) => (
-                      <li key={s}>{s}</li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="text-[13px]">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted mb-2">{t("Stack", "技術スタック")}</p>
+                <ul className="flex flex-wrap gap-2">
+                  {c.stack.map((s) => (
+                    <li key={s} className="font-mono text-[11px] uppercase tracking-widest border rule px-2 py-0.5 text-ink-muted">
+                      {s}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </article>
