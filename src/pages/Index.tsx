@@ -525,8 +525,8 @@ const Index = () => {
                 {
                   q: t("What technologies do you leverage for bilingual web projects?", "多言語Webプロジェクトではどのような技術を使用しますか？"),
                   a: t(
-                    "I use modern, high-performance platforms like Webflow, Framer, and custom React setups, paired with flexible content management systems like Sanity. Behind the scenes, the code is kept exceptionally clean, images and graphics are optimized to load instantly, and the site is built to meet Google’s strictest speed and performance standards.",
-                    "WebflowやFramer、および柔軟な管理画面を持つシステム（Sanityなど）を組み合わせ、最新の高パフォーマンスな設計から最適な技術を選定します。裏側のコードを徹底的にクリーンに保ち、画像やグラフィックが瞬時に読み込まれるよう最適化することで、Googleの厳格な表示速度・性能基準をクリアするサイトを構築します。"
+                    "I use new design frameworks, and I stay up to date with AI tools, and the latest in WordPress developments. Behind the scenes, the code is kept exceptionally clean, images and graphics are optimized to load instantly, and the site is built to meet Google’s strictest speed and performance standards.",
+                    "新しいデザインフレームワークを活用し、AIツールやWordPressの最新動向についても常に情報をキャッチアップしています。裏側のコードを徹底的にクリーンに保ち、画像やグラフィックが瞬時に読み込まれるよう最適化することで、Googleの厳格な表示速度・性能基準をクリアするサイトを構築します。"
                   )
                 },
                 {
