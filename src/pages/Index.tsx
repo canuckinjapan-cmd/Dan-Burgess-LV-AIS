@@ -155,7 +155,7 @@ const Index = () => {
 
                 <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] md:landscape:text-[3.25rem] lg:landscape:text-[3.75rem] xl:text-[6.25rem] xl:landscape:text-[6.25rem] lg:text-[6.25rem]">
                   {t(
-                    <><span className="text-accent-brand font-medium">Bridging</span> Japanese<br />and Western digital<br />experiences. TEMP1</>,
+                    <><span className="text-accent-brand font-medium">Bridging</span> Japanese<br />and Western digital<br />experiences.</>,
                     <span className="text-[0.8em] sm:text-[0.82em] leading-[1.1] block">
                       日本と欧米の<br className="hidden sm:inline" />デジタル体験の<br className="hidden sm:inline" /><span className="text-accent-brand font-medium">架け橋</span>となるデザインを。
                     </span>
