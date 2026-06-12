@@ -280,7 +280,7 @@ const Index = () => {
                 <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
                   {t(
                     <>Three projects, three industries — one approach to <em className="italic text-accent-brand font-medium">bilingual</em> design.</>,
-                    <>3つのプロジェクト、3つの業界。バイリンガルデザインという1つのアプローチ。</>
+                    <>3つのプロジェクト、3つの業界。<em className="italic text-accent-brand font-medium">バイリンガル</em>デザインという1つのアプローチ。</>
                   )}
                 </h2>
                 <p className="mt-6 max-w-[60ch] text-ink-muted text-lg leading-relaxed">
