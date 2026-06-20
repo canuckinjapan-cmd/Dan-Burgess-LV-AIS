@@ -1,20 +1,32 @@
-import { motion } from "motion/react";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Instagram, Rss } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
-import { KineticWordmark } from "@/components/KineticWordmark";
 import { CaseStudies } from "@/components/CaseStudies";
 import { ContactForm } from "@/components/ContactForm";
 import { PortraitPlate } from "@/components/PortraitPlate";
 import manga from "@/assets/danface_manga.svg";
+import japanBg from "@/assets/images/japan_sumie_panoramic_bg_1781882609398.jpg";
+import aboutBg from "@/assets/images/photo-1570435229357-79dd1692b110-BC.jpg";
 
 import instagramLogo from "@/assets/Instagram-Logo.png";
 import bloggerLogo from "@/assets/Blogger-Logo.png";
 import { useLanguage } from "@/context/LanguageContext";
 
-// Version 2.0.2 - Fixed responsive typography scaling and Polaroid layout proportions for landscape tablets
+// Version 2.2.4 - Re-aligned section layouts to fix font jitter bugs and match top edge redlines perfectly
 
 const Index = () => {
   const { t, lang } = useLanguage();
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 1000], [0, 200]);
+  
+  const aboutRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: aboutScrollProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"]
+  });
+  const aboutY = useTransform(aboutScrollProgress, [0, 1], [-80, 80]);
+
   const currentYear = new Date().getFullYear();
 
   const getSeasonDetails = () => {
@@ -23,32 +35,32 @@ const Index = () => {
     const year = today.getFullYear();
 
     let seasonEn = "Spring";
-    let seasonJp = "春号";
+    let seasonJp = "春";
     let seasonIndex = 0; // 0 = Spring, 1 = Summer, 2 = Autumn, 3 = Winter
     let seasonYear = year;
 
     if (month >= 2 && month <= 4) {
       // Mar, Apr, May
       seasonEn = "Spring";
-      seasonJp = "春号";
+      seasonJp = "春";
       seasonIndex = 0;
       seasonYear = year;
     } else if (month >= 5 && month <= 7) {
       // Jun, Jul, Aug
       seasonEn = "Summer";
-      seasonJp = "夏号";
+      seasonJp = "夏";
       seasonIndex = 1;
       seasonYear = year;
     } else if (month >= 8 && month <= 10) {
       // Sep, Oct, Nov
       seasonEn = "Autumn";
-      seasonJp = "秋号";
+      seasonJp = "秋";
       seasonIndex = 2;
       seasonYear = year;
     } else {
       // Dec, Jan, Feb
       seasonEn = "Winter";
-      seasonJp = "冬号";
+      seasonJp = "冬";
       seasonIndex = 3;
       seasonYear = month === 11 ? year : year - 1;
     }
@@ -66,19 +78,18 @@ const Index = () => {
   const seasonDetails = getSeasonDetails();
 
   const stats = [
-    { value: "30+", label: t("Years designing", "デザイン歴") },
-    { value: "1992", label: t("Based in Japan", "来日年") },
-    { value: "EN / JP", label: t("Native bilingual", "バイリンガル対応") },
-    { value: "150+", label: t("Projects shipped", "完了プロジェクト") },
+    { value: "30+", label: t("Years working between English & Japanese", "翻訳・デザイン経験") },
+    { value: "1992", label: t("Based in Japan", "日本在住") },
+    { value: "EN / JP", label: t("Professional bilingual", "英語・日本語対応") },
   ];
 
   const services = [
     {
-      no: "S01",
-      title: t("Bilingual Web Design", "バイリンガルWebデザイン"),
+      no: "01",
+      title: t("Bilingual Web Design", "英語対応Webサイト制作"),
       body: t(
-        "English and Japanese websites created for both readers. I design the layout, spacing, and text carefully for each language, so it never feels like a cheap machine translation.",
-        "日本語と英語の読者それぞれに向けて丁寧に作られたWebサイト。レイアウトや文字、テキストを各言語に合わせて最適化し、機械翻訳のような不自然さを排除します。"
+        "Websites designed for both English and Japanese audiences. Layouts, typography, and content are carefully adapted so each language feels natural.",
+        "英語と日本語の両方に対応したWebサイトを設計・制作します。言語ごとの読みやすさやレイアウトにも配慮しています。"
       ),
       deliverables: t(
         ["Strategy & sitemap", "Design system", "EN + JP build"],
@@ -86,11 +97,11 @@ const Index = () => {
       ),
     },
     {
-      no: "S02",
-      title: t("UI / Product Design", "UI / プロダクトデザイン"),
+      no: "02",
+      title: t("UI / Product Design", "UI・UX設計"),
       body: t(
-        "Thirty years of experience designing clear, user-friendly screens for apps, portals, and software. Built to be clean, easy to navigate, and usable for everyone.",
-        "アプリやソフトウェア向けの分かりやすく使いやすい画面設計における30年の実績。誰もが快適に、直感的に操作できるクリーンなデザインを提供します。"
+        "Clear, user-friendly interfaces for websites, apps, and software. Designed to be intuitive, accessible, and easy to use.",
+        "Webサービスやアプリ向けに、分かりやすく使いやすい画面設計を行います。"
       ),
       deliverables: t(
         ["UX audits", "Design systems", "Figma libraries"],
@@ -98,11 +109,11 @@ const Index = () => {
       ),
     },
     {
-      no: "S03",
-      title: t("Visual Web Design", "ビジュアルWebデザイン"),
+      no: "03",
+      title: t("Visual Web Design", "Webデザイン・構築"),
       body: t(
-        "Built using Webflow, Framer and AI assisted tools. I design beautiful, responsive websites that your team can easily update yourself without needing a web developer.",
-        "Webflow、FramerおよびAIを活用したツール。制作会社や開発者に頼むことなく、自社メンバーで簡単にテキストや画像を更新できる美しいサイトを実現します。"
+        "Modern responsive websites built with tools such as Framer, Wordpress and AI-assisted workflows. Easy for your team to update without relying on a developer.",
+        "Framer、Wordpressなどを活用し、更新しやすく運用しやすいWebサイトを制作します。"
       ),
       deliverables: t(
         ["Webflow / Framer", "CMS modeling", "Editor handover"],
@@ -110,11 +121,11 @@ const Index = () => {
       ),
     },
     {
-      no: "S04",
-      title: t("Localization & Translation", "ローカライズ・翻訳"),
+      no: "04",
+      title: t("Localization & Translation", "英語ローカライズ・翻訳"),
       body: t(
-        "Born in Canada, working in Japan since 1992. I write and review the words too — so nothing reads like a machine translation.",
-        "カナダ出身、1992年より日本で活動。自らコピーの執筆や監修を行うことで、機械翻訳とは一線を画す、文化に根ざした表現を追求しています。"
+        "Translation and localization informed by more than 30 years living and working in Japan. Content is reviewed and adapted for real audiences, not machine translation.",
+        "30年以上の日本在住経験を活かし、単なる翻訳ではなく、伝わる英語表現へ調整します。"
       ),
       deliverables: t(
         ["UI copy EN/JP", "Brand voice", "Cultural review"],
@@ -123,11 +134,76 @@ const Index = () => {
     },
   ];
 
-  const process = [
-    { step: "01", title: t("Discover", "ヒアリング・計画"), body: t("We start by talking — about your business, your customers, and what success looks like for you. No jargon, just an honest conversation to make sure we're building the right thing.", "まずはじっくり話を聞かせてください。ビジネスのこと、お客さまのこと、そして目指す成果について。難しい言葉は使いません。正直な対話から始めます。") },
-    { step: "02", title: t("Design", "デザイン制作"), body: t("I create the look and feel of your website — layouts, colours, and all the words. You can review and give feedback at every step, so there are no surprises at the end.", "サイトの見た目や雰囲気を作り上げていきます。レイアウト、カラー、テキストのすべて。各ステップでフィードバックをいただきながら、完成形に驚かないよう丁寧に進めます。") },
-    { step: "03", title: t("Develop", "サイト構築"), body: t("I build your site to be fast, clear, and easy to find on Google. It works well on phones and computers alike — and loads quickly, which keeps visitors from leaving.", "Googleで見つけやすく、表示が速く、スマートフォンでも見やすいサイトを構築します。ページの読み込みが遅いと離脱につながるため、スピードにもこだわります。") },
-    { step: "04", title: t("Deploy & Support", "公開・継続サポート"), body: t("Once your site is live, I walk you through how to use it yourself. Ongoing support is available so you always have someone to call when you need a hand.", "サイト公開後は、ご自身で更新できるよう丁寧にご説明します。その後も継続的なサポートをご用意しているので、困ったときにすぐ相談できます。") },
+  const pricingCards = [
+    {
+      no: "01",
+      title: t("Starter", "スターター"),
+      body: t(
+        "For consultants, local businesses, and small organizations.",
+        "コンサルタント、個人事業主、小規模な組織に最適です。"
+      ),
+      features: [
+        t("Up to 5 pages", "最大5ページ構成"),
+        t("Mobile responsive", "モバイル端末対応"),
+        t("Contact form", "お問い合わせフォーム"),
+        t("Basic SEO setup", "検索最適化（基本SEO）"),
+        t("English or Japanese", "英語または日本語制作"),
+        t("Self-managed", "自力での更新・管理"),
+      ],
+      price: "¥180,000 – ¥250,000",
+      isMostPopular: false,
+    },
+    {
+      no: "02",
+      title: t("Business", "ビジネス"),
+      body: t(
+        "For growing businesses that need a professional online presence.",
+        "プロフェッショナルな発信力を必要とする、成長中の企業向けです。"
+      ),
+      features: [
+        t("5–10 pages", "5〜10ページ構成"),
+        t("Custom design", "カスタムデザイン"),
+        t("Blog or news section", "ブログ・お知らせ機能"),
+        t("Analytics setup", "アクセス解析設定"),
+        t("Cloudflare setup", "Cloudflare導入・高速化"),
+        t("English + Japanese", "英語・日本語バイリンガル対応"),
+      ],
+      price: "¥350,000 – ¥500,000",
+      isMostPopular: true,
+    },
+    {
+      no: "03",
+      title: t("International", "インターナショナル"),
+      body: t(
+        "For companies targeting overseas customers or operating across multiple markets.",
+        "海外顧客をターゲットにする企業や、マルチマーケットで展開する企業に最適です。"
+      ),
+      features: [
+        t("Strategy workshop", "戦略ワークショップ"),
+        t("UX planning", "UXデザイン・動線設計"),
+        t("Localization review", "言語・文化的ローカライズ"),
+        t("Advanced SEO", "高度なSEO・導線最適化"),
+        t("English copy optimization", "英語コピーライティング調整"),
+        t("Bilingual architecture", "バイリンガル特有の構造最適化"),
+      ],
+      price: "¥600,000+",
+      isMostPopular: false,
+    },
+  ];
+
+  const supportOptions = [
+    {
+      title: t("Self Managed", "自主運用"),
+      price: t("¥0/month", "¥0 / 月"),
+    },
+    {
+      title: t("Basic Care", "ベーシック保守"),
+      price: t("¥5,000/month", "¥5,000 / 月"),
+    },
+    {
+      title: t("Managed Support", "マネージドサポート"),
+      price: t("¥15,000/month", "¥15,000 / 月"),
+    },
   ];
 
   return (
@@ -137,125 +213,127 @@ const Index = () => {
       <main id="main-content" className="w-full">
         {/* HERO ============================================================ */}
         <section id="hero" className="relative overflow-hidden w-full">
-          <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-12 md:landscape:pt-14 lg:pt-20 lg:landscape:pt-20 pb-16 md:landscape:pb-16 lg:pb-24 lg:landscape:pb-24">
-            <div className="grid lg:grid-cols-12 md:landscape:grid-cols-12 lg:landscape:grid-cols-12 gap-10 lg:gap-12 lg:landscape:gap-12 md:landscape:gap-8 items-center">
-              {/* Left column — masthead */}
-              <motion.div
-                className="lg:col-span-8 md:landscape:col-span-8 lg:landscape:col-span-8"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-              >
-                <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted mb-8">
-                  <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" aria-hidden />
-                  <span>Issue №{seasonDetails.issueNo} · {t(`${seasonDetails.seasonEn} ${seasonDetails.seasonYear}`, `${seasonDetails.seasonYear}年 ${seasonDetails.seasonJp}`)}</span>
-                  <span className="h-px w-8 bg-ink/20" />
-                  <span>Fukuoka, JPN · UTC+9</span>
-                </div>
-
-                <h1 className="font-serif-display font-semibold tracking-[-0.02em] leading-[1.05] text-balance text-[3.25rem] sm:text-[4.5rem] md:landscape:text-[3.25rem] lg:landscape:text-[3.75rem] xl:text-[6.25rem] xl:landscape:text-[6.25rem] lg:text-[6.25rem]">
-                  {t(
-                    <><span className="text-accent-brand font-medium">Bridging</span> Japanese<br />and Western digital<br />experiences.</>,
-                    <span className="text-[0.8em] sm:text-[0.82em] leading-[1.1] block">
-                      日本と欧米の<br className="hidden sm:inline" />デジタル体験の<br className="hidden sm:inline" /><span className="text-accent-brand font-medium">架け橋</span>となるデザインを。
-                    </span>
-                  )}
-                </h1>
-
-                <p className="mt-8 md:landscape:mt-4 lg:mt-8 lg:landscape:mt-6 max-w-[58ch] text-lg md:landscape:text-base lg:landscape:text-lg xl:landscape:text-xl xl:text-xl lg:text-xl text-ink-muted leading-relaxed">
-                  {t(
-                    <>I'm <span className="text-ink font-medium">Dan Burgess</span> — a Canadian designer living in Japan since 1992, and based in Fukuoka. For three decades I've helped founders and teams ship websites, UI and product experiences that read beautifully in both English and Japanese, and convert in either market.</>,
-                    <>私は<span className="text-ink font-medium">ダン・バージェス</span>です。1992年から日本に住んでいるカナダ人デザイナーで、現在は福岡を拠点に活動しています。過去30年にわたり、私は起業家やチームが、英語と日本語の両方で美しく読みやすく、どちらの市場でもコンバージョンにつながるウェブサイト、UI、およびプロダクト体験をリリースできるよう支援してきました。</>
-                  )}
-                </p>
-
-                <div className="mt-10 md:landscape:mt-6 lg:mt-10 lg:landscape:mt-10 flex flex-wrap items-center gap-4">
-                  <a
-                    href="#contact"
-                    className="group inline-flex items-center gap-3 bg-ink text-surface px-7 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] hover:bg-accent-brand transition-colors"
-                  >
-                    {t("Start a Project", "プロジェクトを開始する")}
-                    <span className="text-[22px] transition-transform group-hover:translate-x-1" aria-hidden>→</span>
-                  </a>
-                  <a
-                    href="#work"
-                    className="inline-flex items-center gap-3 px-7 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-ink hover:text-accent-brand transition-all border-2 border-ink/40 hover:border-accent-brand hover:bg-white/40 shadow-sm"
-                  >
-                    {t("See Selected Work", "制作事例を見る")}
-                  </a>
-                </div>
-              </motion.div>
-
-              {/* Right column — manga portrait card & stats */}
-              <motion.aside
-                className="lg:col-span-4 md:landscape:col-span-4 lg:landscape:col-span-4 lg:mt-0"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
-              >
-                <div className="flex flex-col sm:grid sm:grid-cols-2 md:landscape:flex md:landscape:flex-col lg:flex lg:flex-col gap-6 sm:gap-12 md:landscape:gap-0 lg:gap-0 items-center">
-
-                  {/* Stats (Hidden on lg and md:landscape, visible < lg) */}
-                  <dl className="order-2 sm:order-1 lg:hidden md:landscape:hidden grid grid-cols-4 sm:grid-cols-2 gap-x-2 sm:gap-x-12 gap-y-7 w-full">
-                    {stats.map((s) => (
-                      <div key={s.label}>
-                        <dt className="font-serif-display text-xl sm:text-4xl font-semibold tracking-tight leading-none text-ink">
-                          {s.value}
-                        </dt>
-                        <dd className="mt-1.5 sm:mt-3 font-mono text-[6px] sm:text-[10px] uppercase tracking-[0.14em] text-ink-muted leading-tight">
-                          {s.label}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-
-                  {/* Polaroid Card (Top on mobile, Right on sm+, Top on lg+) */}
-                  <motion.div
-                    whileHover={{ rotate: 2 }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                    className="order-1 sm:order-2 w-full md:landscape:max-w-[240px] lg:max-w-none lg:landscape:max-w-[280px] xl:landscape:max-w-none relative bg-surface-elevated border rule p-4 sm:p-6 md:landscape:p-4 lg:p-6 lg:landscape:p-4 xl:landscape:p-6 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer animate-fade-in"
-                  >
-                    <div className="flex items-center justify-between font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[8px] xl:landscape:text-[10px] uppercase tracking-widest text-ink-muted mb-3 md:landscape:mb-2 lg:landscape:mb-3 xl:mb-4">
-                      <span>Plate 01</span>
-                      <span className="flex items-center gap-1.5 lg:gap-2">
-                        <span className="size-1 rounded-full lg:size-1.5 bg-accent-brand animate-pulse-dot" />
-                        {t("Accepting Q3", "Q3 プロジェクト受付中")}
-                      </span>
-                    </div>
-                    <PortraitPlate />
-                    <div className="mt-3 md:landscape:mt-2 lg:landscape:mt-3 xl:mt-5 flex items-baseline justify-between gap-2 pt-3 md:landscape:pt-2 lg:landscape:pt-3 xl:pt-4 border-t rule">
-                      <div>
-                        <p className="text-xl md:landscape:text-base lg:landscape:text-lg xl:text-2xl leading-none" style={{ fontFamily: '"Homemade Apple", cursive' }}>Dan Burgess</p>
-                        <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[8px] xl:landscape:text-[10px] uppercase tracking-widest text-ink-muted mt-1">
-                          {t("Designer · デザイナー", "デザイナー · Designer")}
-                        </p>
-                      </div>
-                      <p className="font-mono text-[8px] md:landscape:text-[8px] lg:text-[10px] lg:landscape:text-[8px] xl:landscape:text-[10px] uppercase tracking-widest text-ink-muted text-right leading-relaxed shrink-0">
-                        🍁 → 🇯🇵<br />
-                        {t("Since '92", "92年から活動")}
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.aside>
-            </div>
+          {/* Faint, parallax-shifting Japan-inspired background */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+            <motion.div 
+              style={{ y }} 
+              className="absolute inset-0 w-full h-[125%]"
+            >
+              <img
+                src={japanBg}
+                alt=""
+                className="w-full h-full object-cover object-center opacity-[0.6] mix-blend-multiply"
+                referrerPolicy="no-referrer"
+              />
+            </motion.div>
+            {/* Vignette fade to blend seamlessly with the textured paper canvas */}
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
+            <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-paper to-transparent" />
+            <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-paper to-transparent" />
           </div>
 
-          {/* Stat strip - Hidden on mobile/tablet as they move up next to portrait */}
-          <motion.div
-            className="border-y rule bg-surface-soft/40 hidden lg:block md:landscape:block"
+          <div className="max-w-[1320px] mx-auto px-6 lg:px-10 pt-8 md:landscape:pt-10 lg:pt-16 lg:landscape:pt-16 pb-12 md:landscape:pb-12 lg:pb-16 lg:landscape:pb-16 relative z-10">
+            
+            <motion.div 
+              className="w-full"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+            >
+              {/* Issue Ribbon */}
+              <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink/80 mb-8">
+                <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" aria-hidden />
+                <span>Issue №{seasonDetails.issueNo} · {t(`${seasonDetails.seasonEn} ${seasonDetails.seasonYear}`, `${seasonDetails.seasonJp} ${seasonDetails.seasonYear}`)}</span>
+                <span className="h-px w-8 bg-ink/20" />
+                <span>Fukuoka, JPN · UTC+9</span>
+              </div>
+
+              {/* Layout Engine */}
+              <div className="grid grid-cols-1 landscape:grid-cols-12 lg:grid-cols-12 gap-8 landscape:gap-10 lg:gap-12 items-start">
+                
+                {/* Left Side: Large Title Typography */}
+                <div className="landscape:col-span-7 lg:col-span-7 w-full">
+                  <h1 className="font-serif-display font-extrabold tracking-[-0.02em] text-left">
+                    {t(
+                      <span className="block text-[2.5rem] sm:text-[3.5rem] landscape:text-[2.25rem] md:landscape:text-[2.85rem] lg:text-[3.25rem] lg:landscape:text-[3.0rem] xl:text-[4.0rem] xl:landscape:text-[4.0rem] leading-[1.05] landscape:leading-[1.2] lg:leading-[1.2]">
+                        Helping businesses succeed across <span className="text-accent-brand">English</span> and <span className="text-accent-brand">Japanese</span> markets.
+                      </span>,
+                      <span className="block text-[2.6rem] sm:text-[3.73rem] landscape:text-[2.2rem] md:landscape:text-[3.25rem] lg:text-[3.73rem] lg:landscape:text-[3.73rem] xl:text-[4.59rem] xl:landscape:text-[4.59rem] leading-[1.1]">
+                        海外に伝わる<br />Webサイトを、<br /><span className="text-accent-brand">日本から。</span>
+                      </span>
+                    )}
+                  </h1>
+
+                  {/* CTA Buttons for Mobile Landscape only */}
+                  <div className="hidden landscape:flex lg:hidden flex-wrap items-center gap-4 landscape:gap-2.5 w-full mt-8">
+                    <a
+                      href="#contact"
+                      className="group inline-flex items-center justify-center text-center gap-3 landscape:gap-1.5 bg-ink text-surface px-6 py-4 landscape:px-3.5 landscape:py-3 font-mono text-[11px] landscape:text-[9.5px] lg:landscape:text-[11px] lg:landscape:px-6 lg:landscape:py-4 font-bold uppercase tracking-[0.22em] landscape:tracking-[0.1em] lg:landscape:tracking-[0.22em] hover:bg-accent-brand transition-colors w-full sm:w-auto landscape:w-auto whitespace-nowrap"
+                    >
+                      {t("Start a Project", "プロジェクト相談")}
+                      <span className="text-[22px] landscape:text-[18px] lg:landscape:text-[22px] transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+                    </a>
+                    <a
+                      href="#work"
+                      className="inline-flex items-center justify-center text-center gap-3 landscape:gap-1.5 px-6 py-4 landscape:px-3.5 landscape:py-3 font-mono text-[11px] landscape:text-[9.5px] lg:landscape:text-[11px] lg:landscape:px-6 lg:landscape:py-4 font-bold uppercase tracking-[0.22em] landscape:tracking-[0.1em] lg:landscape:tracking-[0.22em] text-ink hover:text-accent-brand transition-all border-2 border-ink/40 hover:border-accent-brand hover:bg-white/40 shadow-sm w-full sm:w-auto landscape:w-auto whitespace-nowrap"
+                    >
+                      {t("See Selected Work", "制作実績を見る")}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right Side: Paragraph Block and Action Buttons */}
+                <div className="landscape:col-span-5 lg:col-span-5 w-full flex flex-col gap-8 landscape:pt-4 lg:pt-4">
+                  <p className="max-w-[42ch] portrait:text-[15.3px] portrait:leading-[1.42] sm:portrait:text-lg sm:portrait:leading-relaxed text-lg md:landscape:text-base lg:landscape:text-base xl:landscape:text-lg xl:text-lg lg:text-lg text-ink/85 leading-relaxed">
+                    {t(
+                      <>Expanding into international markets requires more than translation.
+I help Japanese businesses communicate effectively with English-speaking audiences through web design, UI design, and localization.<br />
+Based in Japan since 1992, I bring over 30 years of experience working between English and Japanese in software, product development, and digital design.</>,
+                      <>
+                        日本企業の海外発信を支援するWebデザイナー。<br />
+                        英語対応Webサイト、UIデザイン、ローカライズを一貫してサポートしています。<br />
+                        カナダ出身。1992年より日本在住。<br />
+                        30年以上にわたり、日本語と英語の両方に対応したWebサイトやデジタルプロダクトの制作に携わってきました。
+                      </>
+                    )}
+                  </p>
+
+                  <div className="flex landscape:hidden lg:flex flex-wrap landscape:flex-nowrap lg:flex-nowrap items-center gap-4 landscape:gap-2.5 lg:gap-4 w-full">
+                    <a
+                      href="#contact"
+                      className="group inline-flex items-center justify-center text-center gap-3 landscape:gap-1.5 bg-ink text-surface px-6 py-4 landscape:px-3.5 landscape:py-3 font-mono text-[11px] landscape:text-[9.5px] lg:landscape:text-[11px] lg:landscape:px-6 lg:landscape:py-4 font-bold uppercase tracking-[0.22em] landscape:tracking-[0.1em] lg:landscape:tracking-[0.22em] hover:bg-accent-brand transition-colors w-full sm:w-auto landscape:w-auto whitespace-nowrap"
+                    >
+                      {t("Start a Project", "プロジェクト相談")}
+                      <span className="text-[22px] landscape:text-[18px] lg:landscape:text-[22px] transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+                    </a>
+                    <a
+                      href="#work"
+                      className="inline-flex items-center justify-center text-center gap-3 landscape:gap-1.5 px-6 py-4 landscape:px-3.5 landscape:py-3 font-mono text-[11px] landscape:text-[9.5px] lg:landscape:text-[11px] lg:landscape:px-6 lg:landscape:py-4 font-bold uppercase tracking-[0.22em] landscape:tracking-[0.1em] lg:landscape:tracking-[0.22em] text-ink hover:text-accent-brand transition-all border-2 border-ink/40 hover:border-accent-brand hover:bg-white/40 shadow-sm w-full sm:w-auto landscape:w-auto whitespace-nowrap"
+                    >
+                      {t("See Selected Work", "制作実績を見る")}
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Stat strip - Hidden on mobile/tablet */}
+          <motion.div 
+            className="border-y border-ink bg-surface-soft/40 hidden lg:block md:landscape:block relative z-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <dl className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 md:landscape:grid-cols-4 lg:landscape:grid-cols-4 divide-x divide-y lg:divide-y-0 md:landscape:divide-y-0 lg:landscape:divide-y-0 rule">
+            <dl className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-3 divide-x divide-ink">
               {stats.map((s, i) => (
-                <div key={s.label} className={`px-6 py-7 md:landscape:py-5 lg:py-9 lg:landscape:py-9 ${i === 0 ? "border-l-0" : ""}`}>
-                  <dt className="font-serif-display text-4xl md:landscape:text-3xl lg:text-5xl lg:landscape:text-5xl font-semibold tracking-tight leading-none">
+                <div key={s.label} className={`px-6 py-5 md:landscape:py-4 lg:py-7 lg:landscape:py-7 transition-[background-color] duration-300 hover:bg-surface-elevated cursor-pointer ${i === 0 ? "border-l-0" : ""}`}>
+                  <dt className="font-serif-display text-4xl md:landscape:text-3xl lg:text-5xl lg:landscape:text-5xl font-bold tracking-tight leading-none text-ink/85">
                     {s.value}
                   </dt>
-                  <dd className="mt-3 md:landscape:mt-2 lg:landscape:mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+                  <dd className="mt-3 md:landscape:mt-2 lg:landscape:mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink/80 font-semibold">
                     {s.label}
                   </dd>
                 </div>
@@ -263,8 +341,6 @@ const Index = () => {
             </dl>
           </motion.div>
 
-          {/* Kinetic wordmark */}
-          <KineticWordmark />
         </section>
 
         {/* WORK ============================================================ */}
@@ -273,20 +349,20 @@ const Index = () => {
             <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
               <div className="lg:col-span-3">
                 <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                  §01 — {t("Selected Work", "制作事例")}
+                  §01 — {t("Selected Work", "制作実績")}
                 </p>
               </div>
               <div className="lg:col-span-9">
-                <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
+                <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05] text-balance">
                   {t(
-                    <>Three projects, three industries — one approach to <em className="italic text-accent-brand font-medium">bilingual</em> design.</>,
-                    <>3つのプロジェクト、3つの業界。<em className="italic text-accent-brand font-medium">バイリンガル</em>デザインという1つのアプローチ。</>
+                    <>Three projects, three industries — one <em className="italic text-accent-brand font-medium">bilingual</em> design approach.</>,
+                    <>業種は違っても、アプローチは同じです。</>
                   )}
                 </h2>
                 <p className="mt-6 max-w-[60ch] text-ink-muted text-lg leading-relaxed">
                   {t(
-                    "Every project starts by understanding your audience to achieve real business goals. Below are concept case studies showcasing potential designs and results. Click any homepage to open a live demo in a new tab.",
-                    "すべてのプロジェクトは、顧客のニーズを深く理解し、ビジネスの成果を達成することから始まります。以下は、デザイン案と想定される成果を示すコンセプト事例です。クリックすると、別タブでデモ用ホームページが表示されます。"
+                    "Every project begins with understanding your audience and business goals. These concept case studies demonstrate my approach to bilingual design and user experience. Click any homepage to open a live demo in a new tab.",
+                    "まずはターゲットユーザーとビジネス目標を理解することから始めます。\n以下は、バイリンガル対応とユーザー体験を重視したコンセプト事例です。ホームページ画像をクリックするとデモサイトが開きます。"
                   )}
                 </p>
               </div>
@@ -296,53 +372,148 @@ const Index = () => {
           </div>
         </section>
 
-        {/* ABOUT =========================================================== */}
-        <section id="about" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 w-full overflow-x-hidden relative">
-          <motion.div
-            className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-12"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-          >
-            <div className="lg:col-span-3">
-              <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                §02 — {t("About", "プロフィール")}
-              </p>
-              <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05] mb-6">
-                {t("A 30-year route from Victoria to Fukuoka.", "ビクトリアから福岡への30年の道のり。")}
-              </h2>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted">
-                {t("SINCE 1992 · JAPAN", "1992年より · 日本拠点")}
-              </p>
-            </div>
+{/* ABOUT =========================================================== */}
+<section ref={aboutRef} id="about" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 w-full overflow-x-hidden relative">
+  {/* Faint, Japan-inspired background fitting exactly the height and width of the section with parallax */}
+  <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+    <motion.div 
+      style={{ y: aboutY }} 
+      className="absolute inset-0 w-full h-[120%] -top-[10%]"
+    >
+      <img
+        src={aboutBg}
+        alt=""
+        className="w-full h-full object-cover object-center opacity-[0.25] mix-blend-multiply"
+        referrerPolicy="no-referrer"
+      />
+    </motion.div>
+    {/* Vignette fade to blend seamlessly with the textured paper canvas */}
+    <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
+    <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-paper to-transparent" />
+    <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-paper to-transparent" />
+    <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-paper to-transparent" />
+  </div>
 
-            <div className="lg:col-span-6 lg:col-start-5">
-              <p className="drop-cap text-lg leading-[1.7] text-ink/85 mb-6">
-                {t(
-                  "Trained in Canada in print and multimedia, I crossed the Pacific in 1992 and never really went back. Three decades later, I'm still here — designing for Japanese teams who want to reach the world, and for global teams who need to land properly in Japan.",
-                  "カナダでデザインを学び、1992年に来日し、日本を拠点に活動を続けています。30年後の今も、世界を目指す日本のチームや、日本市場への展開を狙うグローバル企業のパートナーとしてデザインを提供しています。"
-                )}
+  <motion.div 
+    className="max-w-[1320px] mx-auto px-6 lg:px-10 grid grid-cols-1 landscape:grid-cols-12 md:landscape:grid-cols-12 lg:grid-cols-12 gap-10 lg:gap-12 items-start relative z-10"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+  >
+    {/* Left Column Container: Houses Title always at top, and Polaroid on Desktop/Landscape layout splits */}
+    <div className="grid-cols-1 landscape:col-span-4 md:landscape:col-span-3 lg:col-span-3 flex flex-col gap-8">
+      <div>
+        <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] landscape:tracking-[0.06em] lg:tracking-[0.22em] text-accent-brand mb-0">
+          §02 — {t("About", "私について")}
+        </p>
+      </div>
+
+      {/* Polaroid Frame: Visible on Desktop OR any Landscape viewport orientation */}
+      <div className="hidden landscape:block lg:block">
+        <motion.div 
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+          style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
+          className="w-full max-w-[310px] relative bg-surface-elevated border rule p-4 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.3)] cursor-pointer"
+        >
+          <div className="flex items-center justify-between font-mono text-[8px] lg:text-[10px] uppercase tracking-widest text-ink-muted mb-3 lg:mb-4">
+            <span>Plate 01</span>
+            <span className="flex items-center gap-1.5 lg:gap-2">
+              <span className="size-1 rounded-full lg:size-1.5 bg-accent-brand animate-pulse-dot" />
+              {t("Accepting Q3", "ご相談受付中")}
+            </span>
+          </div>
+          <PortraitPlate />
+          
+          <div className="mt-4 lg:mt-5 flex items-center justify-between gap-1 pt-3 lg:pt-3.5 border-t rule">
+            <div className="min-w-0 flex-1">
+              <p 
+                className="text-lg lg:text-xl leading-none tracking-tight whitespace-nowrap overflow-visible" 
+                style={{ fontFamily: '"Homemade Apple", cursive', backfaceVisibility: "hidden" }}
+              >
+                Dan Burgess
               </p>
-              <p className="text-ink-muted leading-relaxed mb-6">
-                {t(
-                  "Over the years, my design work has taken many forms — from magazine layouts and shop signs in Canada, to translating games in Nagano, managing documentation and app screens in Tokyo, and now crafting bilingual websites and web design for business founders and growing companies. Throughout it all, my focus remains the same: creating designs that respect and connect both cultures.",
-                  "長年の間に、手がけるデザインの仕事も進化してきました。カナダでの雑誌や看板のデザインから、長野でのゲーム翻訳、東京でのドキュメント作成や画面デザイン、そして現在の起業家や成長企業向けのバイリンガルWebサイト構築まで、多岐にわたります。そのすべての中心にあるのは、双方の文化を尊重し、繋ぐデザインを作るという想いです。"
-                )}
-              </p>
-              <p className="text-ink-muted leading-relaxed">
-                {t(
-                  "I work directly with you, rather than through middle managers or agencies. You get an experienced designer with thirty years of practice, solid technical skills, and a genuine commitment to helping your project succeed.",
-                  "私は代理店や中間会社を通さず、あなたと直接やり取りをします。30年の経験から得た確かなデザインセンス、確かな技術力、そしてプロジェクトを成功へと導く真摯な姿勢で、真剣に向き合います。"
-                )}
+              <p className="font-mono text-[8px] lg:text-[9px] uppercase tracking-widest text-ink-muted mt-1.5 whitespace-nowrap">
+                {t("Designer · Translator", "デザイナー · 翻訳者")}
               </p>
             </div>
-          </motion.div>
-        </section>
+            <p className="font-mono text-sm uppercase tracking-normal text-ink-muted text-right leading-none shrink-0 select-none pl-1 flex items-center gap-0.5">
+              <span>🍁</span><span className="text-[10px] text-ink-muted/60 font-sans">→</span><span>🇯🇵</span>
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+
+    {/* Right Column: Narrative Copy. Takes natural grid order in portrait stacks */}
+    <div className="landscape:col-span-8 landscape:col-start-5 md:landscape:col-span-9 md:landscape:col-start-4 lg:col-span-7 lg:col-start-5 landscape:pt-[54px] lg:pt-[92px] landscape:max-w-[700px] lg:max-w-[700px]">
+      <p className="drop-cap text-lg leading-[1.7] text-ink/85 mb-6">
+        {t(
+          "Originally trained in print and multimedia design in Canada, I moved to Japan in 1992 and have worked here ever since.",
+          "カナダでデザインを学び、1992年に来日しました。"
+        )}
+      </p>
+      <p className="text-ink-muted leading-relaxed mb-6">
+        {t(
+          "My background includes software localization, product documentation, UI design, and web design, including work for major Japanese companies and international projects.",
+          "これまでソフトウェア翻訳、UI設計、技術文書制作、Webデザインなど、幅広い分野で日本語と英語を扱うプロジェクトに携わってきました。"
+        )}
+      </p>
+      <p className="text-ink-muted leading-relaxed mb-6">
+        {t(
+          "Today, I help individuals, small businesses, and organizations bridge the gap between languages, cultures, and markets—creating digital experiences that feel natural in both English and Japanese.",
+          "現在は、個人事業主や中小企業、各種団体の海外向け情報発信を支援し、日本語と英語の両方で自然に伝わるWebサイトやデジタル体験を制作しています。"
+        )}
+      </p>
+      <p className="text-ink-muted leading-relaxed">
+        {t(
+          "You work directly with an experienced designer who understands both the technical and cultural challenges of communicating across English and Japanese. No agencies, account managers, or hand-offs—just clear communication and practical advice from start to finish.",
+          "ご相談から納品まで私が直接対応します。代理店や営業担当を介さないため、スムーズなコミュニケーションと柔軟な対応が可能です。"
+        )}
+      </p>
+    </div>
+
+    {/* Portrait-Only Polaroid Container: Renders explicitly below the text on Mobile & Tablet Portrait viewports */}
+    <div className="block landscape:hidden lg:hidden mt-4 w-full flex justify-center">
+      <motion.div 
+        style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
+        className="w-full max-w-[310px] relative bg-surface-elevated border rule p-4 shadow-[0_20px_50px_-30px_hsl(var(--ink)/0.25)]"
+      >
+        <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-widest text-ink-muted mb-3">
+          <span>Plate 01</span>
+          <span className="flex items-center gap-1.5">
+            <span className="size-1 rounded-full bg-accent-brand animate-pulse-dot" />
+            {t("Accepting Q3", "ご相談受付中")}
+          </span>
+        </div>
+        <PortraitPlate />
+        
+        <div className="mt-4 flex items-center justify-between gap-1 pt-3 border-t rule">
+          <div className="min-w-0 flex-1">
+            <p 
+              className="text-lg leading-none tracking-tight whitespace-nowrap overflow-visible" 
+              style={{ fontFamily: '"Homemade Apple", cursive', backfaceVisibility: "hidden" }}
+            >
+              Dan Burgess
+            </p>
+            <p className="font-mono text-[8px] uppercase tracking-widest text-ink-muted mt-1.5 whitespace-nowrap">
+              {t("Designer · Translator", "デザイナー · 翻訳者")}
+            </p>
+          </div>
+          <p className="font-mono text-sm uppercase tracking-normal text-ink-muted text-right leading-none shrink-0 select-none pl-1 flex items-center gap-0.5">
+            <span>🍁</span><span className="text-[10px] text-ink-muted/60 font-sans">→</span><span>🇯🇵</span>
+          </p>
+        </div>
+      </motion.div>
+    </div>
+
+  </motion.div>
+</section>
 
         {/* SERVICES ======================================================== */}
         <section id="services" className="py-24 lg:py-32 border-t rule w-full overflow-x-hidden relative">
-          <motion.div
+          <motion.div 
             className="max-w-[1320px] mx-auto px-6 lg:px-10"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -356,10 +527,10 @@ const Index = () => {
                 </p>
               </div>
               <div className="lg:col-span-9">
-                <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-balance">
+                <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05] text-balance">
                   {t(
-                    <>What I do, when I'm not <em className="italic text-accent-brand font-medium">drawing manga selfies</em>.</>,
-                    <>プロフェッショナルな<span className="text-accent-brand font-medium">きめ細かなサービス</span>を提供します。</>
+                    <>Designing websites that work naturally in both <span className="text-accent-brand">English</span> and <span className="text-accent-brand">Japanese</span>.</>,
+                    <>デザイン、ローカライズ、デジタル<span className="text-accent-brand">プロダクト支援</span></>
                   )}
                 </h2>
               </div>
@@ -376,85 +547,141 @@ const Index = () => {
                       →
                     </span>
                   </div>
-                  <h3 className="font-serif-display text-2xl lg:text-3xl font-semibold tracking-tight mb-4">
+                  <h3 className="font-serif-display text-2xl lg:text-3xl font-bold tracking-tight mb-4">
                     {s.title}
                   </h3>
-                  <p className="text-ink-muted leading-relaxed mb-6 max-w-[42ch]">{s.body}</p>
-                  <ul className="flex flex-wrap gap-2" aria-label={t("Deliverables", "成果物")}>
-                    {s.deliverables.map((d) => (
-                      <li
-                        key={d}
-                        className="font-mono text-[10px] uppercase tracking-widest border rule px-2.5 py-1 text-ink-muted"
-                      >
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-ink-muted leading-relaxed max-w-[42ch]">{s.body}</p>
                 </article>
               ))}
             </div>
           </motion.div>
         </section>
 
-        {/* PROCESS ========================================================= */}
-        <section id="process" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 w-full overflow-x-hidden relative">
-          <motion.div
-            className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10"
+        {/* PRICING ========================================================= */}
+        <section id="pricing" className="py-24 lg:py-32 border-t rule bg-surface-soft/30 w-full overflow-x-hidden relative">
+          <motion.div 
+            className="max-w-[1320px] mx-auto px-6 lg:px-10 space-y-14 lg:space-y-16"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            <div className="lg:col-span-3">
-              <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                §04 — {t("Process", "プロセス")}
-              </p>
-              <h2 className="font-serif-display text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.05]">
-                {t("Clear steps, no surprises.", "明確なステップで、安心の進行。")}
-              </h2>
-            </div>
-            <ol className="lg:col-span-9 grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-ink/10 border rule">
-              {process.map((p) => (
-                <li key={p.step} className="bg-surface p-6 lg:p-7 hover:bg-surface-elevated transition-colors group">
-                  <div className="flex justify-between items-start mb-3">
-                    <p className="font-mono text-[22px] uppercase tracking-widest text-accent-brand">
-                      {p.step}
+            {/* Top Row: Main Pricing */}
+            <div className="grid lg:grid-cols-12 gap-10 items-stretch">
+              <div className="lg:col-span-3 flex flex-col justify-between">
+                <div>
+                  <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
+                    §04 — {t("Pricing", "制作費の目安")}
+                  </p>
+                  <h2 className="font-serif-display text-4xl lg:text-4xl font-bold tracking-[-0.02em] leading-[1.1] whitespace-pre-line mb-5">
+                    {t(
+                      "Clear pricing.\nNo surprises.",
+                      <span className="text-[1.85rem] sm:text-3xl lg:text-[1.8rem] xl:text-[2rem] leading-tight block font-bold transition-all">
+                        明朗な料金形態、{"\n"}追加費用はありません。
+                      </span>
+                    )}
+                  </h2>
+                  <p className="text-ink-muted text-sm leading-relaxed max-w-[28ch] whitespace-pre-line">
+                    {t(
+                      "Every project is different, but most websites fall into one of the following ranges.\n\nThe final quote depends on scope, content requirements, and bilingual needs.",
+                      "プロジェクトごとに仕様は異なりますが、多くのウェブサイトは右記いずれかの価格帯に収まります。\n\n最終的なお見積もりは制作範囲、コンテンツ要件、日英対応の有無に基づき算出します。"
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="lg:col-span-9 grid sm:grid-cols-3 gap-px bg-ink/10 border rule self-stretch">
+                {pricingCards.map((c) => (
+                  <div 
+                    key={c.no} 
+                    className="flex flex-col h-full bg-surface p-6 lg:p-7 hover:bg-surface-elevated transition-colors duration-300 group relative"
+                  >
+                    {c.isMostPopular && (
+                      <div className="absolute -top-[14px] left-1/2 -translate-x-1/2 z-10">
+                        <span className="inline-block bg-ink text-surface text-[10px] font-mono uppercase tracking-[0.2em] px-4 py-1.5 rounded-full transition-colors duration-300 group-hover:bg-accent-brand whitespace-nowrap">
+                          {t("MOST POPULAR", "一番人気")}
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="flex justify-between items-start mb-4">
+                      <p className="font-mono text-[22px] uppercase tracking-widest text-[#E66244]/80">
+                        {c.no}
+                      </p>
+                    </div>
+                    
+                    <h3 className="font-serif-display text-2xl font-bold mb-4 text-ink">
+                      {c.title}
+                    </h3>
+                    
+                    <p className="text-ink-muted text-sm leading-relaxed mb-6 block min-h-[3.5rem] md:min-h-[4.5rem]">
+                      {c.body}
                     </p>
-                    <span className="font-mono text-[22px] uppercase tracking-widest text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity">
-                      →
-                    </span>
+                    
+                    <ul className="space-y-2.5 mb-8 text-sm text-ink-muted">
+                      {c.features.map((f, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-accent-brand font-bold text-xs mt-0.5" aria-hidden>✓</span>
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="font-mono font-bold text-[15px] lg:text-[16px] text-ink mt-auto pt-6 border-t border-ink/5">
+                      {c.price}
+                    </div>
                   </div>
-                  <h3 className="font-serif-display text-xl font-semibold mb-2">{p.title}</h3>
-                  <p className="text-ink-muted text-sm leading-relaxed">{p.body}</p>
-                </li>
-              ))}
-            </ol>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Row: Optional Support */}
+            <div className="grid lg:grid-cols-12 gap-10 items-stretch pt-6 lg:pt-0">
+              <div className="lg:col-span-3 flex lg:items-center">
+                <h3 className="font-serif-display text-3xl lg:text-3xl font-bold tracking-tight text-ink text-balance leading-none">
+                  {t("Optional support", "オプションサポート")}
+                </h3>
+              </div>
+
+              <div className="lg:col-span-9 grid sm:grid-cols-3 gap-px bg-ink/10 border rule self-stretch">
+                {supportOptions.map((opt) => (
+                  <div key={opt.title} className="bg-surface p-6 lg:p-7 hover:bg-surface-elevated transition-colors duration-300">
+                    <h4 className="font-serif-display text-xl font-bold text-ink mb-1.5">
+                      {opt.title}
+                    </h4>
+                    <p className="font-mono text-xs text-ink-muted">
+                      {opt.price}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </section>
 
         {/* CONTACT ========================================================= */}
         <section id="contact" className="py-24 lg:py-32 border-t rule w-full overflow-x-hidden relative">
-          <motion.div
-            className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16"
+          <motion.div 
+            className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16 items-start"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-4">
               <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-4">
                 §05 — {t("Contact", "お問い合わせ")}
               </p>
-              <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.75rem] font-semibold tracking-[-0.02em] leading-[1.02] text-balance">
+              <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.75rem] font-bold tracking-[-0.02em] leading-[1.02] text-balance">
                 {t(
-                  <>Have a project that needs to land in <em className="italic text-accent-brand font-medium">two languages?</em></>,
-                  <>2つの言語で展開するプロジェクトを<br /><em className="italic text-accent-brand font-medium">お考えですか？</em></>
+                  <>Let's discuss your <em className="italic text-accent-brand font-medium">project</em></>,
+                  <>まずはお気軽にご相談ください</>
                 )}
               </h2>
-              <p className="mt-6 text-ink-muted text-lg leading-relaxed max-w-[44ch]">
+              <p className="mt-6 text-ink-muted text-lg leading-relaxed max-w-[44ch] whitespace-pre-line">
                 {t(
-                  "Send a short brief — goals, audience, timeline. I read every message personally and reply within 1–2 business days (JST).",
-                  "プロジェクトの概要（目標、ターゲット、希望納期）をご記入ください。すべてのメッセージに目を通し、1〜2営業日以内に返信いたします。"
+                  "Whether you're a Japanese company expanding overseas or an international business entering Japan, I'd be happy to discuss your project.",
+                  "プロジェクト概要、ご予算、スケジュールなどをお知らせください。\n内容を確認後、通常1〜2営業日以内にご返信いたします。"
                 )}
               </p>
 
@@ -477,21 +704,21 @@ const Index = () => {
                   <dt className="text-ink-muted w-20">Status</dt>
                   <dd className="text-ink flex items-center gap-2">
                     <span className="size-1.5 rounded-full bg-accent-brand animate-pulse-dot" />
-                    {t("Accepting Q3 Projects", "Q3 プロジェクト受付中")}
+                    {t("Accepting Q3 Projects", "ご相談受付中")}
                   </dd>
                 </div>
               </dl>
             </div>
 
-            <div className="lg:col-span-7 bg-surface-elevated border rule p-7 lg:p-10 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.25)]">
+            <div className="lg:col-span-8 bg-surface-elevated p-7 lg:p-10 shadow-[0_30px_80px_-40px_hsl(var(--ink)/0.25)] lg:mt-[44px]">
               <ContactForm />
             </div>
           </motion.div>
         </section>
 
-        {/* FAQ SECTION (AEO/AIO Direct Answer Layout) ====================== */}
+        {/* FAQ SECTION ===================================================== */}
         <section id="faq" className="py-24 lg:py-32 border-t rule w-full overflow-x-hidden relative bg-surface-soft/25">
-          <motion.div
+          <motion.div 
             className="max-w-[1320px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-12"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -500,15 +727,15 @@ const Index = () => {
           >
             <div className="lg:col-span-4">
               <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                §06 — {t("FAQ & Insights", "よくある質問と方針")}
+                §06 — {t("FAQ & Insights", "よくあるご質問")}
               </p>
-              <h2 className="font-serif-display text-4xl font-semibold tracking-[-0.02em] leading-[1.1]">
-                {t("Direct answers for search engines and strategic minds.", "検索・AIエンジンのための、簡潔で明確な回答方針。")}
+              <h2 className="font-serif-display text-4xl font-bold tracking-[-0.02em] leading-[1.1]">
+                {t("Clear answers about process, tools, and bilingual design.", "制作や英語対応についてよくいただくご質問")}
               </h2>
               <p className="mt-6 text-ink-muted text-sm leading-relaxed max-w-[32ch]">
                 {t(
-                  "In the era of AI-driven search (GEO/AEO), transparency and highly concise answers optimize for featured snippets and LLM citations. Here is how I operate.",
-                  "AIによる要約検索 (GEO/AEO) 時代において、明確で簡潔な直接の回答はWeb上での引用を最適化します。私のアプローチと方針をまとめました。"
+                  "Below are common questions about how I work and how bilingual websites are designed and built.",
+                  "制作の進め方やバイリンガルサイトについて、よくいただくご質問をまとめました。"
                 )}
               </p>
             </div>
@@ -516,117 +743,103 @@ const Index = () => {
             <div className="lg:col-span-8 space-y-12">
               {[
                 {
-                  q: t("How do you handle Japanese and English layout differences?", "日本語と英語のレイアウトの違いにはどのように対応しますか？"),
+                  q: t("How do you handle English and Japanese layout differences?", "英語と日本語でレイアウトは変わりますか？"),
                   a: t(
-                    "English and Japanese have completely different text densities and visual weights. I hand-craft the typography, spacing, and layout rules for each language separately so the site looks equally premium and balanced in both markets. I never rely on automated templates that break when language switches; every headline is adjusted by hand to fit the screen perfectly.",
-                    "日本語と英語では文字の長さやバランスが全く異なります。そのため、言語ごとにフォントの大きさや文字の間隔、レイアウトのルールを個別に調整し、どちらの言語でも同様の美しさと高級感を保ちます。自動翻訳のテンプレートに頼るだけの粗雑な設計はせず、見出しの一行にいたるまで、手動で美しいバランスに微調整しています。"
+                    "English and Japanese have different text densities and visual balance. Typography and spacing are designed separately for each language to maintain a consistent visual experience.",
+                    "はい。文字量や見え方が異なるため、それぞれに合わせて余白やタイポグラフィを調整しています。"
                   )
                 },
                 {
-                  q: t("What technologies do you leverage for bilingual web projects?", "多言語Webプロジェクトではどのような技術を使用しますか？"),
+                  q: t("What tools and technologies do you use?", "どのようなツールを使用していますか？"),
                   a: t(
-                    "I use new design frameworks, and I stay up to date with AI tools, and the latest in WordPress developments. Behind the scenes, the code is kept exceptionally clean, images and graphics are optimized to load instantly, and the site is built to meet Google’s strictest speed and performance standards.",
-                    "新しいデザインフレームワークを活用し、AIツールやWordPressの最新動向についても常に情報をキャッチアップしています。裏側のコードを徹底的にクリーンに保ち、画像やグラフィックが瞬時に読み込まれるよう最適化することで、Googleの厳格な表示速度・性能基準をクリアするサイトを構築します。"
+                    "I use modern design tools, responsive frameworks, and custom code where appropriate. All sites are built with performance, accessibility, and long-term maintenance in mind.",
+                    "Webflow、Framer、カスタムコードなど、プロジェクトに応じて最適な手法を選択しています。"
                   )
                 },
                 {
-                  q: t("How long does a typical bilingual web design project take?", "一般的なバイリンガルWebデザインプロジェクトの制作期間はどのくらいですか？"),
+                  q: t("How long does a typical project take?", "制作期間はどのくらいですか？"),
                   a: t(
-                    "A full-scale bilingual project generally takes 4 to 8 weeks from our initial strategy sessions to final launch. The exact timeline depends on the volume of content, the depth of bilingual copy editing required, and the level of search engine setup needed.",
-                    "最初の戦略ミーティングから最終公開まで、一般的なプロジェクトでは4〜8週間をいただいております。この期間は、掲載するコンテンツの量や複雑さ、日英の翻訳・コピーの監修範囲、および検索エンジン向けの最適化設定の深さによって変動します。"
+                    "Most projects take 4 to 8 weeks from initial planning to launch. Timelines depend on content volume and bilingual requirements.",
+                    "一般的には4〜8週間程度です。内容や規模によって変動します。"
                   )
                 },
                 {
-                  q: t("Are your localized websites optimized for local and global search engines?", "ローカライズされたWebサイトは国内外の検索エンジンに最適化されていますか？"),
+                  q: t("Are bilingual websites optimized for search?", "SEOにも対応していますか？"),
                   a: t(
-                    "Yes. Every site is built with a clean, easy-to-scan structure and the hidden technical formatting that search engines require. This ensures your brand ranks high on Google and Bing, and is easily found and cited by modern AI search tools like Perplexity and ChatGPT.",
-                    "はい。すべてのサイトは、検索エンジンが情報を読み取りやすいクリーンな階層構造と、見えない部分の正しい技術設定（構造化データなど）を徹底して構築します。これにより、GoogleやBingでの上位表示はもちろん、PerplexityやChatGPTといった最新の対話型AIからも正確に引用・参照されやすくなります。"
+                    "Yes. Sites are built with clean structure, technical SEO best practices, and bilingual content considerations to help customers find you online.",
+                    "はい。検索エンジンに配慮した構造と技術的なSEO対策を基本として制作しています。"
                   )
                 }
               ].map((faq, idx) => (
-                <article key={idx} className="border-b rule pb-8 last:border-b-0 last:pb-0">
-                  <h3 className="font-serif-display text-xl sm:text-2xl font-semibold tracking-tight text-ink mb-3">
-                    {faq.q}
-                  </h3>
-                  <p className="text-ink-muted leading-relaxed text-base max-w-[65ch]">
-                    {faq.a}
-                  </p>
-                </article>
+                <div key={idx} className="border-b rule pb-8 last:border-0 last:pb-0">
+                  <h3 className="font-serif-display text-xl font-bold text-ink mb-3">{faq.q}</h3>
+                  <p className="text-ink-muted text-sm leading-relaxed">{faq.a}</p>
+                </div>
               ))}
             </div>
           </motion.div>
         </section>
-
       </main>
 
-      {/* FOOTER ========================================================== */}
-      <footer className="border-t rule">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
-          <div className="flex items-center gap-3">
-            <img
-              src={manga}
-              alt=""
-              className="w-7 h-7 rounded-full bg-white"
-              style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
-              loading="lazy"
-            />
-            <span>© {currentYear} Dan Burgess Design</span>
-          </div>
+      {/* FOOTER SECTION =================================================== */}
+      <footer className="py-12 border-t rule bg-surface-soft/10 text-xs w-full">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <p className="text-ink-muted">
+            &copy; 2026 Dan Burgess Design
+          </p>
           <div className="flex flex-wrap gap-x-4 gap-y-2 -ml-2">
-            <a href="#work" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Work", "制作事例")}</a>
-            <a href="#about" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("About", "プロフィール")}</a>
+            <a href="#work" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Work", "制作実績")}</a>
+            <a href="#about" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("About", "私について")}</a>
             <a href="#services" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Services", "サービス")}</a>
-            <a href="#process" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Process", "プロセス")}</a>
+            <a href="#pricing" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Pricing", "制作費の目安")}</a>
             <a href="#contact" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Contact", "お問い合わせ")}</a>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-ink-muted">{t("MY SOCIALS →", "自分のSNS→")}</span>
-
+            <span className="text-ink-muted">{t("SNS →", "SNS →")}</span>
+            
             {/* Instagram */}
             <div className="relative group">
-              <a
-                href="https://www.instagram.com/canuckinjapan/"
-                target="_blank"
+              <a 
+                href="https://www.instagram.com/canuckinjapan/" 
+                target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center justify-center size-8 transition-transform hover:scale-110"
               >
-                <img
-                  src={instagramLogo}
-                  alt="Instagram"
-                  className="w-full h-full object-contain"
+                <img 
+                  src={instagramLogo} 
+                  alt="Instagram" 
+                  className="w-full h-full object-contain" 
                   style={{ imageRendering: "-webkit-optimize-contrast" }}
                 />
               </a>
-
-              {/* Tooltip Balloon */}
+              
               <div className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-y-1 group-hover:translate-y-0">
                 <div className="relative bg-ink text-surface text-[9px] font-mono uppercase tracking-[0.1em] px-2.5 py-1.5 rounded-sm whitespace-nowrap shadow-2xl">
-                  {t("SOME NATURE PHOTOS", "自作自然の写真")}
+                  {t("SOME NATURE PHOTOS", "風景写真など")}
                   <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45" />
                 </div>
               </div>
             </div>
 
-            {/* Blogspot */}
+            {/* Blogger */}
             <div className="relative group">
-              <a
-                href="https://djb-archviz.blogspot.com"
-                target="_blank"
+              <a 
+                href="https://djb-archviz.blogspot.com" 
+                target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center justify-center size-8 transition-transform hover:scale-110"
               >
-                <img
-                  src={bloggerLogo}
-                  alt="Blogger"
-                  className="w-full h-full object-contain"
+                <img 
+                  src={bloggerLogo} 
+                  alt="Blogger" 
+                  className="w-full h-full object-contain" 
                   style={{ imageRendering: "-webkit-optimize-contrast" }}
                 />
               </a>
-
-              {/* Tooltip Balloon */}
+              
               <div className="absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none translate-y-1 group-hover:translate-y-0">
                 <div className="relative bg-ink text-surface text-[9px] font-mono uppercase tracking-[0.1em] px-2.5 py-1.5 rounded-sm whitespace-nowrap shadow-2xl">
-                  {t("3D CG MADE BY ME", "自作の3DCG作例")}
+                  {t("3D CG MADE BY ME", "3DCG作品")}
                   <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45" />
                 </div>
               </div>

@@ -16,7 +16,7 @@ The "Ver. 2" aesthetic is inspired by high-end editorial layouts—think premium
 ## 🖋️ Typography
 | Role | Family | Weights | Details |
 | :--- | :--- | :--- | :--- |
-| **Display (Serif)** | `Fraunces` | 100-900 | Soft, high-personality headers. Often paired with `tracking-tight`. |
+| **Display (Serif)** | `Playfair Display` | 100-900 | Elegant, classic editorial headers. Often paired with `tracking-tight`. |
 | **Body (Sans)** | `Inter` | 100-900 | High legibility for bilingual content. Handles EN/JP pairing gracefully. |
 | **Monospace** | `JetBrains Mono`| 400-800 | Technical data, tool stacks, and "Plate" identification labels. |
 | **Japanese** | `Noto Sans JP` | 100-900 | Matched with Inter for a unified sans-serif look. |
@@ -25,7 +25,7 @@ The "Ver. 2" aesthetic is inspired by high-end editorial layouts—think premium
 - **Grid Strategy**: 12-column desktop grid with a `max-w-7xl` container.
 - **Borders**: Sharp 0.25rem radius (`--radius`) for cards, combined with `rule` (12% ink) borders.
 - **Paper Texture**: A subtle radial gradient grain is applied via `.bg-paper` for tactile depth.
-- **Drop-cap**: Editorial start for the "About" section using `Fraunces` and `accent-brand` color.
+- **Drop-cap**: Editorial start for the "About" section using `Playfair Display` and `accent-brand` color.
 
 ## 🎞️ Component Patterns
 

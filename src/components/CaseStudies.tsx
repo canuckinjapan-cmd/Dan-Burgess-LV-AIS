@@ -35,20 +35,20 @@ const cases: CaseStudy[] = [
     year: "2025",
     client: "Takasaki Fitness",
     clientJp: "高崎フィットネス",
-    title: "A neighborhood gym website designed to increase membership sign-ups.",
-    titleJp: "集客と入会率を向上させる、地域密着型ジムのWebサイト設計。",
+    title: "A local gym website designed to increase class bookings and memberships.",
+    titleJp: "入会予約を増やすための地域密着型ジムサイト",
     sector: "Fitness · Local Booking - Sample HP",
     sectorJp: "フィットネス・予約システム - サンプルHP",
     summary:
-      "Helping a local gym in Takasaki move beyond social media with a clear, welcoming website. It features an easy bilingual booking system for trial classes, designed to attract local residents and guide them to sign up.",
-    summaryJp: "高崎市のプライベートジムの、SNS発信のみの体制から次のステップへ。地域住民を惹きつけ体験レッスン予約に繋げるための、親しみやすく分かりやすいバイリンガルWebサイトと予約システムを設計しました。",
+      "Helping a neighborhood gym build a stronger online presence with a welcoming bilingual website and a simple class booking system.",
+    summaryJp: "地域のジムがオンラインで新規会員を獲得できるよう、親しみやすいデザインとシンプルな予約システムを備えたWebサイトを制作。",
     role: ["Strategy", "UX/UI", "Front-end", "Bilingual Copy"],
     roleJp: ["戦略策定", "UX/UIデザイン", "フロントエンド実装", "コピーライティング"],
     stack: ["Webflow", "GSAP", "Calendar API", "i18n"],
     outcomes: [
       { value: "+184%*", label: "Est. booking increase", jpLabel: "体験予約数（想定）" },
       { value: "2.3s*", label: "Est. mobile load time", jpLabel: "モバイル読込速度（想定）" },
-      { value: "EN/JP", label: "Bilingual translation", jpLabel: "多言語翻訳対応" },
+      { value: "EN/JP", label: "Bilingual support", jpLabel: "多言語翻訳対応" },
     ],
     image: new URL("../assets/Taka-PCbig-E.jpg", import.meta.url).href,
     jpImage: new URL("../assets/Taka-PCbig-J.jpg", import.meta.url).href,
@@ -66,13 +66,13 @@ const cases: CaseStudy[] = [
     year: "2024",
     client: "Rural Japan Living",
     clientJp: "不動産",
-    title: "Premium property listings, designed for international buyers.",
-    titleJp: "国内外の買い手に向けた、高級不動産プラットフォーム。",
+    title: "Premium property listings designed for overseas buyers.",
+    titleJp: "海外購入者向けに設計した不動産検索サイト",
     sector: "Real Estate · Property DB - Sample HP",
     sectorJp: "不動産・物件データベース - サンプルHP",
     summary:
-      "Converting complex real estate data into a clean, editorial property website. It features an easy-to-use search and a clear layout that helps both Japanese and overseas buyers find homes with ease.",
-    summaryJp: "複雑な物件データを整理し、洗練された不動産情報サイトへと変換。直感的な検索とクリアなレイアウトにより、国内および海外の買い手がスムーズに理想の物件を探せる体験を提供します。",
+      "Turning complex property data into a clean, easy-to-use website that helps both Japanese and international buyers find homes with confidence.",
+    summaryJp: "複雑な不動産情報を整理し、日本国内外の利用者が物件を探しやすい構成にまとめました。",
     role: ["IA", "UX/UI", "Search UX", "Localization"],
     roleJp: ["情報設計", "UX/UIデザイン", "検索体験設計", "ローカライズ"],
     stack: ["Next.js", "Algolia", "Sanity", "Tailwind"],
@@ -96,13 +96,13 @@ const cases: CaseStudy[] = [
     year: "2026",
     client: "JDM RETRO RIDES",
     clientJp: "自動車の輸出",
-    title: "Cross-border auctions, simplified for global buyers.",
-    titleJp: "国境を越えたオークション。世界中のバイヤーに、安心の購入体験を。",
+    title: "Making Japanese vehicle auctions accessible to global buyers.",
+    titleJp: "日本の中古車オークションを海外ユーザーにもっと身近に",
     sector: "Automotive · E-commerce - Sample HP",
     sectorJp: "自動車・ECサイト - サンプルHP",
     summary:
-      "An easy-to-use online shop that connects car lovers worldwide directly to Japanese car auctions. It simplifies shipping, paperwork, and bidding, making the buying process feel simple and secure.",
-    summaryJp: "世界の車愛好家と日本のオークション市場を直接繋ぐ、使いやすいオンラインショップ。配送、手続き、入札などの複雑なフローをシンプルにし、安心・安全な購入体験を実現します。",
+      "A streamlined online shop that simplifies bidding, paperwork, and shipping for customers buying vehicles from Japan.",
+    summaryJp: "入札から輸出手続きまでを分かりやすく整理し、海外からでも安心して利用できる購入体験を実現。",
     role: ["Product Strategy", "UI System", "Checkout UX"],
     roleJp: ["プロダクト戦略", "UIシステム設計", "チェックアウト体験"],
     stack: ["Framer", "Custom Liquid", "i18n"],
@@ -169,7 +169,7 @@ export const CaseStudies = () => {
           <article
             key={c.id}
             ref={c.id === 'taka' ? takaRef : undefined}
-            className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start"
+            className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center"
           >
             {/* Image */}
             <div className={`lg:col-span-7 ${reverse ? "lg:order-2" : ""}`}>
@@ -224,7 +224,7 @@ export const CaseStudies = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}samples/gym01/Profile-half.png`.replace(/\/+/g, '/')}
                               alt="Takasaki Fitness Profile Overlay"
-                              className="h-full mx-auto object-contain block"
+                              className="h-full mr-0 ml-auto object-contain block"
                             />
                           </div>
                         </>
@@ -278,7 +278,7 @@ export const CaseStudies = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}samples/gym01/Profile-half.png`.replace(/\/+/g, '/')}
                               alt="Takasaki Fitness Profile Overlay"
-                              className="h-full mx-auto object-contain block"
+                              className="h-full mr-0 ml-auto object-contain block"
                             />
                           </div>
                         </>
@@ -290,7 +290,7 @@ export const CaseStudies = () => {
             </div>
 
             {/* Copy */}
-            <div className={`lg:col-span-5 ${reverse ? "lg:order-1" : ""} lg:pt-6`}>
+            <div className={`lg:col-span-5 ${reverse ? "lg:order-1" : ""}`}>
               <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted mb-5">
                 <span className="text-accent-brand">{c.index}</span>
                 <span className="h-px w-8 bg-ink/20" />
@@ -307,7 +307,7 @@ export const CaseStudies = () => {
                   rel="noopener noreferrer" 
                   className="block group/text transition-colors duration-300 hover:text-accent-brand"
                 >
-                  <h3 className="font-serif-display text-3xl md:text-4xl font-semibold leading-[1.1] tracking-tight text-balance mb-5">
+                  <h3 className="font-serif-display text-3xl md:text-4xl font-bold leading-[1.1] tracking-tight text-balance mb-5">
                     {t(c.title, c.titleJp)}
                   </h3>
                   <p className="text-ink-muted leading-relaxed mb-8 max-w-[52ch] group-hover/text:text-accent-brand transition-colors duration-300">
@@ -316,7 +316,7 @@ export const CaseStudies = () => {
                 </a>
               ) : (
                 <>
-                  <h3 className="font-serif-display text-3xl md:text-4xl font-semibold leading-[1.1] tracking-tight text-balance mb-5">
+                  <h3 className="font-serif-display text-3xl md:text-4xl font-bold leading-[1.1] tracking-tight text-balance mb-5">
                     {t(c.title, c.titleJp)}
                   </h3>
                   <p className="text-ink-muted leading-relaxed mb-8 max-w-[52ch]">
@@ -331,27 +331,15 @@ export const CaseStudies = () => {
                     <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-muted mb-1">
                       {t(o.label, o.jpLabel)}
                     </dt>
-                    <dd className="font-serif-display text-2xl font-semibold tracking-tight">
+                    <dd className="font-serif-display text-2xl font-bold tracking-tight">
                       {o.value}
                     </dd>
                   </div>
                 ))}
               </dl>
-              
               <p className="text-[10px] font-mono text-ink-muted/70 italic mt-2 mb-6 border-b rule pb-5">
                 * {t("Potential results based on website optimization and redesign.", "ウェブサイト最適化およびリニューアルによる想定の成果")}
               </p>
-
-              <div className="text-[13px]">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-ink-muted mb-2">{t("Stack", "技術スタック")}</p>
-                <ul className="flex flex-wrap gap-2">
-                  {c.stack.map((s) => (
-                    <li key={s} className="font-mono text-[11px] uppercase tracking-widest border rule px-2 py-0.5 text-ink-muted">
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </article>
         );
