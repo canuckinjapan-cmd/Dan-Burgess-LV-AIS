@@ -11,11 +11,15 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState<Language>("EN");
+  const [lang, setLang] = useState<Language>(() => {
+    const saved = localStorage.getItem("site-lang");
+    return saved === "EN" || saved === "JP" ? saved : "EN";
+  });
 
-  // Sync with html lang attribute
+  // Sync with html lang attribute and localStorage for samples
   useEffect(() => {
     document.documentElement.lang = lang.toLowerCase();
+    localStorage.setItem("site-lang", lang);
   }, [lang]);
 
   const t = <T,>(en: T, jp: T): T => (lang === "EN" ? en : jp);

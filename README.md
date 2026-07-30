@@ -18,7 +18,7 @@ This project is a React-based single-page application (SPA) showcasing 30 years 
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Motion**: [Framer Motion](https://www.framer.com/motion/) (via `motion/react`)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Typography**: [Fraunces](https://fonts.google.com/specimen/Fraunces), [Inter](https://fonts.google.com/specimen/Inter), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono)
+- **Typography**: [Playfair Display](https://fonts.google.com/specimen/Playfair+Display), [Inter](https://fonts.google.com/specimen/Inter), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono)
 - **Deployment**: [www.danburgess.com](https://www.danburgess.com/)
 
 ## ✨ Key Features

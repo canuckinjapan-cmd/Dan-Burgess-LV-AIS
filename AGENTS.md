@@ -15,7 +15,7 @@ This document provides technical guidelines and implementation patterns for AI a
 ## 🎨 Implementation Patterns
 
 ### Typography & Icons
-- **Headings**: Always use `font-serif-display` (Fraunces).
+- **Headings**: Always use `font-serif-display` (Playfair Display).
 - **Body**: Use `text-ink-muted` for secondary descriptions to maintain contrast ratios.
 - **Icons**: Exclusively use `lucide-react`. Do not import SVGs directly unless requested.
 

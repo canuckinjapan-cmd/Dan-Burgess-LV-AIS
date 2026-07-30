@@ -108,7 +108,7 @@ const NotFound = () => {
           <h1 className="font-serif-display text-8xl lg:text-9xl font-bold text-accent-brand mb-4 drop-shadow-lg">404</h1>
           
           <div className="space-y-4 mb-8">
-            <h2 className="text-2xl lg:text-3xl font-serif-display font-semibold text-white">
+            <h2 className="text-2xl lg:text-3xl font-serif-display font-bold text-white">
               {t("Page Not Found", "ページが見つかりません")}
             </h2>
             <p className="text-white/60 font-mono text-sm uppercase tracking-widest animate-pulse">
@@ -140,9 +140,9 @@ const NotFound = () => {
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <Link to="/#work" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Work", "制作事例")}</Link>
-            <Link to="/#about" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("About", "プロフィール")}</Link>
+            <Link to="/#about" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("About", "私について")}</Link>
             <Link to="/#services" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Services", "サービス")}</Link>
-            <Link to="/#process" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Process", "プロセス")}</Link>
+            <Link to="/#pricing" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Pricing", "制作費の目安")}</Link>
             <Link to="/#contact" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Contact", "お問い合わせ")}</Link>
           </div>
           <div className="flex items-center gap-4">

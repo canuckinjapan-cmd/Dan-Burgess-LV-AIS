@@ -16,7 +16,7 @@ The "Ver. 2" aesthetic is inspired by high-end editorial layouts—think premium
 ## 🖋️ Typography
 | Role | Family | Weights | Details |
 | :--- | :--- | :--- | :--- |
-| **Display (Serif)** | `Fraunces` | 100-900 | Soft, high-personality headers. Often paired with `tracking-tight`. |
+| **Display (Serif)** | `Playfair Display` | 100-900 | Elegant, classic editorial headers. Often paired with `tracking-tight`. |
 | **Body (Sans)** | `Inter` | 100-900 | High legibility for bilingual content. Handles EN/JP pairing gracefully. |
 | **Monospace** | `JetBrains Mono`| 400-800 | Technical data, tool stacks, and "Plate" identification labels. |
 | **Japanese** | `Noto Sans JP` | 100-900 | Matched with Inter for a unified sans-serif look. |
@@ -25,7 +25,7 @@ The "Ver. 2" aesthetic is inspired by high-end editorial layouts—think premium
 - **Grid Strategy**: 12-column desktop grid with a `max-w-7xl` container.
 - **Borders**: Sharp 0.25rem radius (`--radius`) for cards, combined with `rule` (12% ink) borders.
 - **Paper Texture**: A subtle radial gradient grain is applied via `.bg-paper` for tactile depth.
-- **Drop-cap**: Editorial start for the "About" section using `Fraunces` and `accent-brand` color.
+- **Drop-cap**: Editorial start for the "About" section using `Playfair Display` and `accent-brand` color.
 
 ## 🎞️ Component Patterns
 
@@ -45,3 +45,14 @@ The "Ver. 2" aesthetic is inspired by high-end editorial layouts—think premium
 - **Ease**: Prefer `cubic-bezier(0.16, 1, 0.3, 1)` for entrances (the "fade-up" effect).
 - **Subtlety**: Animations should feel authoritative and smooth, never "bouncy" or distracting.
 - **Responsive**: Complex hover effects are maintained through the `motion` library's `whileHover` prop.
+
+## 🎨 Block Illustrations (Section Graphics)
+To enrich sections visually, pristine inline vector SVGs are dynamically rendered under headers/descriptions in the left-hand column (with the exception of §02 — About):
+- **Aesthetic**: Minimalist hand-drawn manga/sketched brush stroke style with clean, organic shapes, solid white inner boundaries, and a single solid accent of bright orange (`#FF6A1F`).
+- **Styling Specs**: Sized precisely at `w-40 md:w-48` and marked as `pointer-events-none` to remain elegant, crispy high-resolution landmarks. Fully transparent backgrounds outside outline boundaries.
+- **Component Mapping (/src/components/SectionIllustrations.tsx)**:
+  - **§01 Selected Work**: `SelectedWorkIllustration` — Sketch-style browser wireframe mockup with custom click arrow and orange CTA action.
+  - **§03 Services**: `BilingualServicesIllustration` — Intersecting handwritten dialogue balloons showing bilingual mastery ("ABC" in English serif, "あいう" in Japanese Mincho serif with orange accent).
+  - **§04 Pricing**: `PricingIllustration` — Traditional Japanese wooden soroban (abacus) with select highlighted orange beads.
+  - **§05 Contact**: `ContactIllustration` — Stylized folded origami paper crane carrying an international letter with orange postmark stamp.
+  - **§06 FAQ**: `FAQIllustration` — Integrated custom portrait line-drawing from `danface_only-2025.svg` paired with an elegant floating vector thought bubble enclosing a bold orange question mark (`?`).

@@ -8,13 +8,13 @@ import bloggerLogo from "@/assets/Blogger-Logo.png";
 
 const navItems = [
   { label: "Work", jpLabel: "制作事例", href: "#work" },
-  { label: "About", jpLabel: "プロフィール", href: "#about" },
+  { label: "About", jpLabel: "私について", href: "#about" },
   { label: "Services", jpLabel: "サービス", href: "#services" },
-  { label: "Process", jpLabel: "プロセス", href: "#process" },
+  { label: "Pricing", jpLabel: "制作費の目安", href: "#pricing" },
   { label: "Contact", jpLabel: "お問い合わせ", href: "#contact" },
 ];
 
-export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => {
+export const TopBar = () => {
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -98,12 +98,12 @@ export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => 
             <img
               src={manga}
               alt=""
-              className="relative w-9 h-9 rounded-full bg-white object-cover"
+              className="relative w-11 h-11 rounded-full bg-white object-cover"
               style={{ imageRendering: "-webkit-optimize-contrast", transform: "translateZ(0)" }}
               loading="eager"
             />
           </span>
-          <span className="font-serif-display font-semibold tracking-tight text-[18px] sm:text-xl">
+          <span className="font-serif-display font-extrabold tracking-tight text-[22px] sm:text-2xl">
             <span className="text-black">DAN</span>
             <span className="text-accent-brand">BURGESS</span>
             <span className="text-black">DESIGN</span>
@@ -123,65 +123,59 @@ export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => 
           </div>
         </a>
 
-        {/* Desktop Center: Nav */}
-        {!isComingSoon && (
-          <nav className="hidden lg:flex lg:portrait:hidden items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] absolute left-1/2 -translate-x-1/2">
-            {navItems.map((n) => (
-              <a key={n.label} href={n.href} className="px-2 py-1 text-ink-muted hover:text-white hover:bg-accent-brand rounded-sm transition-all">
-                {t(n.label, n.jpLabel)}
-              </a>
-            ))}
-          </nav>
-        )}
+        {/* Desktop/Tablet Landscape Center: Nav */}
+        <nav className="hidden md:landscape:flex lg:portrait:hidden flex-1 items-center justify-center gap-6 xl:gap-8 font-mono text-[10px] lg:text-[11px] uppercase tracking-[0.14em] lg:tracking-[0.18em]">
+          {navItems.map((n) => (
+            <a key={n.label} href={n.href} className="px-1.5 py-1 text-ink-muted hover:text-white hover:bg-accent-brand rounded-sm transition-all whitespace-nowrap">
+              {t(n.label, n.jpLabel)}
+            </a>
+          ))}
+        </nav>
 
         {/* Right Side Tools */}
-        <div className="flex items-center gap-1 md:gap-1.5">
+        <div className="flex items-center gap-1 md:gap-1.5 shrink-0">
           {/* Lang Switcher - Visible right for mobile/tablet, and within desktop tools */}
           <LangSwitcher className="flex ml-1.5 sm:ml-6 md:ml-8 lg:ml-10" />
           
-          {/* Desktop Only Tools */}
-          {!isComingSoon && (
-            <div className="hidden lg:flex lg:portrait:hidden items-center ml-3">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 bg-ink text-surface px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-accent-brand transition-colors"
-              >
-                {t("Start a Project", "プロジェクトを開始する")} <span aria-hidden>→</span>
-              </a>
-            </div>
-          )}
+          {/* Desktop/Tablet Landscape Tools */}
+          <div className="hidden xl:flex items-center ml-2.5 lg:ml-3">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 bg-ink text-surface px-3 py-1.5 landscape:px-3 landscape:py-1.5 lg:px-4 lg:py-2 font-mono text-[10px] lg:text-[11px] uppercase tracking-widest hover:bg-accent-brand transition-colors"
+            >
+              {t("Start a Project", "プロジェクト相談")} <span aria-hidden>→</span>
+            </a>
+          </div>
 
-          {/* Mobile Right: Hamburger (Visible on lg:hidden) */}
-          {!isComingSoon && (
-            <div className="relative lg:hidden lg:portrait:flex mr-1 sm:mr-3 h-10 flex items-center">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
-                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+          {/* Mobile Right: Hamburger (Visible on lg:hidden, hidden on tablet/desktop landscape) */}
+          <div className="relative md:landscape:hidden lg:hidden lg:portrait:flex mr-1 sm:mr-3 h-10 flex items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-ink hover:text-accent-brand transition-colors flex items-center justify-center relative z-10"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
 
-              {/* Bottom-reached Navigation Menu Overlay */}
-              <AnimatePresence>
-                {isAtBottom && !isMenuOpen && (
-                  <motion.div
-                    key="nav-menu-overlay"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.2 }}
-                    onClick={() => setIsMenuOpen(true)}
-                    className="absolute right-0 top-[calc(100%+8px)] bg-surface text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
-                  >
-                    {t("Navigation Menu", "ナビメニュー")}
-                    {/* Hollow/Open border-matching triangle at the top pointing up */}
-                    <div className="absolute -top-1 right-4 w-2 h-2 bg-surface border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
+            {/* Bottom-reached Navigation Menu Overlay */}
+            <AnimatePresence>
+              {isAtBottom && !isMenuOpen && (
+                <motion.div
+                  key="nav-menu-overlay"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => setIsMenuOpen(true)}
+                  className="absolute right-0 top-[calc(100%+8px)] bg-surface text-ink border border-ink shadow-2xl rounded-sm py-1.5 px-3 font-mono text-[9px] uppercase tracking-[0.12em] whitespace-nowrap z-30 cursor-pointer hover:bg-accent-brand hover:text-white hover:border-accent-brand transition-all flex items-center group"
+                >
+                  {t("Navigation Menu", "ナビメニュー")}
+                  {/* Hollow/Open border-matching triangle at the top pointing up */}
+                  <div className="absolute -top-1 right-4 w-2 h-2 bg-surface border-t border-l border-ink rotate-45 group-hover:bg-accent-brand group-hover:border-accent-brand transition-all" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 
@@ -193,10 +187,10 @@ export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-0 top-16 z-40 bg-surface lg:hidden lg:portrait:block border-t rule shadow-2xl"
+            className="fixed inset-0 top-16 z-40 bg-surface md:landscape:hidden lg:hidden lg:portrait:block border-t rule shadow-2xl overflow-y-auto"
           >
             <div className="bg-paper absolute inset-0 -z-10" /> {/* Solid texture background */}
-            <nav className="flex flex-col p-8 gap-8">
+            <nav className="flex flex-col p-8 gap-8 landscape:p-6 landscape:gap-3">
               {navItems.map((n, i) => (
                 <motion.a
                   key={n.label}
@@ -205,27 +199,13 @@ export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 + 0.1 }}
-                  className="font-serif-display text-4xl font-semibold tracking-tight text-ink hover:text-accent-brand transition-colors"
+                  className="font-serif-display text-4xl landscape:text-lg font-bold tracking-tight text-ink hover:text-accent-brand transition-colors"
                 >
                   {t(n.label, n.jpLabel)}
                 </motion.a>
               ))}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="mt-8 pt-8 border-t rule"
-              >
-                <a
-                  href="#contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex items-center justify-between w-full bg-ink text-surface px-6 py-5 font-mono text-[12px] uppercase tracking-[0.25em] hover:bg-accent-brand transition-colors"
-                >
-                  {t("Start a Project", "プロジェクトを開始する")} <span>→</span>
-                </a>
-              </motion.div>
             </nav>
-            <div className="absolute bottom-10 left-8 right-8 flex justify-between items-center font-mono text-[10px] uppercase tracking-widest text-ink-muted">
+            <div className="absolute bottom-10 landscape:bottom-3 left-8 right-8 landscape:left-6 landscape:right-6 flex justify-between items-center font-mono text-[10px] uppercase tracking-widest text-ink-muted">
               <div className="flex items-center gap-4">
                 <a 
                   href="https://www.instagram.com/canuckinjapan/" 
@@ -254,7 +234,7 @@ export const TopBar = ({ isComingSoon = false }: { isComingSoon?: boolean }) => 
                   />
                 </a>
               </div>
-              <span>© {new Date().getFullYear()} Burgess</span>
+              <span>© {new Date().getFullYear()} Dan Burgess Design</span>
             </div>
           </motion.div>
         )}
