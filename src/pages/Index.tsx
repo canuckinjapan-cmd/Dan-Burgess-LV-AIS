@@ -416,14 +416,14 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
             <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
               <div className="lg:col-span-3 group cursor-pointer">
                 <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                  §01 — {t("Selected Work", "制作実績")}
+                  §01 - {t("Selected Work", "制作実績")}
                 </p>
                 <SelectedWorkIllustration className="w-40 md:w-48 h-auto mt-4 select-none pointer-events-none transition-all duration-300 ease-out filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:drop-shadow-[0_8px_20px_rgba(26,26,26,0.15)] group-hover:scale-[1.04]" />
               </div>
               <div className="lg:col-span-9">
                 <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] leading-[1.05] text-balance">
                   {t(
-                    <>Three projects, three industries — one <em className="italic text-accent-brand font-medium">bilingual</em> design approach.</>,
+                    <>Three projects, three industries - one <em className="italic text-accent-brand font-medium">bilingual</em> design approach.</>,
                     <>業種は違っても、アプローチは同じです。</>
                   )}
                 </h2>
@@ -473,7 +473,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
     <div className="grid-cols-1 landscape:col-span-4 md:landscape:col-span-3 lg:col-span-3 flex flex-col gap-8">
       <div>
         <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] landscape:tracking-[0.06em] lg:tracking-[0.22em] text-accent-brand mb-0">
-          §02 — {t("About", "私について")}
+          §02 - {t("About", "私について")}
         </p>
       </div>
 
@@ -591,7 +591,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
             <header className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-20">
               <div className="lg:col-span-3 group cursor-pointer">
                 <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                  §03 — {t("Services", "サービス")}
+                  §03 - {t("Services", "サービス")}
                 </p>
                 <BilingualServicesIllustration className="w-40 md:w-48 h-auto mt-4 select-none pointer-events-none transition-all duration-300 ease-out filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:drop-shadow-[0_8px_20px_rgba(26,26,26,0.15)] group-hover:scale-[1.04]" />
               </div>
@@ -645,7 +645,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-3 group cursor-pointer">
                 <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                  §04 — {t("Pricing & Support", "制作費・サポート")}
+                  §04 - {t("Pricing & Support", "制作費・サポート")}
                 </p>
                 <PricingIllustration className="w-40 md:w-48 h-auto mt-4 select-none pointer-events-none transition-all duration-300 ease-out filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:drop-shadow-[0_8px_20px_rgba(26,26,26,0.15)] group-hover:scale-[1.04]" />
               </div>
@@ -883,7 +883,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
           >
             <div className="lg:col-span-4 group cursor-pointer">
               <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-4">
-                §05 — {t("Contact", "お問い合わせ")}
+                §05 - {t("Contact", "お問い合わせ")}
               </p>
               <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.75rem] font-bold tracking-[-0.02em] leading-[1.02] text-balance">
                 {t(
@@ -942,7 +942,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
           >
             <div className="lg:col-span-4 group cursor-pointer">
               <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                §06 — {t("FAQ & Insights", "よくあるご質問")}
+                §06 - {t("FAQ & Insights", "よくあるご質問")}
               </p>
               <h2 className="font-serif-display text-4xl font-bold tracking-[-0.02em] leading-[1.1]">
                 {t("Clear answers about bilingual websites, localization, and project planning.", "日英Webサイト制作とローカライズに関するよくあるご質問")}
@@ -992,10 +992,10 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                   )
                 },
                 {
-                  q: t("What is the difference between a \"Bilingual Website\" and \"Localization / Translation\"?", "「日・英ウェブサイト」と「ローカライズ／翻訳」の違いは何ですか？"),
+                  q: t("What is the difference between a \"Bilingual Website\" and \"Localization & Bilingual UX\"?", "「バイリンガルWebサイト制作」と「ローカライズ & バイリンガルUX」の違いは何ですか？"),
                   a: t(
-                    "A \"Bilingual Website\" project covers designing and building a completely new website (or a full redesign) from scratch that works seamlessly in both English and Japanese. \"Localization & Translation\" is when you already have an active website or app and want to refine, adapt, and culturally optimize its existing English UI copy and marketing text without changing the entire design.",
-                    "「日・英ウェブサイト」は、ゼロから（または全面リニューアルで）英語・日本語の両方に対応したWebサイトのデザイン・システムを新規に構築するプロジェクトです。一方、「ローカライズ／翻訳」は、すでにお持ちのWebサイトやアプリのUI、コピーなどのテキストを、デザイン自体は大きく変えずに、英語圏のユーザーへ自然に伝わるよう文化的文脈をふまえてローカライズ・翻訳のみを行うプロジェクトを指します。"
+                    "A \"Bilingual Website\" project covers designing and building a new website (or a full redesign) from scratch that works seamlessly in both English and Japanese. \"Localization & Bilingual UX\" focuses on refining, adapting, and culturally optimizing your existing website or app content and UI without requiring a complete rebuild.",
+                    "「バイリンガルWebサイト制作」は、ゼロから（または全面リニューアルで）英語・日本語の両方に対応したWebサイトのデザイン・システムを構築するプロジェクトです。一方、「ローカライズ & バイリンガルUX」は、すでにお持ちのWebサイトやアプリのUI・コンテンツを、一から作り直すことなく、海外および国内ユーザーへ自然に伝わるよう文化的文脈をふまえて最適化するサービスです。"
                   )
                 },
                 {
@@ -1008,8 +1008,8 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                 {
                   q: t("Can you help with English content and translation?", "英語コンテンツや翻訳のサポートはありますか？"),
                   a: t(
-                    "Yes. Depending on the project, I can assist with translation, English copy editing, localization, and adapting content for international audiences. For larger projects, professional translation resources can also be incorporated where appropriate.",
-                    "はい。翻訳サポート、英語表現の調整、ローカライズなど、プロジェクトに応じて対応可能です。必要に応じて専門翻訳サービスとの連携もご提案します。"
+                    "Yes. I write content and handle all translations personally, from crafting fresh English copywriting to translating existing materials. Because I handle every step directly rather than outsourcing, your message maintains a consistent tone, clear phrasing, and natural appeal for international audiences.",
+                    "はい。コンテンツの執筆から翻訳、英語コピーライティング、ローカライズまで、外部委託せずに私自身が直接行います。企画から言葉の表現まで一貫して手がけることで、ブレのない自然で洗練された日英コミュニケーションを実現します。"
                   )
                 },
                 {
@@ -1029,8 +1029,8 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                 {
                   q: t("What is included in the support plans?", "保守プランには何が含まれますか？"),
                   a: t(
-                    "Self Managed is ideal if you prefer to handle updates yourself. Basic Care covers routine maintenance, backups, and monitoring. Managed Support adds priority assistance, content updates, localization advice, and ongoing website improvement support.",
-                    "自主運用はご自身で更新や管理を行う方向けです。ベーシック保守では定期更新やバックアップ、監視対応を行います。マネージドサポートでは優先対応やコンテンツ更新支援、ローカライズ相談など継続的なサポートをご提供します。"
+                    "Essential Care covers routine maintenance, plugin updates, security monitoring, and backups. Business Care adds priority support, performance monitoring, monthly SEO reviews, content updates, and technical consultation. Flexible Support is available on an hourly basis with no monthly commitment for occasional updates, troubleshooting, and advice.",
+                    "エッセンシャル保守は、定期的なメンテナンス、プラグイン更新、セキュリティ監視、自動バックアップに対応します。ビジネス保守では、優先サポート、パフォーマンス監視、月次SEOレポート、コンテンツ更新、技術・改善相談が加わります。また、月額固定契約なしで必要な時だけ利用できるスポット対応（時間給サポート）もご用意しています。"
                   )
                 }
               ].map((faq, idx) => {

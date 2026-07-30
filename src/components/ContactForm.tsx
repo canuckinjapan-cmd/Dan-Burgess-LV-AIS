@@ -75,7 +75,7 @@ export const ContactForm = () => {
       setSubmitting(false);
       toast({
         title: t("Message sent", "メッセージを送信しました"),
-        description: t("Thanks — Dan will reply within 1–2 business days (JST).", "ありがとうございます。1〜2営業日以内に返信いたします。"),
+        description: t("Thanks! Dan will reply within 1–2 business days (JST).", "ありがとうございます。1〜2営業日以内に返信いたします。"),
       });
       setForm({
         name: "",
