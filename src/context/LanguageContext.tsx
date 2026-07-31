@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import React, { createContext, useContext, ReactNode, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Language = "EN" | "JP";
 
@@ -11,16 +12,30 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState<Language>(() => {
-    const saved = localStorage.getItem("site-lang");
-    return saved === "EN" || saved === "JP" ? saved : "EN";
-  });
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Sync with html lang attribute and localStorage for samples
+  const isEnPath = location.pathname.startsWith("/en");
+  const lang: Language = isEnPath ? "EN" : "JP";
+
   useEffect(() => {
-    document.documentElement.lang = lang.toLowerCase();
+    const langCode = lang === "JP" ? "ja" : "en";
+    document.documentElement.lang = langCode;
+    localStorage.setItem("user_lang_preference", langCode);
     localStorage.setItem("site-lang", lang);
   }, [lang]);
+
+  const setLang = (newLang: Language) => {
+    const targetCode = newLang === "JP" ? "ja" : "en";
+    localStorage.setItem("user_lang_preference", targetCode);
+    localStorage.setItem("site-lang", newLang);
+
+    if (newLang === "EN" && !isEnPath) {
+      navigate("/en/", { replace: false });
+    } else if (newLang === "JP" && isEnPath) {
+      navigate("/", { replace: false });
+    }
+  };
 
   const t = <T,>(en: T, jp: T): T => (lang === "EN" ? en : jp);
 

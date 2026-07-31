@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -54,20 +55,22 @@ export const TopBar = () => {
 
   const LangSwitcher = ({ className = "" }: { className?: string }) => (
     <div className={`flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest border rule rounded-sm px-1 py-0.5 ${className}`}>
-      <button
+      <Link
+        to="/en/"
         onClick={() => setLang("EN")}
-        className={`px-1.5 py-0.5 transition-colors ${lang === "EN" ? "bg-accent-brand text-surface" : "text-ink-muted"}`}
-        aria-pressed={lang === "EN"}
+        className={`px-1.5 py-0.5 transition-colors ${lang === "EN" ? "bg-accent-brand text-surface font-semibold" : "text-ink-muted hover:text-ink"}`}
+        aria-label="Switch to English"
       >
         EN
-      </button>
-      <button
+      </Link>
+      <Link
+        to="/"
         onClick={() => setLang("JP")}
-        className={`px-1.5 py-0.5 transition-colors ${lang === "JP" ? "bg-accent-brand text-surface" : "text-ink-muted"}`}
-        aria-pressed={lang === "JP"}
+        className={`px-1.5 py-0.5 transition-colors ${lang === "JP" ? "bg-accent-brand text-surface font-semibold" : "text-ink-muted hover:text-ink"}`}
+        aria-label="日本語へ切り替え"
       >
         JP
-      </button>
+      </Link>
     </div>
   );
 
