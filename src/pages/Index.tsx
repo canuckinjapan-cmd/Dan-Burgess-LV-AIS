@@ -123,7 +123,7 @@ const Index = () => {
     {
       no: "01",
       title: t("Small Business Website", "スモールビジネス Webサイト"),
-      note: t("Ideal for small businesses, professionals and local services.", "個人事業主、プロフェッショナル、ローカルサービスに最適。"),
+      note: t("Ideal for small businesses, professionals and local services.", "個人事業、店舗、フリーランス向け。必要な情報を整理し、信頼感のあるWebサイトをシンプルに構築します。"),
       price: "¥150,000 – ¥300,000",
       features: [
         t("1–5 pages", "1〜5ページ"),
@@ -134,16 +134,12 @@ const Index = () => {
         t("Social media links", "SNS連携"),
         t("Launch assistance", "公開サポート"),
       ],
-      smallNote: t(
-        "Ideal for businesses establishing or refreshing their online presence.",
-        "Web上の信頼感をシンプルに構築・刷新したい企業向け。"
-      ),
-      isRecommended: false,
+            isRecommended: false,
     },
     {
       no: "02",
       title: t("Business Website", "ビジネス Webサイト"),
-      note: t("Suitable for growing companies wanting a stronger online presence.", "認知拡大と信頼性向上を目指す成長企業に最適。"),
+      note: t("Suitable for growing companies wanting a stronger online presence.", "成長中の企業やサービス事業向け。情報設計、SEOを意識した構成、日英対応も視野に入れた中規模サイトに適しています。"),
       price: "¥300,000 – ¥600,000",
       features: [
         t("5–10 pages", "5〜10ページ"),
@@ -154,16 +150,12 @@ const Index = () => {
         t("Analytics setup", "アクセス解析導入"),
         t("English/Japanese bilingual UX & localization", "英語・日本語バイリンガルのUXおよびローカライズ"),
       ],
-      smallNote: t(
-        "Suitable for growing companies wanting a stronger online presence.",
-        "ブランド力と情報発信力を強化したい成長企業向け。"
-      ),
-      isRecommended: true,
+            isRecommended: true,
     },
     {
       no: "03",
       title: t("Corporate & Global Websites", "企業およびグローバルウェブサイト"),
-      note: t("Every project is quoted individually based on requirements.", "要件や規模に応じて個別に最適なプランをご提案します。"),
+      note: t("Every project is quoted individually based on requirements.", "多言語展開や独自要件のある企業向け。戦略設計から実装、ローカライズまで含めたカスタム案件に対応します。"),
       price: t("From ¥600,000+", "¥600,000〜"),
       features: [
         t("Larger corporate websites", "大規模コーポレートサイト"),
@@ -174,11 +166,7 @@ const Index = () => {
         t("Custom functionality", "カスタム機能実装"),
         t("Long-term development", "長期的な制作・開発支援"),
       ],
-      smallNote: t(
-        "Every project is quoted individually based on requirements.",
-        "要件に応じて個別にお見積もりいたします。"
-      ),
-      isRecommended: false,
+            isRecommended: false,
     },
   ];
 
@@ -195,8 +183,8 @@ const Index = () => {
       title: t("Essential Care", "エッセンシャル保守"),
       price: t("From ¥10,000 / month", "¥10,000〜 / 月"),
       desc: t(
-        "Perfect for businesses needing occasional updates.",
-        "定期的な更新やセキュリティ管理を行いたい方向け。"
+        "For basic post-launch maintenance. Includes routine maintenance, plugin updates, backups, and security checks.",
+        "公開後の基本的な維持管理向けです。定期メンテナンス、プラグイン更新、バックアップ、セキュリティ確認に対応します。"
       ),
       isRecommended: false,
       badgeText: null,
@@ -212,8 +200,8 @@ const Index = () => {
       title: t("Business Care", "ビジネス保守"),
       price: t("From ¥30,000 / month", "¥30,000〜 / 月"),
       desc: t(
-        "Comprehensive management for active business websites.",
-        "継続的な改善と安心のサポートを求める企業向け。"
+        "For businesses that need ongoing updates and more active support. Includes priority response, content updates, site monitoring, and improvement advice.",
+        "継続的な運用と改善を重視する方向けです。優先対応、コンテンツ更新、状態確認、改善相談などを含みます。"
       ),
       isRecommended: true,
       badgeText: t("RECOMMENDED", "おすすめ"),
@@ -230,8 +218,8 @@ const Index = () => {
       title: t("Flexible Support", "スポット対応（時間給）"),
       price: t("¥6,000–¥10,000 / hour", "¥6,000〜10,000 / 時間"),
       desc: t(
-        "No monthly commitment.",
-        "月額固定契約なし。"
+        "For occasional help without a monthly plan. Useful for small edits, updates, troubleshooting, and ad hoc advice when needed.",
+        "必要な時だけ依頼したい方向けです。軽微な修正、更新作業、トラブル時の確認などを時間単位で承ります。"
       ),
       isRecommended: false,
       badgeText: t("HOURLY SUPPORT", "単発・時間給"),
@@ -518,25 +506,25 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
     <div className="landscape:col-span-8 landscape:col-start-5 md:landscape:col-span-9 md:landscape:col-start-4 lg:col-span-7 lg:col-start-5 landscape:pt-[54px] lg:pt-[92px] landscape:max-w-[700px] lg:max-w-[700px]">
       <p className="drop-cap text-lg leading-[1.7] text-ink/85 mb-6">
         {t(
-          "Originally from Canada, I have lived and worked in Japan since 1992, helping Japanese companies communicate effectively with international audiences.",
+          "Originally from Canada, I have lived and worked in Japan since 1992, helping Japanese companies connect more clearly with international audiences.",
           "カナダ出身で、1992年より日本を拠点に、日本企業の海外向けコミュニケーション支援に携わっています。"
         )}
       </p>
       <p className="text-ink-muted leading-relaxed mb-6">
         {t(
-          "My career has combined website design, UI design, software localization, and technical communication. Working across both creative and technical disciplines has given me a practical understanding of how design, language, and user experience work together. The result is websites that feel natural in both English and Japanese.",
+          "My background includes website design, UI design, software localization, and technical communication. Working across both creative and technical fields has given me a practical understanding of how design, language, and user experience work together.",
           "Webデザイン、UIデザイン、ソフトウェアローカライズ、テクニカルコミュニケーションを組み合わせたキャリアを歩んできました。クリエイティブと技術の領域を横断する実務経験を通じ、デザイン、言語、ユーザー体験がどのように連動するかを実践的に理解しています。その結果、日本語と英語の両方で自然に親しまれるWebサイトを制作できます。"
         )}
       </p>
       <p className="text-ink-muted leading-relaxed mb-6">
         {t(
-          "After many years specializing in localization and bilingual communication, I have returned my focus to modern web design. Today, I help businesses create websites that are visually engaging, easy to use, and designed for performance, accessibility, and long-term search visibility.",
+          "After many years focused on localization and bilingual communication, I have returned my attention to modern web design. Today, I create websites that are visually clear, easy to use, and built for performance, accessibility, and long-term search visibility.",
           "ローカライズやバイリンガルコミュニケーションでの長年の実績を経て、現在は最新のWebデザインへ再び焦点を合わせています。視覚的に魅力的で使いやすく、パフォーマンス、アクセシビリティ、長期的なSEO効果を備えたWebサイトの構築を支援しています。"
         )}
       </p>
       <p className="text-ink-muted leading-relaxed">
         {t(
-          "When you work with me, you work directly with an experienced designer from planning through launch. There are no account managers, outsourced teams, or unnecessary layers of communication. Just clear advice, practical solutions, and a long-term partner who understands both the technical and cultural challenges of doing business across English and Japanese.",
+          "When you work with me, you work directly with an experienced designer from planning through launch. There are no account managers, outsourced teams, or unnecessary layers of communication, just clear advice and practical solutions.",
           "企画から公開まで、経験豊富なデザイナーである私が直接ご対応いたします。営業担当や外注チーム、不要な伝言ゲームは一切ありません。明確なアドバイス、実践的なソリューション、そして日英双方でのビジネスの技術的・文化的課題を理解した長期的なパートナーとしてお応えします。"
         )}
       </p>
@@ -645,19 +633,19 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-3 group cursor-pointer">
                 <p className="font-mono font-bold text-[16px] uppercase tracking-[0.22em] text-accent-brand mb-3">
-                  §04 - {t("Pricing & Support", "制作費・サポート")}
+                  §04 - {t("Pricing & Support", "料金とサポート")}
                 </p>
                 <PricingIllustration className="w-40 md:w-48 h-auto mt-4 select-none pointer-events-none transition-all duration-300 ease-out filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:drop-shadow-[0_8px_20px_rgba(26,26,26,0.15)] group-hover:scale-[1.04]" />
               </div>
 
               <div className="lg:col-span-9 space-y-4">
                 <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.08] text-balance">
-                  {t("Simple Pricing. Reliable Support.", "明朗な料金体系と確実なサポート。")}
+                  {t("Clear pricing, with reliable support after launch.", "明確な料金体系と、公開後も安心できるサポート。")}
                 </h2>
                 <p className="text-ink-muted text-base lg:text-lg leading-relaxed max-w-[65ch]">
                   {t(
-                    "Every project is different, but these examples provide a realistic starting point. Final pricing depends on project scope, content, functionality and localization requirements.",
-                    "プロジェクトごとに仕様は異なりますが、下記は一般的な費用の目安です。最終的なお見積もりは制作範囲、コンテンツ要件、機能、ローカライズ要件に基づき算出します。"
+                    "Choose a plan based on the scale of your project. Final quotes are always tailored to your goals, content, and bilingual requirements.",
+                    "制作内容や規模に応じて選べるプランをご用意しています。すべての案件で、目的と内容を確認したうえで個別にお見積もりします。"
                   )}
                 </p>
               </div>
@@ -754,8 +742,8 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                 </h3>
                 <p className="text-ink-muted text-sm lg:text-base leading-relaxed max-w-[65ch]">
                   {t(
-                    "Launching your website is only the beginning. I offer flexible support options to keep your website secure, current and performing well.",
-                    "Webサイトの公開はスタートに過ぎません。セキュリティ、最新状態の維持、パフォーマンス向上のための柔軟なサポートを提供しています。"
+                    "Support is available after launch so your website can stay secure, current, and useful over time.",
+                    "公開して終わりではなく、その後の更新や運用も安心して続けられるようサポートします。"
                   )}
                 </p>
               </div>
@@ -893,7 +881,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
               </h2>
               <p className="mt-6 text-ink-muted text-lg leading-relaxed max-w-[44ch] whitespace-pre-line">
                 {t(
-                  "Whether you're a Japanese company expanding overseas or an international business entering Japan, I'd be happy to discuss your project.",
+                  "Please share a short outline of your project, budget range, and preferred schedule. I typically reply within 1–2 business days after reviewing your message.",
                   "プロジェクト概要、ご予算、スケジュールなどをお知らせください。\n内容を確認後、通常1〜2営業日以内にご返信いたします。"
                 )}
               </p>
@@ -945,12 +933,12 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                 §06 - {t("FAQ & Insights", "よくあるご質問")}
               </p>
               <h2 className="font-serif-display text-4xl font-bold tracking-[-0.02em] leading-[1.1]">
-                {t("Clear answers about bilingual websites, localization, and project planning.", "日英Webサイト制作とローカライズに関するよくあるご質問")}
+                {t("Questions about bilingual websites, localization, and support.", "日英Webサイト制作とローカライズに関する、よくあるご質問")}
               </h2>
               <p className="mt-6 text-ink-muted text-sm leading-relaxed max-w-[32ch]">
                 {t(
-                  "Some common questions about how I work and how bilingual websites are designed and built.",
-                  "制作の進め方やバイリンガルサイトについて、よくいただくご質問をまとめました。"
+                  "Here are a few common questions about the design process, bilingual website strategy, and post-launch support.",
+                  "制作の進め方、バイリンガル対応、公開後のサポートについて、よくいただくご質問をまとめました。"
                 )}
               </p>
               <FAQIllustration className="mt-6 select-none pointer-events-none transition-all duration-300 ease-out transform filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.02)] group-hover:drop-shadow-[0_8px_20px_rgba(26,26,26,0.15)] group-hover:scale-[1.04]" />
@@ -959,78 +947,78 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
             <div className="lg:col-span-8 space-y-4">
               {[
                 {
-                  q: t("Which website is right for your business?", "あなたのビジネスに最適なウェブサイトはどれか？"),
+                  q: t("Which website is right for your business?", "あなたのビジネスに最適なWebサイトはどれですか？"),
                   a: t(
                     <div className="space-y-4">
                       <div>
                         <strong className="text-ink font-bold block mb-1">Small Business Website</strong>
-                        <p>Ideal for freelancers, consultants, local businesses, and startups looking to establish a professional online presence with a clean, responsive website. This option is best suited to smaller projects focused on clear communication, essential business information, and lead generation. A bilingual version can also be created if your content requirements are straightforward.</p>
+                        <p>Best for freelancers, consultants, local businesses, and small teams that need a professional online presence without unnecessary complexity. It focuses on clear communication, essential business information, and lead generation. If the content is relatively simple, a bilingual version can also be included.</p>
                       </div>
                       <div>
                         <strong className="text-ink font-bold block mb-1">Business Website</strong>
-                        <p>Designed for growing companies that need a more comprehensive online presence. Typically includes additional pages, a blog or news section, stronger SEO foundations, and optional English/Japanese localization. This is the best choice for businesses looking to attract both domestic and international customers while maintaining a professional, scalable website.</p>
+                        <p>Designed for growing companies that need a stronger and more scalable web presence. This typically includes more pages, a blog or news section, SEO-conscious structure, and optional English/Japanese localization. It is a good fit for businesses serving both domestic and international audiences.</p>
                       </div>
                       <div>
                         <strong className="text-ink font-bold block mb-1">Corporate & Global Websites</strong>
-                        <p>Built for established companies requiring a fully customized solution. Ideal for multilingual corporate websites, product or service websites, advanced CMS integration, custom functionality, and long-term growth. These projects often involve bilingual or multilingual UX, localization strategy, technical consultation, and close collaboration from planning through launch.</p>
+                        <p>Built for established companies that need a more customized solution. These projects may include multilingual corporate websites, product or service sites, CMS integration, custom functionality, and localization strategy. They are best suited to businesses planning for long-term growth and more complex communication needs.</p>
                       </div>
                     </div>,
                     <div className="space-y-4">
                       <div>
                         <strong className="text-ink font-bold block mb-1">スモールビジネス Webサイト</strong>
-                        <p>フリーランス、コンサルタント、ローカルビジネス、スタートアップなど、信頼性の高いWebサイトでプロフェッショナルなオンライン存在感を築きたい方に最適です。明確な情報伝達、重要なビジネス情報の発信、リード獲得に焦点を当てた小規模プロジェクトに適しています。要件がシンプルな場合は、バイリンガル対応も可能です。</p>
+                        <p>フリーランス、コンサルタント、地域の店舗、小規模事業者向けです。必要な情報をわかりやすく伝え、信頼感のあるオンライン窓口を整えたい場合に適しています。内容が比較的シンプルであれば、日英対応にも対応できます。</p>
                       </div>
                       <div>
                         <strong className="text-ink font-bold block mb-1">ビジネス Webサイト</strong>
-                        <p>より包括的なオンライン展開を必要とする成長企業向けです。追加のページ構築、ブログ・お知らせ機能（CMS）、強固なSEO基盤、オプションでの日英ローカライズ対応を含みます。国内および海外の顧客を引き付けながら、スケーラブルなWebサイトを維持したい企業に最適な選択肢です。</p>
+                        <p>成長中の企業や、より充実した情報発信が必要な事業者向けです。ページ数の追加、ブログやお知らせ機能、SEOを意識した設計、必要に応じた日英ローカライズに対応します。国内外の顧客に向けて、継続的に運用しやすい構成です。</p>
                       </div>
                       <div>
-                        <strong className="text-ink font-bold block mb-1">企業およびグローバルウェブサイト</strong>
-                        <p>完全カスタムなソリューションを求める確立された企業向けです。多言語コーポレートサイト、プロダクト・サービスサイト、高度なCMS統合、カスタム機能実装、長期的な成長支援に最適です。プロジェクトにはバイリンガル/多言語UX、ローカライズ戦略、技術コンサルティング、企画から公開に至る密接な連携が含まれます。</p>
+                        <strong className="text-ink font-bold block mb-1">企業・グローバルWebサイト</strong>
+                        <p>多言語対応や独自機能を含む、より本格的なWeb展開向けです。コーポレートサイト、製品・サービスサイト、CMS連携、カスタム機能、ローカライズ戦略まで含めて設計します。企画段階から公開後の成長まで、長期的な視点で進めるプロジェクトに適しています。</p>
                       </div>
                     </div>
                   )
                 },
                 {
-                  q: t("What is the difference between a \"Bilingual Website\" and \"Localization & Bilingual UX\"?", "「バイリンガルWebサイト制作」と「ローカライズ & バイリンガルUX」の違いは何ですか？"),
+                  q: t("What is the difference between a bilingual website and localization & bilingual UX?", "「バイリンガルWebサイト制作」と「ローカライズ & バイリンガルUX」の違いは何ですか？"),
                   a: t(
-                    "A \"Bilingual Website\" project covers designing and building a new website (or a full redesign) from scratch that works seamlessly in both English and Japanese. \"Localization & Bilingual UX\" focuses on refining, adapting, and culturally optimizing your existing website or app content and UI without requiring a complete rebuild.",
-                    "「バイリンガルWebサイト制作」は、ゼロから（または全面リニューアルで）英語・日本語の両方に対応したWebサイトのデザイン・システムを構築するプロジェクトです。一方、「ローカライズ & バイリンガルUX」は、すでにお持ちのWebサイトやアプリのUI・コンテンツを、一から作り直すことなく、海外および国内ユーザーへ自然に伝わるよう文化的文脈をふまえて最適化するサービスです。"
+                    "A bilingual website project means designing and building a new website, or fully redesigning an existing one, for both English and Japanese. Localization & bilingual UX focuses on improving an existing website or app so the content, interface, and overall user experience feel natural in both languages without requiring a full rebuild.",
+                    "バイリンガルWebサイト制作は、新規制作または全面リニューアルとして、英語と日本語の両方に対応したサイトを設計・構築するサービスです。ローカライズ & バイリンガルUXは、既存のWebサイトやアプリを活かしながら、言葉・UI・見せ方を海外および国内ユーザーに自然に伝わる形へ最適化するサービスです。"
                   )
                 },
                 {
-                  q: t("How do you handle English and Japanese layout differences?", "英語と日本語でレイアウトは変わりますか？"),
+                  q: t("How do you handle layout differences between English and Japanese?", "英語と日本語でレイアウトは変わりますか？"),
                   a: t(
-                    "English and Japanese have different text densities and visual balance. Typography and spacing are designed separately for each language to maintain a consistent visual experience.",
-                    "はい。文字量や見え方が異なるため、それぞれに合わせて余白やタイポグラフィを調整しています。"
+                    "English and Japanese have different text density, rhythm, and visual balance. Typography, spacing, and layout are adjusted for each language so the overall experience feels consistent and natural.",
+                    "はい。英語と日本語では文字量や読みやすい余白の取り方が異なるため、それぞれの言語に合わせてタイポグラフィやレイアウトを調整しています。"
                   )
                 },
                 {
-                  q: t("Can you help with English content and translation?", "英語コンテンツや翻訳のサポートはありますか？"),
+                  q: t("Can you help with English content and translation?", "英語コンテンツや翻訳もお願いできますか？"),
                   a: t(
-                    "Yes. I write content and handle all translations personally, from crafting fresh English copywriting to translating existing materials. Because I handle every step directly rather than outsourcing, your message maintains a consistent tone, clear phrasing, and natural appeal for international audiences.",
-                    "はい。コンテンツの執筆から翻訳、英語コピーライティング、ローカライズまで、外部委託せずに私自身が直接行います。企画から言葉の表現まで一貫して手がけることで、ブレのない自然で洗練された日英コミュニケーションを実現します。"
+                    "Yes. I handle English copywriting, translation, editing, and localization directly. Because the work is not split between multiple vendors, the tone stays consistent and the final message feels more natural for international audiences.",
+                    "はい。英語コピーの作成、既存原稿の翻訳、表現の調整、ローカライズまで一貫して対応しています。外部に分けずに私自身が担当するため、言葉のトーンや伝わり方に一貫性を持たせやすいのが特長です。"
                   )
                 },
                 {
                   q: t("How long does a typical project take?", "制作期間はどのくらいですか？"),
                   a: t(
-                    "Most projects take 2 to 8 weeks from initial planning to launch. Timelines depend on content volume and bilingual requirements.",
-                    "一般的には2〜8週間程度です。内容や規模によって変動します。"
+                    "Most projects take about 2 to 8 weeks. The schedule depends on scope, content readiness, and whether bilingual support is included.",
+                    "目安は2〜8週間程度です。ページ数、原稿の準備状況、日英対応の有無によって変わります。"
                   )
                 },
                 {
                   q: t("Are bilingual websites optimized for search?", "SEOにも対応していますか？"),
                   a: t(
-                    "Yes. Sites are built with clean structure, technical SEO best practices, and bilingual content considerations to help customers find you online.",
-                    "はい。検索エンジンに配慮した構造と技術的なSEO対策を基本として制作しています。"
+                    "Yes. Websites are built with clean structure, technical SEO best practices, and bilingual content considerations to help people find your business more easily online.",
+                    "はい。検索されやすい構造、基本的な技術SEO、日英コンテンツ設計を意識して制作しています。"
                   )
                 },
                 {
                   q: t("What is included in the support plans?", "保守プランには何が含まれますか？"),
                   a: t(
-                    "Essential Care covers routine maintenance, plugin updates, security monitoring, and backups. Business Care adds priority support, performance monitoring, monthly SEO reviews, content updates, and technical consultation. Flexible Support is available on an hourly basis with no monthly commitment for occasional updates, troubleshooting, and advice.",
-                    "エッセンシャル保守は、定期的なメンテナンス、プラグイン更新、セキュリティ監視、自動バックアップに対応します。ビジネス保守では、優先サポート、パフォーマンス監視、月次SEOレポート、コンテンツ更新、技術・改善相談が加わります。また、月額固定契約なしで必要な時だけ利用できるスポット対応（時間給サポート）もご用意しています。"
+                    "Essential Care includes routine maintenance, plugin updates, security checks, and backups. Business Care adds priority support, site monitoring, content updates, and ongoing improvement advice. Flexible hourly support is also available for occasional updates or troubleshooting without a monthly plan.",
+                    "公開後の基本的な維持管理向けです。定期メンテナンス、プラグイン更新、バックアップ、セキュリティ確認に対応します。"
                   )
                 }
               ].map((faq, idx) => {
@@ -1085,7 +1073,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
             <a href="#work" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Work", "制作実績")}</a>
             <a href="#about" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("About", "私について")}</a>
             <a href="#services" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Services", "サービス")}</a>
-            <a href="#pricing" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Pricing", "制作費の目安")}</a>
+            <a href="#pricing" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Pricing", "料金とサポート")}</a>
             <a href="#contact" className="px-2 py-1 hover:text-white hover:bg-accent-brand rounded-sm transition-all">{t("Contact", "お問い合わせ")}</a>
           </div>
           <div className="flex items-center gap-4">

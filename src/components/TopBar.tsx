@@ -11,7 +11,7 @@ const navItems = [
   { label: "Work", jpLabel: "制作事例", href: "#work" },
   { label: "About", jpLabel: "私について", href: "#about" },
   { label: "Services", jpLabel: "サービス", href: "#services" },
-  { label: "Pricing", jpLabel: "制作費の目安", href: "#pricing" },
+  { label: "Pricing", jpLabel: "料金とサポート", href: "#pricing" },
   { label: "Contact", jpLabel: "お問い合わせ", href: "#contact" },
 ];
 
