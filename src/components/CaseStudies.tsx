@@ -36,19 +36,19 @@ const cases: CaseStudy[] = [
     client: "Takasaki Fitness",
     clientJp: "高崎フィットネス",
     title: "A local gym website designed to increase class bookings and memberships.",
-    titleJp: "入会予約を増やすための地域密着型ジムサイト",
-    sector: "Fitness · Local Booking - Sample HP",
-    sectorJp: "フィットネス・予約システム - サンプルHP",
+    titleJp: "体験予約と入会につなげる地域密着型ジムサイト",
+    sector: "Fitness · Local Booking - Sample Project",
+    sectorJp: "フィットネス・予約サイト - 制作サンプル",
     summary:
       "Helping a neighborhood gym build a stronger online presence with a welcoming bilingual website and a simple class booking system.",
-    summaryJp: "地域のジムがオンラインで新規会員を獲得できるよう、親しみやすいデザインとシンプルな予約システムを備えたWebサイトを制作。",
+    summaryJp: "地域のジムがオンラインで新規会員を獲得できるよう、親しみやすいデザインとシンプルな予約システムを備えたWebサイトを制作しました。",
     role: ["Strategy", "UX/UI", "Front-end", "Bilingual Copy"],
     roleJp: ["戦略策定", "UX/UIデザイン", "フロントエンド実装", "コピーライティング"],
     stack: ["Webflow", "GSAP", "Calendar API", "i18n"],
     outcomes: [
-      { value: "+184%*", label: "Est. booking increase", jpLabel: "体験予約数（想定）" },
-      { value: "2.3s*", label: "Est. mobile load time", jpLabel: "モバイル読込速度（想定）" },
-      { value: "EN/JP", label: "Bilingual support", jpLabel: "多言語翻訳対応" },
+      { value: "EN/JP", label: "Bilingual support", jpLabel: "日英バイリンガル対応" },
+      { value: "UX", label: "Booking flow", jpLabel: "予約導線設計" },
+      { value: "RWD", label: "Responsive design", jpLabel: "レスポンシブ設計" },
     ],
     image: new URL("../assets/Taka-PCbig-E.jpg", import.meta.url).href,
     jpImage: new URL("../assets/Taka-PCbig-J.jpg", import.meta.url).href,
@@ -65,11 +65,11 @@ const cases: CaseStudy[] = [
     index: "02",
     year: "2024",
     client: "Rural Japan Living",
-    clientJp: "不動産",
+    clientJp: "Rural Japan Living",
     title: "Premium property listings designed for overseas buyers.",
-    titleJp: "海外購入者向けに設計した不動産検索サイト",
-    sector: "Real Estate · Property DB - Sample HP",
-    sectorJp: "不動産・物件データベース - サンプルHP",
+    titleJp: "海外の購入者に向けた不動産検索サイト",
+    sector: "Real Estate · Property DB - Sample Project",
+    sectorJp: "不動産・物件データベース - 制作サンプル",
     summary:
       "Turning complex property data into a clean, easy-to-use website that helps both Japanese and international buyers find homes with confidence.",
     summaryJp: "複雑な不動産情報を整理し、日本国内外の利用者が物件を探しやすい構成にまとめました。",
@@ -77,9 +77,9 @@ const cases: CaseStudy[] = [
     roleJp: ["情報設計", "UX/UIデザイン", "検索体験設計", "ローカライズ"],
     stack: ["Next.js", "Algolia", "Sanity", "Tailwind"],
     outcomes: [
-      { value: "+62%*", label: "Est. inquiry increase", jpLabel: "問い合わせ率（想定）" },
-      { value: "8k+", label: "Sample listings", jpLabel: "サンプル掲載物件数" },
-      { value: "0*", label: "Est. error rate", jpLabel: "エラー発生率（想定）" },
+      { value: "UX", label: "Property search", jpLabel: "物件検索UX" },
+      { value: "EN/JP", label: "Bilingual support", jpLabel: "日英バイリンガル対応" },
+      { value: "DB", label: "Property database", jpLabel: "物件データベース" },
     ],
     image: new URL("../assets/Real01-PCbig-E.jpg", import.meta.url).href,
     jpImage: new URL("../assets/Real01-PCbig-J.jpg", import.meta.url).href,
@@ -95,21 +95,21 @@ const cases: CaseStudy[] = [
     index: "03",
     year: "2026",
     client: "JDM RETRO RIDES",
-    clientJp: "自動車の輸出",
+    clientJp: "JDM RETRO RIDES",
     title: "Making Japanese vehicle auctions accessible to global buyers.",
     titleJp: "日本の中古車オークションを海外ユーザーにもっと身近に",
-    sector: "Automotive · E-commerce - Sample HP",
-    sectorJp: "自動車・ECサイト - サンプルHP",
+    sector: "Automotive · E-commerce - Sample Project",
+    sectorJp: "自動車・ECサイト - 制作サンプル",
     summary:
       "A streamlined online shop that simplifies bidding, paperwork, and shipping for customers buying vehicles from Japan.",
-    summaryJp: "入札から輸出手続きまでを分かりやすく整理し、海外からでも安心して利用できる購入体験を実現。",
+    summaryJp: "入札から輸出手続きまでを分かりやすく整理し、海外からでも安心して利用できる購入フローを設計しました。",
     role: ["Product Strategy", "UI System", "Checkout UX"],
-    roleJp: ["プロダクト戦略", "UIシステム設計", "チェックアウト体験"],
+    roleJp: ["プロダクト戦略", "UIシステム設計", "購入フロー設計"],
     stack: ["Framer", "Custom Liquid", "i18n"],
     outcomes: [
-      { value: "4 mkts", label: "Sample markets", jpLabel: "サンプル対象市場" },
-      { value: "+38%*", label: "Est. repeat buyers", jpLabel: "リピート率（想定）" },
-      { value: "🇬🇧 🇦🇺 🇺🇸", label: "Supported currencies", jpLabel: "対応通貨" },
+      { value: "UX", label: "Purchase flow", jpLabel: "購入フロー設計" },
+      { value: "EN/JP", label: "Bilingual support", jpLabel: "日英対応" },
+      { value: "UI", label: "UI system", jpLabel: "UIシステム設計" },
     ],
     image: new URL("../assets/MacBook-Pro-indexbig.jpg", import.meta.url).href,
     mobileImage: new URL("../assets/iPhone-16-index.jpg", import.meta.url).href,
@@ -127,7 +127,7 @@ export const CaseStudies = () => {
     const element = takaRef.current;
     if (!element) return;
 
-    let timeoutId: any;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -297,7 +297,7 @@ export const CaseStudies = () => {
                 <span>{t(c.sector, c.sectorJp)}</span>
               </div>
               <p className="font-mono text-[11px] uppercase tracking-widest text-ink-muted mb-2">
-                {t(`${c.client} · ${c.clientJp}`, `${c.clientJp} · ${c.client}`)}
+                {t(c.client, c.clientJp)}
               </p>
               
               {currentLink ? (
@@ -337,9 +337,6 @@ export const CaseStudies = () => {
                   </div>
                 ))}
               </dl>
-              <p className="text-[10px] font-mono text-ink-muted/70 italic mt-2 mb-6 border-b rule pb-5">
-                * {t("Potential results based on website optimization and redesign.", "ウェブサイト最適化およびリニューアルによる想定の成果")}
-              </p>
             </div>
           </article>
         );

@@ -41,7 +41,7 @@ export function LanguageDetector({ children }: { children: ReactNode }) {
     }, 120);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname, navigate]);
 
   if (checking) {
     return (

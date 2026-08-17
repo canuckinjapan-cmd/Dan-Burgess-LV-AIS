@@ -53,8 +53,8 @@ export const TopBar = () => {
     };
   }, [isMenuOpen]);
 
-  const LangSwitcher = ({ className = "" }: { className?: string }) => (
-    <div className={`flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest border rule rounded-sm px-1 py-0.5 ${className}`}>
+  const renderLangSwitcher = (extraClass = "") => (
+    <div className={`flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest border rule rounded-sm px-1 py-0.5 ${extraClass}`}>
       <Link
         to="/en/"
         onClick={() => setLang("EN")}
@@ -138,7 +138,7 @@ export const TopBar = () => {
         {/* Right Side Tools */}
         <div className="flex items-center gap-1 md:gap-1.5 shrink-0">
           {/* Lang Switcher - Visible right for mobile/tablet, and within desktop tools */}
-          <LangSwitcher className="flex ml-1.5 sm:ml-6 md:ml-8 lg:ml-10" />
+          {renderLangSwitcher("flex ml-1.5 sm:ml-6 md:ml-8 lg:ml-10")}
           
           {/* Desktop/Tablet Landscape Tools */}
           <div className="hidden xl:flex items-center ml-2.5 lg:ml-3">
