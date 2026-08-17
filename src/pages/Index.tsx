@@ -43,10 +43,10 @@ const Index = () => {
     const month = today.getMonth(); // 0-11 (Jan is 0, Dec is 11)
     const year = today.getFullYear();
 
-    let seasonEn = "Spring";
-    let seasonJp = "春";
-    let seasonIndex = 0; // 0 = Spring, 1 = Summer, 2 = Autumn, 3 = Winter
-    let seasonYear = year;
+    let seasonEn: string;
+    let seasonJp: string;
+    let seasonIndex: number; // 0 = Spring, 1 = Summer, 2 = Autumn, 3 = Winter
+    let seasonYear: number;
 
     if (month >= 2 && month <= 4) {
       // Mar, Apr, May
