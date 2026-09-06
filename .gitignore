@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Temporary assets
+src/assets/images-temp/
+images-temp/

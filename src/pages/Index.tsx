@@ -123,113 +123,32 @@ const Index = () => {
     {
       no: "01",
       title: t("Small Business Website", "スモールビジネス向けWebサイト"),
-      note: t("Ideal for small businesses, professionals and local services.", "個人事業、店舗、フリーランス向け。必要な情報を整理し、信頼感のあるWebサイトをシンプルに構築します。"),
-      price: "¥150,000 – ¥300,000",
-      features: [
-        t("1–5 pages", "1〜5ページ"),
-        t("Responsive design", "レスポンシブデザイン"),
-        t("Contact form", "お問い合わせフォーム"),
-        t("Basic SEO", "基本SEO対策"),
-        t("Google Maps", "Googleマップ埋め込み"),
-        t("Social media links", "SNS連携"),
-        t("Launch assistance", "公開サポート"),
-      ],
-            isRecommended: false,
+      desc: t(
+        "For individuals, professionals, local businesses, and small organizations.",
+        "個人事業主、専門職、地域の事業者、小規模な組織などに適しています。"
+      ),
+      price: t("From ¥150,000", "¥150,000〜"),
+      isRecommended: false,
     },
     {
       no: "02",
       title: t("Business Website", "ビジネスWebサイト"),
-      note: t("Suitable for growing companies wanting a stronger online presence.", "成長中の企業やサービス事業向け。情報設計、SEOを意識した構成、日英対応も視野に入れた中規模サイトに適しています。"),
-      price: "¥300,000 – ¥600,000",
-      features: [
-        t("5–10 pages", "5〜10ページ"),
-        t("Custom visual design", "カスタムビジュアルデザイン"),
-        t("Blog or News section", "ブログ・お知らせ機能（CMS）"),
-        t("SEO optimization", "SEO最適化"),
-        t("Performance optimization", "パフォーマンス最適化"),
-        t("Analytics setup", "アクセス解析導入"),
-        t("English/Japanese bilingual UX & localization", "英語・日本語バイリンガルのUXおよびローカライズ"),
-      ],
-            isRecommended: true,
+      desc: t(
+        "For established businesses looking for a more complete website and stronger online presence.",
+        "事業の成長に合わせて、より充実したWebサイトを必要とする企業・事業者向けです。"
+      ),
+      price: t("Typically ¥300,000-¥600,000", "¥300,000〜¥600,000"),
+      isRecommended: true,
     },
     {
       no: "03",
-      title: t("Corporate & Global Websites", "企業・グローバルWebサイト"),
-      note: t("Every project is quoted individually based on requirements.", "多言語展開や独自要件のある企業向け。戦略設計から実装、ローカライズまで含めたカスタム案件に対応します。"),
-      price: t("From ¥600,000+", "¥600,000〜"),
-      features: [
-        t("Larger corporate websites", "大規模コーポレートサイト"),
-        t("Product websites", "プロダクト・サービスサイト"),
-        t("Localization", "ローカライズ対応"),
-        t("English/Japanese multilingual sites", "日英バイリンガルサイト構築"),
-        t("CMS integration", "CMS導入・構築"),
-        t("Custom functionality", "カスタム機能実装"),
-        t("Long-term development", "長期的な制作・開発支援"),
-      ],
-            isRecommended: false,
-    },
-  ];
-
-  const pricingNotes = [
-    t("Prices are starting estimates.", "価格は目安です。"),
-    t("Every quotation is tailored to your project.", "お見積もりは、プロジェクトの内容に合わせて個別に作成します。"),
-    t("Existing websites can often be redesigned without rebuilding from scratch.", "既存のWebサイトは、一から作り直さずにリニューアルできる場合もあります。"),
-    t("Bilingual (Japanese/English) websites typically require additional planning and implementation.", "日英バイリンガル対応では、翻訳だけでなく、情報設計やレイアウト、実装まで含めて対応します。"),
-    t("Localization and bilingual UX are available as part of the project.", "ローカライズやバイリンガルUXも、プロジェクトの一環として対応します。"),
-  ];
-
-  const longTermCare = [
-    {
-      title: t("Essential Care", "エッセンシャル保守"),
-      price: t("From ¥10,000 / month", "¥10,000〜 / 月"),
+      title: t("Corporate & Global Websites", "企業・グローバル向けWebサイト"),
       desc: t(
-        "For basic post-launch maintenance. Includes routine maintenance, plugin updates, backups, and security checks.",
-        "公開後の基本的な維持管理向けです。定期メンテナンス、プラグイン更新、バックアップ、セキュリティ確認などに対応します。"
+        "For larger websites, multilingual projects, custom functionality, or more complex requirements.",
+        "大規模なWebサイト、多言語対応、カスタム機能など、より複雑な要件に対応します。"
       ),
+      price: t("From ¥600,000", "¥600,000〜"),
       isRecommended: false,
-      badgeText: null,
-      features: [
-        t("CMS updates", "CMSアップデート"),
-        t("Plugin updates", "プラグイン更新"),
-        t("Security monitoring", "セキュリティ監視"),
-        t("Monthly backups", "月次自動バックアップ"),
-        t("Minor content updates", "軽微なテキスト・コンテンツ修正"),
-      ],
-    },
-    {
-      title: t("Business Care", "ビジネス保守"),
-      price: t("From ¥30,000 / month", "¥30,000〜 / 月"),
-      desc: t(
-        "For businesses that need ongoing updates and more active support. Includes priority response, content updates, site monitoring, and improvement advice.",
-        "継続的な運用と改善を重視する方向けです。優先対応、コンテンツ更新、状態確認、改善相談などを含みます。"
-      ),
-      isRecommended: true,
-      badgeText: t("RECOMMENDED", "おすすめ"),
-      features: [
-        t("Everything in Essential", "Essentialの全機能"),
-        t("Priority support", "優先サポート対応"),
-        t("Performance monitoring", "パフォーマンス監視"),
-        t("Monthly SEO review", "月次SEOレポート・点検"),
-        t("Content updates", "コンテンツ追加・更新"),
-        t("Technical consultation", "技術・改善のご相談"),
-      ],
-    },
-    {
-      title: t("Flexible Support", "スポット対応（時間給）"),
-      price: t("¥6,000–¥10,000 / hour", "¥6,000〜10,000 / 時間"),
-      desc: t(
-        "For occasional help without a monthly plan. Useful for small edits, updates, troubleshooting, and ad hoc advice when needed.",
-        "必要な時だけ依頼したい方向けです。軽微な修正、更新作業、トラブル時の確認などを時間単位で承ります。"
-      ),
-      isRecommended: false,
-      badgeText: t("HOURLY SUPPORT", "単発・時間給"),
-      features: [
-        t("Website improvements", "サイト改善・機能追加"),
-        t("Training", "操作レクチャー・トレーニング"),
-        t("Troubleshooting", "トラブルシューティング"),
-        t("Consulting", "Web・ローカライズ相談"),
-        t("Design updates", "デザイン修正・アセット作成"),
-      ],
     },
   ];
 
@@ -640,12 +559,15 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
 
               <div className="lg:col-span-9 space-y-4">
                 <h2 className="font-serif-display text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-[-0.02em] leading-[1.08] text-balance">
-                  {t("Clear pricing, with reliable support after launch.", "明確な料金体系と、公開後も安心できるサポート。")}
+                  {t(
+                    "Straightforward pricing. Tailored to your project.",
+                    "わかりやすい料金設定。柔軟にご提案します。"
+                  )}
                 </h2>
                 <p className="text-ink-muted text-base lg:text-lg leading-relaxed max-w-[65ch]">
                   {t(
-                    "Choose a plan based on the scale of your project. Final quotes are always tailored to your goals, content, and bilingual requirements.",
-                    "制作内容や規模に応じて選べるプランをご用意しています。すべての案件で、目的と内容を確認したうえで個別にお見積もりします。"
+                    "Most projects fall into one of the ranges below. Final pricing depends on the scope, content, functionality, and whether Japanese and English versions are required.",
+                    "Webサイトの制作費は、規模や内容によって異なります。以下は料金の目安です。最終的な料金は、ページ数、コンテンツ、機能、日英対応の有無などを確認したうえでお見積もりします。"
                   )}
                 </p>
               </div>
@@ -657,141 +579,79 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                 {typicalProjects.map((c) => (
                   <div 
                     key={c.no} 
-                    className={`flex flex-col h-full bg-surface p-7 lg:p-8 hover:bg-surface-elevated transition-colors duration-300 group relative ${
+                    className={`flex flex-col h-full justify-between bg-surface p-6 sm:p-7 lg:p-8 hover:bg-surface-elevated transition-colors duration-300 group relative ${
                       c.isRecommended ? 'ring-2 ring-accent-brand/40 z-10' : ''
                     }`}
                   >
-                    {c.isRecommended && (
-                      <div className="absolute -top-[14px] left-1/2 -translate-x-1/2 z-20">
-                        <span className="inline-block bg-ink text-surface text-[10px] font-mono uppercase tracking-[0.2em] px-4 py-1.5 rounded-full transition-colors duration-300 group-hover:bg-accent-brand whitespace-nowrap shadow-sm">
-                          {t("MOST POPULAR", "一番人気")}
-                        </span>
+                    <div>
+                      <div className="flex justify-between items-start mb-3">
+                        <p className="font-mono text-[22px] uppercase tracking-widest text-[#E66244]/80">
+                          {c.no}
+                        </p>
                       </div>
-                    )}
 
-                    <div className="flex justify-between items-start mb-3">
-                      <p className="font-mono text-[22px] uppercase tracking-widest text-[#E66244]/80">
-                        {c.no}
+                      <h3 className="font-serif-display text-2xl font-bold mb-2.5 text-ink">
+                        {c.title}
+                      </h3>
+
+                      <p className="text-ink-muted text-xs sm:text-sm leading-relaxed mb-6">
+                        {c.desc}
                       </p>
                     </div>
 
-                    <h3 className="font-serif-display text-2xl font-bold mb-2 text-ink">
-                      {c.title}
-                    </h3>
-
-                    <p className="text-ink-muted text-xs leading-relaxed mb-6 block min-h-[2.5rem]">
-                      {c.note}
-                    </p>
-
-                    {/* Typical Project Investment */}
-                    <div className="mb-6 pb-5 border-b border-ink/5">
-                      <span className="block font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted mb-1">
-                        {t("Typical Project Investment", "想定予算の目安")}
-                      </span>
+                    <div className="pt-5 border-t border-ink/5 mt-auto">
                       <span className="font-mono font-bold text-lg lg:text-xl text-ink">
                         {c.price}
                       </span>
                     </div>
-
-                    {/* Typical Scope */}
-                    <div className="mb-6 space-y-3 flex-1">
-                      <span className="block font-mono text-[11px] uppercase tracking-[0.18em] text-accent-brand font-bold">
-                        {t("Typical Scope", "標準制作範囲")}
-                      </span>
-                      <ul className="space-y-2 text-xs text-ink-muted">
-                        {c.features.map((f, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className="text-accent-brand font-bold text-xs mt-0.5" aria-hidden>✓</span>
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Small Note */}
-                    <div className="pt-4 border-t border-ink/5 mt-auto">
-                      <p className="text-[11px] text-ink-muted leading-relaxed italic">
-                        {c.smallNote}
-                      </p>
-                    </div>
                   </div>
                 ))}
               </div>
 
-              {/* Every project is unique */}
-              <div className="mt-8 bg-surface/60 border border-ink/10 p-6 lg:p-8 space-y-4">
+              {/* Every project is different */}
+              <div className="mt-6 bg-surface/60 border border-ink/10 p-6 lg:p-7 space-y-2">
                 <h3 className="font-serif-display text-lg font-bold text-ink">
-                  {t("Every project is unique", "プロジェクトはどれもユニークです")}
+                  {t("Every project is different.", "プロジェクトごとに最適な方法をご提案します。")}
                 </h3>
-                <ul className="grid md:grid-cols-2 gap-x-8 gap-y-2.5 text-xs text-ink-muted">
-                  {pricingNotes.map((note, idx) => (
-                    <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                      <span className="text-accent-brand font-bold" aria-hidden>•</span>
-                      <span>{note}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-xs sm:text-sm text-ink-muted leading-relaxed max-w-[75ch]">
+                  {t(
+                    "These figures are starting points rather than fixed packages. Existing websites can often be improved without being rebuilt from scratch, and Japanese/English localization can be included where needed.",
+                    "上記はあくまで料金の目安で、固定パッケージではありません。既存サイトの改善やリニューアル、日英のローカライズにも対応しています。"
+                  )}
+                </p>
               </div>
             </div>
 
-            {/* Long-Term Website Care */}
-            <div className="space-y-8 pt-6">
-              <div>
-                <h3 className="font-serif-display text-3xl lg:text-4xl font-bold tracking-tight text-ink mb-3">
-                  {t("Long-Term Website Care", "公開後の継続サポート")}
+            {/* Website support after launch */}
+            <div className="space-y-6 pt-2">
+              <div className="space-y-2">
+                <h3 className="font-serif-display text-2xl lg:text-3xl font-bold tracking-tight text-ink">
+                  {t("Website support after launch", "公開後のWebサイトサポート")}
                 </h3>
                 <p className="text-ink-muted text-sm lg:text-base leading-relaxed max-w-[65ch]">
                   {t(
-                    "Support is available after launch so your website can stay secure, current, and useful over time.",
-                    "公開して終わりではなく、その後の更新や運用も安心して続けられるようサポートします。"
+                    "Ongoing maintenance and support are available after launch, from occasional updates and troubleshooting to regular website care.",
+                    "公開後の更新やトラブル対応など、必要に応じてサポートします。定期的なメンテナンスからスポット対応まで、ご希望に合わせて対応します。"
                   )}
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-px bg-ink/10 border rule self-stretch">
-                {longTermCare.map((opt, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`flex flex-col h-full bg-surface p-6 lg:p-7 hover:bg-surface-elevated transition-colors duration-300 group relative ${
-                      opt.isRecommended ? 'ring-2 ring-accent-brand/40 z-10' : ''
-                    }`}
-                  >
-                    {opt.badgeText && (
-                      <div className="absolute -top-[13px] left-1/2 -translate-x-1/2 z-20">
-                        <span className="inline-block bg-ink text-surface text-[9px] font-mono uppercase tracking-[0.2em] px-3.5 py-1 rounded-full group-hover:bg-accent-brand transition-colors whitespace-nowrap shadow-sm">
-                          {opt.badgeText}
-                        </span>
-                      </div>
-                    )}
-
-                    <h4 className="font-serif-display text-xl font-bold text-ink mb-1 mt-1">
-                      {opt.title}
-                    </h4>
-
-                    <div className="font-mono font-bold text-sm lg:text-base text-accent-brand mb-3">
-                      {opt.price}
-                    </div>
-
-                    <p className="text-ink-muted text-xs leading-relaxed mb-5 min-h-[2.5rem]">
-                      {opt.desc}
-                    </p>
-
-                    <div className="mb-4">
-                      <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-ink-muted mb-2 font-bold">
-                        {t("Includes", "サポート内容")}
-                      </span>
-                      <ul className="space-y-2 text-xs text-ink-muted">
-                        {opt.features.map((f, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className="text-accent-brand font-bold text-xs" aria-hidden>✓</span>
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="bg-surface border border-ink/10 p-5 flex items-center">
+                  <span className="font-mono font-bold text-sm sm:text-base text-ink">
+                    {t("Monthly support: From ¥10,000/month", "月額サポート：月額¥10,000〜")}
+                  </span>
+                </div>
+                <div className="bg-surface border border-ink/10 p-5 flex items-center">
+                  <span className="font-mono font-bold text-sm sm:text-base text-ink">
+                    {t("Ad-hoc support: ¥6,000-¥10,000/hour", "スポット対応：¥6,000〜¥10,000/時")}
+                  </span>
+                </div>
               </div>
+
+              <p className="text-xs font-mono text-ink-muted">
+                • {t("No long-term contract required.", "長期契約は必要ありません。")}
+              </p>
             </div>
 
             {/* Working Together: Horizontal Timeline */}
@@ -843,8 +703,8 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                   </h4>
                   <p className="text-ink-muted text-sm leading-relaxed">
                     {t(
-                      "Every project starts with a conversation. Whether you're looking for a new website, a redesign, bilingual localization, or an experienced designer to join your team remotely, I'd be happy to discuss how I can help.",
-                      "すべてのプロジェクトは対話から始まります。新規Webサイトの制作、リニューアル、日英ローカライズ、またはリモートでのデザインパートナーをお探しの際も、まずはお気軽にご相談ください。"
+                      "Not sure what fits your project? Tell me what you're looking to build, improve, or translate. I'll recommend an appropriate approach and provide a detailed quotation.",
+                      "どのくらいの規模になるかわからない場合も、まずはお気軽にご相談ください。ご希望や目的を伺い、適した方法をご提案したうえでお見積もりします。"
                     )}
                   </p>
                 </div>
@@ -973,7 +833,7 @@ Based in Japan since 1992, I bring over 30 years of experience working between E
                         <p>成長中の企業や、より充実した情報発信が必要な事業者向けです。ページ数の追加、ブログやお知らせ機能、SEOを意識した設計、必要に応じた日英ローカライズに対応します。国内外の顧客に向けて、継続的に運用しやすい構成です。</p>
                       </div>
                       <div>
-                        <strong className="text-ink font-bold block mb-1">企業・グローバルWebサイト</strong>
+                        <strong className="text-ink font-bold block mb-1">企業・グローバル向けWebサイト</strong>
                         <p>多言語対応や独自機能を含む、より本格的なWeb展開向けです。コーポレートサイト、製品・サービスサイト、CMS連携、カスタム機能、ローカライズ戦略まで含めて設計します。企画段階から公開後の成長まで、長期的な視点で進めるプロジェクトに適しています。</p>
                       </div>
                     </div>
